@@ -66,10 +66,30 @@ abstract class AdminController extends Controller{
 		exit();
 	}
 
+	protected function successMessage($message, $jumpUrl){
+		session('actionMessage', $message);
+		$this->redirect($jumpUrl);
+	}
+
+	protected function errorMessage($message, $jumpUrl){
+		session('actionError', $message);
+		$this->redirect($jumpUrl);
+	}
+
 	/**
 	 * 菜单与tab的选中状态
 	 */
 	protected function authView($viewId){
+		$user = get_login_user();
+
+		if(empty($user)){
+			$this->error('请先登录');
+		}
+
+		if(!has_auth($user, $viewId)){
+			$this->error('没有权限');
+		}
+
 		$this->assign('currentView', $viewId);
 	}
 

@@ -32,7 +32,7 @@ class AuthWidget extends Controller{
 			if($active){
 				$html .= ' active';
 			}
-			$html .= "\"><span class=\"{$menu['icon']}\"></span> {$menu['name']}</a>";
+			$html .= "\"><span class=\"{$menu['icon']}\"></span>&nbsp;&nbsp;{$menu['name']}</a>";
 		}
 
 		$html .= '</div>';

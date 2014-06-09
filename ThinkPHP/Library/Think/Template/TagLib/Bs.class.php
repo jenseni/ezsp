@@ -1,32 +1,48 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2014 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
 namespace Think\Template\TagLib;
+
 use Think\Template\TagLib;
 /**
- * CX标签库解析类
+ * bootstrap标签库解析类
  */
 class Bs extends TagLib {
 
     // 标签定义
     protected $tags   =  array(
         // 标签定义： attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次
-        'actionErrors'=>array('close'=>0),
-		'textfield'=>array('attr'=>'id,name,label,type,layout,value','close'=>0),
+        'actionError'=>array('close'=>0),
+        'actionMessage'=>array('close'=>0),
+		'textfield'=>array('attr'=>'id,name,label,type,layout,value','close'=>0)
     );
 
-    public function _actionErrors($tag, $content){
-		
-		$str = '<?php if(isset($actionError) && !empty($actionError)):?>';
+    public function _actionError($tag, $content){
+		$str = '<?php if(!isset($actionError)){ ?>';
+		$str .= 	'<?php if(session("?actionError")) { ?>';
+		$str .= 		'<?php $actionError = session("actionError"); ?>';
+		$str .= 		'<?php session("actionError", null); ?>';
+		$str .= 	'<?php } ?>';
+		$str .= '<?php } ?>';
+		$str .= '<?php if(isset($actionError) && !empty($actionError)):?>';
 		$str .= '<div class="alert alert-danger">';
-		$str .= '<p><?php echo $actionError?></p>';
+		$str .= 	'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+		$str .= 	'<p><?php echo $actionError; ?></p>';
+		$str .= '</div>';
+		$str .= '<?php endif;?>';
+
+		return $str;
+	}
+
+	public function _actionMessage($tag, $content){
+		$str = '<?php if(!isset($actionMessage)){ ?>';
+		$str .= 	'<?php if(session("?actionMessage")) { ?>';
+		$str .= 		'<?php $actionMessage = session("actionMessage"); ?>';
+		$str .= 		'<?php session("actionMessage", null); ?>';
+		$str .= 	'<?php } ?>';
+		$str .= '<?php } ?>';
+		$str .= '<?php if(isset($actionMessage) && !empty($actionMessage)):?>';
+		$str .= '<div class="alert alert-success">';
+		$str .= 	'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+		$str .= 	'<p><?php echo $actionMessage; ?></p>';
 		$str .= '</div>';
 		$str .= '<?php endif;?>';
 

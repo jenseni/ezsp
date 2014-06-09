@@ -28,7 +28,7 @@ body{
 	<div class="panel panel-info panel-login">
 		<div class="panel-heading">恒润房产管理平台</div>
 		<div class="panel-body">
-			<bs:actionErrors />
+			<bs:actionError />
 			<form action="{:U('User/login')}" method="post" class="form-horizontal" role="form">
 			<bs:textfield name="username" value="{$data.username}" label="用户名"/>
 			<bs:textfield name="password" value="" label="密码" type="password"/>

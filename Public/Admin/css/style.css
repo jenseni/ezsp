@@ -1,5 +1,6 @@
 body{
 	padding-top: 50px;
+	background-color: #3D3D3D;
 }
 
 /* header */
@@ -13,15 +14,12 @@ body{
 /* sidebar */
 .sidebar{
 	padding: 47px 0;
-	background-color: #3D3D3D;
 }
 .list-group-item:first-child {
-	border-top-right-radius: 0;
-	border-top-left-radius: 0;
+	border-radius: 0;
 }
 .list-group-item:last-child {
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+	border-radius: 0;
 }
 .sidebar .list-group .active{
 	background-image: url(../images/sidebar-menu-arrow.png);
@@ -57,4 +55,14 @@ body{
 .nav-channel li a{
 	background-color: #eee;
 	color: #555;
+}
+
+/* content */
+.content{
+	background-color: #FEFEFE;
+}
+
+/* data-table */
+.data-table .form-search{
+	margin-bottom: 15px;
 }
