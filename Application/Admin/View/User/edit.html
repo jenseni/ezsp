@@ -1,0 +1,19 @@
+<extend name="Public/base" />
+
+<block name="content">
+
+<form action="{:U('User/add')}" method="post" class="form-horizontal">
+
+<bs:textfield name="username" value="{$data.username}" label="用户名"/>
+
+<div class="form-group">
+	<div class="col-sm-offset-3 col-sm-3">
+		<input type="submit" class="btn btn-info form-control" value="提&nbsp;&nbsp;交"/>
+	</div>
+	<div class="col-sm-3">
+		<a href="{:U('User/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
+	</div>
+</div>
+
+</form>
+</block>
