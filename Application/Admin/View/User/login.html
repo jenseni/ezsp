@@ -1,0 +1,45 @@
+<taglib name="bs" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>恒润房产管理平台</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap-theme.min.css"/>
+<!--[if lt IE 9]>
+<script src="__STATIC__/bootstrap/html5shiv.js"></script>
+<script src="__STATIC__/bootstrap/respond.min.js"></script>
+<![endif]-->
+<style type="text/css">
+body{
+	background-color: #003366;
+}
+.panel-login{
+	max-width: 400px;
+	margin: 100px auto 0 auto;
+	background-color: white;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="panel panel-info panel-login">
+		<div class="panel-heading">恒润房产管理平台</div>
+		<div class="panel-body">
+			<bs:actionErrors />
+			<form action="{:U('User/login')}" method="post" class="form-horizontal" role="form">
+			<bs:textfield name="username" value="{$data.username}" label="用户名"/>
+			<bs:textfield name="password" value="" label="密码" type="password"/>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-6">
+					<input type="submit" class="btn btn-info form-control" value="登&nbsp;&nbsp;录"/>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

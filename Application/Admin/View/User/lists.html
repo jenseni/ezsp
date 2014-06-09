@@ -1,0 +1,41 @@
+<extend name="Public/base"/>
+
+<block name="content">
+
+<ul class="nav nav-tabs nav-channel">
+	<li class="active"><a href="javascript:;"><span class="glyphicon glyphicon-user"></span> 管理员信息</a></li>
+</ul>
+
+<div class="btn-group btn-group-sm">
+	<a href="<s:url action='nav/add' namespace='/admin/content'/>" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> 添加管理员</a>
+	<a id="opr_delete" href="javascript:;" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> 删除</a>
+</div>
+	
+<table class="table table-striped table-condensed table-hover table-bordered">
+	<thead>
+		<tr>
+			<th>
+				<input type="checkbox"/>
+			</th>
+			<th>用户名</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="dataList" id="data">
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>{$data.username}</td>
+			<td>
+				<a class="btn btn-xs btn-info" href="#">权限设置</a>
+				<a class="btn btn-xs btn-warning" href="#">重置密码</a>
+				<a class="btn btn-xs btn-danger" href="#">删除</a>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+	
+</block>
