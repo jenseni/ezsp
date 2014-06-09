@@ -3,6 +3,7 @@ namespace Admin\Controller;
 
 class IndexController extends AdminController{
 	public function index(){
+		$this->authView(101);
 		$this->display();
 	}
 }

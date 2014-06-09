@@ -17,8 +17,16 @@ return array(
 		array(
 			'id'	=>	10001,
 			'name'	=>	'首页',
-			'action'	=>	'Index/index',
-			'icon'	=> 'glyphicon glyphicon-globe'
+			'action'	=>	'#',
+			'icon'	=> 'glyphicon glyphicon-globe',
+			'children'	=>	array(
+				array(
+					'id'	=>	101,
+					'name'	=>	'首页',
+					'action'	=>	'Index/index',
+					'icon'	=>	'glyphicon glyphicon-globe'
+				)
+			)
 		),
 		array(
 			'id'	=>	2,
@@ -30,7 +38,21 @@ return array(
 			'id'	=>	3,
 			'name'	=>	'房屋买卖',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-home'
+			'icon'	=> 'glyphicon glyphicon-home',
+			'children'	=>	array(
+				array(
+					'id'	=>	102,
+					'name'	=>	'发布信息',
+					'action'	=>	'HouseSale/add',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				),
+				array(
+					'id'	=>	103,
+					'name'	=>	'房屋买卖管理',
+					'action'	=>	'HouseSale/lists',
+					'icon'	=>	'glyphicon glyphicon-home'
+				)
+			)
 		),
 		array(
 			'id'	=>	4,
@@ -89,7 +111,8 @@ return array(
 				array(
 					'id'	=>	100,
 					'name'	=>	'管理员信息',
-					'action'	=>	'User/lists'
+					'action'	=>	'User/lists',
+					'icon'	=>	'glyphicon glyphicon-user'
 				)
 			)
 		),

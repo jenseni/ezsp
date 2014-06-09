@@ -8,4 +8,5 @@ class AdminUserModel extends Model{
 	public static $loginUser;
 
 	protected $patchValidate = true;
+	
 }

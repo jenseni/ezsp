@@ -48,9 +48,11 @@ body{
 /* top tab */
 .nav-channel{
 	background-color: #3D3D3D;
-	padding-left: 15px;
 	padding-top: 5px;
 	margin: 0 -15px 15px -15px;
+}
+.nav-channel li{
+	margin-left: 15px;
 }
 .nav-channel li a{
 	background-color: #eee;

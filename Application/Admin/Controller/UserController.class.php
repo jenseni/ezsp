@@ -51,6 +51,8 @@ class UserController extends AdminController{
 	}
 
 	public function lists(){
+		$this->authView(100);
+
 		$AdminUser = D('AdminUser');
 
 		$userList = $AdminUser->field(true)->select();

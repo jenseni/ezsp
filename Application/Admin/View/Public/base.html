@@ -8,7 +8,7 @@
 <link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap.min.css"/>
 <link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap-theme.min.css"/>
 <link type="text/css" rel="stylesheet" href="__CSS__/style.css">
-<block name="style"></block>
+<block name="style"></block> 
 <script type="text/javascript" src="__STATIC__/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="__STATIC__/bootstrap/bootstrap.min.js"></script>
 <!--[if lt IE 9]>
@@ -20,17 +20,18 @@
 var ROOT = "__ROOT__";
 </script>
 <script type="text/javascript" src="__JS__/admin.js"></script>
-<block name="script"></block>
+<block name="script"></block> 
 </head>
 <body>
 <include file="Public/header"/>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2 sidebar">
-			{:W('Sidebar/showMenu')}
+			{:W('Auth/showMenu', array($loginUser, $currentView))} 
 		</div>
 		<div class="col-sm-10 content">
-			<block name="content"></block>
+			{:W('Auth/showTab', array($loginUser, $currentView))} 
+			<block name="content"></block> 
 		</div>
 	</div>
 </div>

@@ -7,7 +7,30 @@ function get_login_user(){
 	$uid = session('uid');
 	if($uid){
 		$AdminUser = new Admin\Model\AdminUserModel();
-		$user = $AdminUser->find($uid);
+		$user = $AdminUser->field('password', true)->find($uid);
+
+		//设置权限资源
+		$userMenuList = array();
+		$menuList = C('SYS_MENU');
+		if(!empty($user['auth']) && !empty($menuList)){
+			foreach ($menuList as $menu) {
+				$authViewList = array();
+				if(isset($menu['children']) && !empty($menu['children'])){
+					foreach ($menu['children'] as $m) {
+						if(has_auth($user, $m['id'])){
+							$authViewList[] = $m;
+						}
+					}
+				}
+				if(!empty($authViewList)){
+					$menu['children'] = $authViewList;
+					$userMenuList[] = $menu;
+				}
+			}
+		}
+
+		$user['menuList'] = $userMenuList;
+
 		Admin\Model\AdminUserModel::$loginUser = $user;
 
 		return $user;
