@@ -5,4 +5,4 @@ CREATE TABLE `t_admin_user` (
   `auth` varchar(255) DEFAULT NULL COMMENT '权限配置',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_admin_user_username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
