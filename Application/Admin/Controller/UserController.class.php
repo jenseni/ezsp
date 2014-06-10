@@ -57,16 +57,25 @@ class UserController extends AdminController{
 
 		$condition = array();
 		if($username){
-			$condition['username'] = $username;
+			$condition['username'] = array('LIKE', "%{$username}%");
 		}
 
 		$AdminUser = D('AdminUser');
 
-		$userList = $AdminUser->field(true)->where($condition)->select();
+		$totalCount = $AdminUser->where($condition)->count(1);
+		$Page = new \Org\Util\Page($totalCount);
+
+		$AdminUser->field(true)->where($condition);
+		$sortInfo = get_sort_info();
+		if(!empty($sortInfo)){
+			$AdminUser->order($sortInfo);
+		}
+		$userList = $AdminUser->limit($Page->firstRow, $Page->listRows)->select();
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 
 		$this->assign('dataList', $userList);
+		$this->assign('page', $Page->show());
 
 		$this->display();
 	}
@@ -98,5 +107,67 @@ class UserController extends AdminController{
 		}
 
 		$this->display('edit');
+	}
+
+	public function delete(){
+		$this->authView(100);
+
+		$id = I('id');
+		if(empty($id)){
+			$this->errorMessage('请选择要删除的记录', get_return_url(U('User/lists')));
+		}
+
+		$AdminUser = M('AdminUser');
+
+		if(is_array($id)){
+			$AdminUser->where(array('id'=>array('IN', $id)))->delete();
+		}else{
+			$AdminUser->where(array('id'=>(int)$id))->delete();
+		}
+
+		$this->successMessage('删除成功', get_return_url(U('User/lists')));
+	}
+
+	public function resetpassword($id){
+		$AdminUser = M('AdminUser');
+
+		$user = $AdminUser->find($id);
+
+		$AdminUser->setField('password', md5($user['username']));
+
+		$this->successMessage('重置成功', get_return_url(U('User/lists')));
+	}
+
+	public function assignauth(){
+
+		$this->authView(100);
+
+		$userId = I('id');
+
+		if(empty($userId)){
+			$this->error('参数错误');
+		}
+
+		$AdminUser = M('AdminUser');
+
+		if(IS_POST){
+			$auth = I('auth');
+			if(empty($auth)){
+				$auth = null;
+			}else{
+				$auth = implode(',', $auth);
+			}
+			
+			$AdminUser->where(array('id'=>(int)$userId))->setField('auth', $auth);
+
+			$this->successMessage('权限设置成功', get_return_url(U('User/lists')));
+		}else{
+			$user = $AdminUser->find($userId);
+			
+			$this->assign('menuList', C('SYS_MENU'));
+			$this->assign('user', $user);
+
+			return $this->display();
+		}
 	}
 }

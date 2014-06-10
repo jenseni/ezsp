@@ -44,3 +44,22 @@ function has_auth($user, $authId){
 
 	return in_array($authId, explode(',', $user['auth']));
 }
+
+function get_sort_info(){
+	$sortInfo = I('get.sort');
+	if(!empty($sortInfo)){
+		$sortInfo = explode('-', $sortInfo);
+		if(isset($sortInfo[0]) && isset($sortInfo[1])){
+			return array($sortInfo[0]=>$sortInfo[1]);
+		}
+	}
+}
+
+function get_return_url($defaultUrl = ''){
+	$url = cookie('return_url');
+	if(empty($url)){
+		return $defaultUrl;
+	}
+
+	return $url;
+}

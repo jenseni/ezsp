@@ -1,0 +1,30 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	<div class="page-header">
+		<h3>{$user.username}的权限设置</h3>
+	</div>
+	<form action="{:U('User/assignauth')}" method="post" class="form-horizontal">
+		<input type="hidden" name="id" value="{$user.id}"/>
+		<volist name="menuList" id="menu">
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="{$menu.icon}"></span> {$menu.name}</label>
+			<div class="col-sm-10">
+				<volist name="menu.children" id="auth">
+				<label class="checkbox-inline">
+					<input type="checkbox" name="auth[]" value="{$auth.id}" <if condition="has_auth($user, $auth['id'])"> checked</if> ><span class="{$auth.icon}"></span>  {$auth.name} 
+				</label>
+				</volist> 
+			</div>
+		</div>
+		</volist> 
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-3">
+				<input type="submit" class="btn btn-primary form-control" value="提&nbsp;&nbsp;&nbsp;&nbsp;交"/>
+			</div>
+			<div class="col-sm-3">
+				<a class="btn btn-primary form-control" href="{:get_return_url(U('User/lists'))}">返回</a>
+			</div>
+		</div>
+	</form>
+</block>

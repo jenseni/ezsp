@@ -32,7 +32,15 @@ return array(
 			'id'	=>	2,
 			'name'	=>	'公司介绍',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-pencil'
+			'icon'	=> 'glyphicon glyphicon-pencil',
+			'children'	=>	array(
+				array(
+					'id'	=>	104,
+					'name'	=>	'编辑',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				)
+			)
 		),
 		array(
 			'id'	=>	3,
@@ -50,7 +58,7 @@ return array(
 					'id'	=>	103,
 					'name'	=>	'房屋买卖管理',
 					'action'	=>	'HouseSale/lists',
-					'icon'	=>	'glyphicon glyphicon-home'
+					'icon'	=>	'glyphicon glyphicon-wrench'
 				)
 			)
 		),
@@ -58,49 +66,143 @@ return array(
 			'id'	=>	4,
 			'name'	=>	'房屋租赁',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-home'
+			'icon'	=> 'glyphicon glyphicon-home',
+			'children'	=>	array(
+				array(
+					'id'	=>	105,
+					'name'	=>	'房屋租赁发布',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				),
+				array(
+					'id'	=>	106,
+					'name'	=>	'房屋租赁管理',
+					'action'	=>	'Article/edit',
+					'icon'	=> 'glyphicon glyphicon-wrench'
+				)
+			)
 		),
 		array(
 			'id'	=>	5,
 			'name'	=>	'短期租房',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-home'
+			'icon'	=> 'glyphicon glyphicon-home',
+			'children'	=>	array(
+				array(
+					'id'	=>	107,
+					'name'	=>	'短期租房发布',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				),
+				array(
+					'id'	=>	108,
+					'name'	=>	'短期租房管理',
+					'action'	=>	'Article/edit',
+					'icon'	=> 'glyphicon glyphicon-wrench'
+				)
+			)
 		),
 		array(
 			'id'	=>	6,
 			'name'	=>	'写字楼商铺',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-home'
+			'icon'	=> 'glyphicon glyphicon-home',
+			'children'	=>	array(
+				array(
+					'id'	=>	109,
+					'name'	=>	'写字楼商铺发布',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				),
+				array(
+					'id'	=>	110,
+					'name'	=>	'写字楼商铺管理',
+					'action'	=>	'Article/edit',
+					'icon'	=> 'glyphicon glyphicon-wrench'
+				)
+			)
 		),
 		array(
 			'id'	=>	7,
 			'name'	=>	'代理楼盘',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-home'
+			'icon'	=> 'glyphicon glyphicon-home',
+			'children'	=>	array(
+				array(
+					'id'	=>	111,
+					'name'	=>	'代理楼盘编辑',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				)
+			)
 		),
 		array(
 			'id'	=>	8,
 			'name'	=>	'信息发布',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-comment'
+			'icon'	=> 'glyphicon glyphicon-comment',
+			'children'	=>	array(
+				array(
+					'id'	=>	112,
+					'name'	=>	'信息发布管理',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				)
+			)
 		),
 		array(
 			'id'	=>	9,
 			'name'	=>	'房产动态',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-eye-open'
+			'icon'	=> 'glyphicon glyphicon-eye-open',
+			'children'	=>	array(
+				array(
+					'id'	=>	113,
+					'name'	=>	'房产动态发布',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				),
+				array(
+					'id'	=>	114,
+					'name'	=>	'房产动态管理',
+					'action'	=>	'Article/edit',
+					'icon'	=> 'glyphicon glyphicon-wrench'
+				)
+			)
 		),
 		array(
 			'id'	=>	10,
 			'name'	=>	'优惠活动',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-fire'
+			'icon'	=> 'glyphicon glyphicon-fire',
+			'children'	=>	array(
+				array(
+					'id'	=>	115,
+					'name'	=>	'房产动态发布',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				),
+				array(
+					'id'	=>	116,
+					'name'	=>	'房产动态管理',
+					'action'	=>	'Article/edit',
+					'icon'	=> 'glyphicon glyphicon-wrench'
+				)
+			)
 		),
 		array(
 			'id'	=>	11,
 			'name'	=>	'用户管理',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-user'
+			'icon'	=> 'glyphicon glyphicon-user',
+			'children'	=>	array(
+				array(
+					'id'	=>	117,
+					'name'	=>	'用户管理',
+					'action'	=>	'Article/edit',
+					'icon'	=>	'glyphicon glyphicon-edit'
+				)
+			)
 		),
 		array(
 			'id'	=>	12,
@@ -120,13 +222,29 @@ return array(
 			'id'	=>	13,
 			'name'	=>	'咨询留言',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-comment'
+			'icon'	=> 'glyphicon glyphicon-comment',
+			'children'	=>	array(
+				array(
+					'id'	=>	119,
+					'name'	=>	'咨询留言管理',
+					'action'	=>	'User/lists',
+					'icon'	=>	'glyphicon glyphicon-wrench'
+				)
+			)
 		),
 		array(
 			'id'	=>	14,
 			'name'	=>	'积分派发',
 			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-heart'
+			'icon'	=> 'glyphicon glyphicon-heart',
+			'children'	=>	array(
+				array(
+					'id'	=>	120,
+					'name'	=>	'积分管理',
+					'action'	=>	'User/lists',
+					'icon'	=>	'glyphicon glyphicon-wrench'
+				)
+			)
 		)
 	)
 );

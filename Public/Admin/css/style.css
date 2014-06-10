@@ -66,3 +66,9 @@ body{
 .data-table .form-search{
 	margin-bottom: 15px;
 }
+th.column-check{
+	width: 8px !important;
+}
+th.sortable{
+	cursor: pointer;
+}

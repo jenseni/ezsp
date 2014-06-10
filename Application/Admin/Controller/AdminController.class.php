@@ -68,12 +68,24 @@ abstract class AdminController extends Controller{
 
 	protected function successMessage($message, $jumpUrl){
 		session('actionMessage', $message);
-		$this->redirect($jumpUrl);
+		if(strpos($jumpUrl, MODULE_NAME) === 0
+			|| strpos($jumpUrl, CONTROLLER_NAME) === 0){
+
+			$this->redirect($jumpUrl);
+		}else{
+			redirect($jumpUrl);
+		}
 	}
 
 	protected function errorMessage($message, $jumpUrl){
 		session('actionError', $message);
-		$this->redirect($jumpUrl);
+		if(strpos($jumpUrl, MODULE_NAME) === 0
+			|| strpos($jumpUrl, CONTROLLER_NAME) === 0){
+
+			$this->redirect($jumpUrl);
+		}else{
+			redirect($jumpUrl);
+		}
 	}
 
 	/**
