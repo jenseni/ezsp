@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{$site_title}</title>
+	<meta name="keywords" content="{$site_keywords}" />
+	<meta name="description" content="{$site_description}"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/all.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/site.css"/>
+	<block name="style"></block>
+	<script type="text/javascript" src="__STATIC__/jquery/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+	var _ROOT_ = "__ROOT__";
+	var MID = "{:is_login()}";
+	</script>
+	<block name="headscript"></block>
+</head>
+<body>
+	<div class="login_head">
+		<div class="login_text">
+			<if condition="is_login()">
+			<span class="loginimg">{:query_user('nickname')}</span> <a href="{:U('User/logout')}" >安全退出</a>
+			<else/>
+			<a href="{:U('User/login')}"class="loginimg">登录</a>&nbsp;/&nbsp;<a href="{:U('User/register')}">注册</a>
+			</if>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客服：400&nbsp;&nbsp;000&nbsp;&nbsp;0000
+		</div>
+	</div>
+	<a id="goTopBtn"></a>
+	<div class="header_box2">
+		<div class="logo">
+			<img src="__IMG__/logo.jpg" width="232" height="82" />
+		</div>
+		<div class="search_box">
+			<table width="100%" height="34" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="82%"><input type="text" class="search_input" /></td>
+					<td width="18%"><a href="#" class="search_btn">搜索楼盘</a></td>
+				</tr>
+			</table>
+		</div>
+		<div class="clear"></div>
+		<div class="nav_box">
+			<volist name='site_menus' id='menu'>
+				<a  href="{:U($menu['url'])}" <eq name="currentNav" value="$menu.id">class="navnow"</eq>>{$menu.name}</a><span class="spaceitem"></span>
+			</volist>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="content_box">
+	<block name="content"></block>
+	</div>
+	<div class="footerbox">
+	关于我们| 联系我们 | 加入我们 | 网站地图 | 友情链接<br />
+	大连恒润房地产经纪有限公司/ 网络经营许可证 {:C('WEB_SITE_ICP')}<br />
+	Copyright©2014 大连恒润房地产经纪有限公司保留全部权利
+	</div>
+	<block name="footscript"></block>
+</body>
+</html>

@@ -1,6 +1,11 @@
 insert into t_admin_user(username, password, auth)
 value('admin', '21232f297a57a5a743894a0e4a801fc3', '100');
 
+insert into `t_category` (`id`, `name`, `title`, `seq_num`, `list_row`, `status`) values('1','recommend','专题推荐','1','10','0');
+insert into `t_category` (`id`, `name`, `title`, `seq_num`, `list_row`, `status`) values('2','buyway','买房小道','2','10','0');
+insert into `t_category` (`id`, `name`, `title`, `seq_num`, `list_row`, `status`) values('3','newstoday','今日要闻','3','10','0');
+insert into `t_category` (`id`, `name`, `title`, `seq_num`, `list_row`, `status`) values('4','interview','访谈活动','4','10','0');
+
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('1','BOOL_CHAR','Y','是','N','0');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('2','BOOL_CHAR','N','否','N','0');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('3','HOUSE_BUILD_TYPE','1','普通住宅','N','1');
