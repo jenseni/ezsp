@@ -159,13 +159,13 @@ return array(
 				array(
 					'id'	=>	113,
 					'name'	=>	'房产动态发布',
-					'action'	=>	'Article/edit',
+					'action'	=>	'HouseNews/edit',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				),
 				array(
 					'id'	=>	114,
 					'name'	=>	'房产动态管理',
-					'action'	=>	'Article/edit',
+					'action'	=>	'HouseNews/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
 				)
 			)
