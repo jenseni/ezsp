@@ -12,7 +12,8 @@ class Bs extends TagLib {
         // 标签定义： attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次
         'actionError'=>array('close'=>0),
         'actionMessage'=>array('close'=>0),
-		'textfield'=>array('attr'=>'id,name,label,type,layout,value','close'=>0)
+		'textfield'=>array('attr'=>'id,name,label,type,layout,value','close'=>0),
+		'textarea'=>array('attr'=>'id,name,label,layout,value', 'close'=>0)
     );
 
     public function _actionError($tag, $content){
@@ -79,6 +80,33 @@ class Bs extends TagLib {
 			$str .= $inputStr;
 		}
 		
+		$str .= '</div>';
+
+		return $str;
+	}
+
+	public function _textarea($tag, $content){
+		$name = $this->getAttrValue($tag, 'name', '');
+		$value = $this->getAttrValue($tag, 'value');
+		$id = $this->getAttrValue($tag, 'id', $name);
+		$label = $this->getAttrValue($tag, 'label');
+		$layout = $this->getAttrValue($tag, 'layout', '3:9');
+		list($labelSpace, $controlSpace) = explode(':', $layout);
+
+		$str = "<div class='form-group <?php if(isset(\$fieldErrors['$name']) && !empty(\$fieldErrors['$name'])):?>has-error<?php endif;?>'>";
+		if($label){
+			$str .= "<label for=\"{$id}\" class=\"control-label";
+			if($labelSpace > 0){
+				$str .= " col-sm-{$labelSpace}";
+			}
+			$str .= "\">{$label}</label>";
+		}
+
+		$str .= "<div class=\"col-sm-{$controlSpace}\">";
+		$str .= 	"<textarea id=\"{$id}\" name=\"{$name}\" class=\"form-control\">{$value}</textarea>";
+		$str .= "<?php if(isset(\$fieldErrors['$name']) && !empty(\$fieldErrors['$name'])):?><span class='help-block small'><?php echo \$fieldErrors['$name'];?></span><?php endif;?>";
+		$str .= '</div>';
+
 		$str .= '</div>';
 
 		return $str;

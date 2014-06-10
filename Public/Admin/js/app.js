@@ -11,7 +11,7 @@
 		var docHeight = $(document).height();
 		var contentHeight = $('.content').height();
 		if(contentHeight < docHeight){
-			$('.content').css('height', docHeight - 50);
+			$('.content').css('min-height', docHeight - 50);
 		}
 	};
 
