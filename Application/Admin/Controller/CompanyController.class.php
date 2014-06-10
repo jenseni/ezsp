@@ -2,31 +2,29 @@
 namespace Admin\Controller;
 
 class CompanyController extends AdminController{
-	private $_articleId = 1;
 
 	public function edit(){
 		$this->authView(104);
+
+		$pagePath = C('STATIC_PAGE_PATH') . '/company.html';
+
 		if(IS_POST){
-			$Article = D('Article');
-			$data = $Article->validate(array(
-					array('title', 'require', '标题必须填写', 1),
-					array('content', 'require', '内容必须填写', 1)
-				))
-				->create();
 
-			if(!$data){
-				$this->errorInput($Article->getError(), 'Company/edit');
+			\Think\Storage::connect();
+
+			if(\Think\Storage::put($pagePath, $_POST['content'])){
+				$this->successMessage('保存成功', 'Company/edit');
 			}
-
-			$Article->save();
-
-			$this->successMessage('保存成功', 'Company/edit');
+			$this->errorMessage('保存失败', 'Company/edit');
 
 		}else{
-			$Article = M('Article');
-			$article = $Article->find($_articleId);
+			\Think\Storage::connect();
 
-			$this->assign('data', $article);
+			if(\Think\Storage::has($pagePath)){
+				$content = \Think\Storage::read($pagePath);
+			}
+
+			$this->assign('content', isset($content) ? $content : '');
 
 			$this->display();
 		}

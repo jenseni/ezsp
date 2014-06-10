@@ -3611,6 +3611,3 @@ insert into `t_district` (`id`, `pid`, `name`, `type`, `code`, `inactive`) value
 insert into `t_district` (`id`, `pid`, `name`, `type`, `code`, `inactive`) values('3558','523','白玉山','4',NULL,'N');
 insert into `t_district` (`id`, `pid`, `name`, `type`, `code`, `inactive`) values('3559','523','北海','4',NULL,'N');
 insert into `t_district` (`id`, `pid`, `name`, `type`, `code`, `inactive`) values('3560','523','滨港路','4',NULL,'N');
-
-
-insert into t_article(title,category_id,uid,content) value('公司简介', -1, 1, 'Hello World!');

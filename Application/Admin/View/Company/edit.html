@@ -15,18 +15,8 @@ $(function(){
 
 <block name="content">
 	<form action="{:U('Company/edit')}" method="post" class="form-horizontal">
-		<input type="hidden" name="id" value="{$data.id}"/>
-		<input type="hidden" name="uid" value="{$data.uid}"/>
-		<input type="hidden" name="category_id" value="{$data.category_id}"/>
-		<input type="hidden" name="description" value="{$data.description}"/>
-		<input type="hidden" name="level" value="{$data.level}"/>
-		<input type="hidden" name="create_time" value="{$data.create_time}"/>
-		<input type="hidden" name="update_time" value="{$data.update_time}"/>
-		<input type="hidden" name="status" value="{$data.status}"/>
 
-		<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:5"/>
-
-		<bs:textarea name="content" value="{$data.content}" label="内容" layout="1:9"/>
+		<bs:textarea name="content" value="{$content}" layout="0:12"/>
 
 		<div class="form-group">
 			<div class="col-sm-offset-1 col-sm-3">
