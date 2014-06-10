@@ -37,7 +37,7 @@ return array(
 				array(
 					'id'	=>	104,
 					'name'	=>	'编辑',
-					'action'	=>	'Article/edit',
+					'action'	=>	'Company/edit',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
