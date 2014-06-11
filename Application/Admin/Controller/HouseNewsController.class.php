@@ -24,7 +24,11 @@ class HouseNewsController extends AdminController{
 			$Article->order($sortInfo);
 		}
 
-		$houseNews = $Article->limit($Page->firstRow, $Page->listRows)->select();
+		$houseNews = $Article
+					 ->field('a.title, c.title category_name')
+					 ->alias('a')
+					 ->join('t_category c on a.category_id = c.id')
+					 ->limit($Page->firstRow, $Page->listRows)->select();
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 

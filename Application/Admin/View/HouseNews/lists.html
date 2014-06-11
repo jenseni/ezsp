@@ -23,6 +23,7 @@
 					<input type="checkbox" check-group=":checkbox[name='id[]']"/>
 				</th>
 				{:W('App/sortColumn', array('title', '标题'))}
+				{:W('App/sortColumn', array('category_id', '分类'))}
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -33,6 +34,7 @@
 					<input type="checkbox" name="id[]" value="{$data.id}"/>
 				</td>
 				<td>{$data.title}</td>
+				<td>{$data.category_name}</td>
 				<td>
 					<a class="btn btn-xs btn-info app-btn" href="{:U('User/assignauth', array('id'=>$data['id']))}">编辑</a>
 					<a class="btn btn-xs btn-danger app-btn" confirm="确认删除？" href="{:U('User/delete', array('id'=>$data['id']))}">删除</a>

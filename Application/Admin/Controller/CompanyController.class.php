@@ -24,7 +24,8 @@ class CompanyController extends AdminController{
 
 		}else{
 			$Article = M('Article');
-			$article = $Article->find($_articleId);
+			//$article = $Article->find($_articleId);
+			$article = $Article->where('category_id = -1')->find();
 
 			$this->assign('data', $article);
 
