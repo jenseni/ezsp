@@ -11,5 +11,7 @@ return array(
 	'DB_USER'	=>	'root',
 	'DB_PWD'	=>	'',
 	'DB_PORT'	=>	3306,
-	'DB_PREFIX'	=>	't_'
+	'DB_PREFIX'	=>	't_',
+
+	'STATIC_PAGE_PATH'	=>	'./Uploads/static'
 );

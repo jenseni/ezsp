@@ -17,6 +17,7 @@
             'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts'
         ]]
         ,topOffset: 50
+        ,initialFrameHeight: 350
     };
 
     function getUEBasePath(docUrl, confUrl) {

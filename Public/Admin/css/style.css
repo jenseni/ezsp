@@ -21,26 +21,28 @@ body{
 .list-group-item:last-child {
 	border-radius: 0;
 }
-.sidebar .list-group .active{
-	background-image: url(../images/sidebar-menu-arrow.png);
-	background-repeat: no-repeat;
-	background-position: right;
-	border-right: none;
-}
 .sidebar .list-group-item{
+	line-height: 25px;
 	color: #F3F3F3;
 	padding-left: 35px;
-}
-.sidebar .list-group a:hover{
-	background-color: #303030;
-}
-.sidebar .list-group a.active:hover{
-	background-color: #428BCA;
-}
-.sidebar .list-group-item{
+	padding-right: 0;
 	background-color: #3D3D3D;
 	border: none;
 	border-top: 1px solid #5C5C5C;
+}
+.sidebar a.list-group-item:hover{
+	background-color: #303030;
+}
+.sidebar a.list-group-item:focus {
+  background-color: #3D3D3D;
+}
+.sidebar .list-group-item .selected{
+	float: right;
+	width: 8px;
+	height: 25px;
+	background-image: url(../images/sidebar-menu-arrow.png);
+	background-repeat: no-repeat;
+	border-right: none;
 }
 
 /* top tab */
