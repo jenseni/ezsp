@@ -3,7 +3,7 @@ namespace Admin\Model;
 
 use Think\Model\RelationModel;
 
-class ArticleModel extends RelationModel{
+class OfficemarketModel extends RelationModel{
 	protected $patchValidate = true;
 
 	protected $_auto = array(
@@ -14,23 +14,17 @@ class ArticleModel extends RelationModel{
 
 	protected $_validate = array(
 		array('title', 'require', '请填写标题'),
-		array('content', 'require', '请填写详细信息')
+		array('desc_txt', 'require', '请填写详细信息')
 	);
 
 	protected $_link = array(
-		'Author' => array(
+		'District' => array(
 				'mapping_type' 	=> 	self::BELONGS_TO,
-				'class_name' 	=> 	'AdminUser',
-				'foreign_key'	=> 	'uid',
-				//'mapping_name'	=>	'author'
-				'as_fields'		=>	'username'
+				'class_name' 	=> 	'District',
+				'foreign_key'	=> 	'busi_area',
+				'as_fields'  =>  'name:busi_area_name'
 		),
-		'Category'=> array(
-				'mapping_type'	=>	self::BELONGS_TO,
-				'class_name'	=>	'Category',
-				'foreign_key'	=>	'category_id',
-				'as_fields'		=>	'title:category_name'
-		),
+		
 
 	);
 

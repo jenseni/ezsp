@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 
-class HouseNewsController extends AdminController{
+class OfficeMarketController extends AdminController{
 	
 	public function lists(){
 		$this->authView(114);
@@ -27,31 +27,37 @@ class HouseNewsController extends AdminController{
 	}
 
 	public function index(){
-		$this->authView(113);
+		
 
+		$Case = D('Officemarket');
+		$res = $Case->relation(true)->select();
+		echo json_encode($res);
+		exit();
+
+		$this->authView(109);
 		$title = I('get.title');
 		$condition = array();
 		if($title){
 			$condition['title'] = array('LIKE', "%{$title}%");
 		}
 
-		$Article = D('Article');
+		$Case = D('OfficeMarket');
 
-		$totalCount = $Article->listCount('1',$condition);
+		$totalCount = $Case->listCount($condition);
 		$Page = new \Org\Util\Page($totalCount);
 
 		$sortInfo = get_sort_info();
 
-		$houseNews = $Article->lists('1',$sortInfo,$Page->firstRow,$Page->listRows,$condition);
+		$dataList = $Case>lists($sortInfo,$Page->firstRow,$Page->listRows,$condition);
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 
-		$this->assign('dataList', $houseNews);
+		$this->assign('dataList', $dataList);
 		$this->display();
 	}
 
 	public function add(){
-		$this->authView(113);
+		$this->authView(109);
 
 		if(IS_POST){
 

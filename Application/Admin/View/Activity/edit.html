@@ -14,7 +14,7 @@ $(function(){
 
 <block name="content">
 
-<form role="form" action="{:U('HouseNews/update')}" method="post" class="form-horizontal">
+<form role="form" action="{:U('Activity/update')}" method="post" class="form-horizontal">
 	<input type="hidden" name="id" value="{$data.id}"/>
 	<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/>
 	<bs:textfield name="description" value="{$data.description}" label="描述" layout="1:4"/>
@@ -30,17 +30,6 @@ $(function(){
 		</div>
 	</div>
 	<div class="form-group">
-		<label for='category_id' class='control-label col-sm-1'>分类</label>
-		<div class='col-sm-4'>
-			<select class="form-control" name="category_id">
-			  <option value="1" <eq name="data['category_id']" value="1">selected</eq>>专题推荐</option>
-			  <option value="2" <eq name="data['category_id']" value="2">selected</eq>>买房小道</option>
-			  <option value="3" <eq name="data['category_id']" value="3">selected</eq>>今日要闻</option>
-			  <option value="4" <eq name="data['category_id']" value="4">selected</eq>>访谈活动</option>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
 		<label class='control-label col-sm-1'>详细信息</label>
 		<div class='col-sm-11'>
 			<bs:textarea name="content" value="{$data.content}" layout="0:12"/>
@@ -52,7 +41,7 @@ $(function(){
 			<input type="submit" class="btn btn-info form-control" value="更&nbsp;&nbsp;新"/>
 		</div>
 		<div class="col-sm-2">
-			<a href="{:U('HouseNews/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
+			<a href="{:U('Activity/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
 		</div>
 	</div>
 
