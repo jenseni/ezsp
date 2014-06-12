@@ -49,12 +49,12 @@ return array(
 		array(
 			'id'	=>	8,
 			'name'	=>	'房产动态',
-			'url'	=>	'#'
+			'url'	=>	'HouseNews/index'
 		),
 		array(
 			'id'	=>	9,
 			'name'	=>	'优惠活动',
-			'url'	=>	'#'
+			'url'	=>	'Activity/index'
 		)
 	),
 );

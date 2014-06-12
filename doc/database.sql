@@ -69,6 +69,7 @@ CREATE TABLE `t_article` (
    `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
    `update_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
    `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
+   `cover_url` varchar(250) NULL COMMENT '封面图片链接',
    PRIMARY KEY (`id`)
  ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COMMENT='文档模型文章表';
 

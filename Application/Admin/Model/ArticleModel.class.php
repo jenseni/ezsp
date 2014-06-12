@@ -9,6 +9,7 @@ class ArticleModel extends RelationModel{
 	protected $_auto = array(
 		array('status','1'),
 		array('create_time','time',1,'function'),
+        array('update_time','time',1,'function'),
 		array('update_time','time',2,'function'),
 	);
 
