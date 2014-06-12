@@ -23,7 +23,7 @@
                 <th>类型</th>
                 <th>价格</th>
                 <th>供求</th>
-                <th>面积</th>
+                <th>面积(m<sup>2</sup>)</th>
                 <th>联系人类型</th>
                 <th>状态</th>
                 <th>创建时间</th>
@@ -41,7 +41,7 @@
 	                <td>{$data.square}</td>
 	                <td>{$data.contact_type|get_lookup_value='HOUSE_CONTACT_TYPE',###}</td>
 	                <td>{$data.status|get_lookup_value='DOC_STATUS',###}</td>
-	                <td>{$data.ctime}</td>
+	                <td>{$data.create_time|format_timestamp}</td>
 				</tr>
 			</volist>
 		</tbody>

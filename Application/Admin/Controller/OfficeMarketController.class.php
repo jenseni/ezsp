@@ -4,101 +4,103 @@ namespace Admin\Controller;
 class OfficeMarketController extends AdminController{
 	
 	public function lists(){
-		$this->authView(114);
+		$this->authView(110);
 		
 		$title = I('get.title');
 		$condition = array();
 		if($title){
 			$condition['title'] = array('LIKE', "%{$title}%");
 		}
-
-		$Article = D('Article');
-		
-		$totalCount = $Article->listCount('1',$condition);
-		$Page = new \Org\Util\Page($totalCount);
-
-		$sortInfo = get_sort_info();
-
-		$houseNews = $Article->lists('1',$sortInfo,$Page->firstRow,$Page->listRows,$condition);
-		cookie('return_url', $_SERVER['REQUEST_URI']);
-
-		$this->assign('dataList', $houseNews);
-		$this->display();
-	}
-
-	public function index(){
-		
 
 		$Case = D('Officemarket');
-		$res = $Case->relation(true)->select();
-		echo json_encode($res);
-		exit();
-
-		$this->authView(109);
-		$title = I('get.title');
-		$condition = array();
-		if($title){
-			$condition['title'] = array('LIKE', "%{$title}%");
-		}
-
-		$Case = D('OfficeMarket');
-
+		
 		$totalCount = $Case->listCount($condition);
 		$Page = new \Org\Util\Page($totalCount);
 
 		$sortInfo = get_sort_info();
 
-		$dataList = $Case>lists($sortInfo,$Page->firstRow,$Page->listRows,$condition);
+		$OfficeMarket = $Case->lists($sortInfo,$Page->firstRow,$Page->listRows,$condition);
+		cookie('return_url', $_SERVER['REQUEST_URI']);
+
+		$this->assign('dataList', $OfficeMarket);
+		$this->display();
+	}
+
+	public function index(){
+		
+		/*$Case = D('Officemarket');
+		$res = $Case->relation(true)->select();
+		echo json_encode($res);
+		exit();*/
+
+		$this->authView(109);
+		$title = I('get.title');
+		$condition = array();
+		if($title){
+			$condition['title'] = array('LIKE', "%{$title}%");
+		}
+
+		$Case = D('Officemarket');
+
+		$totalCount = $Case->listCount($condition);
+		
+		$Page = new \Org\Util\Page($totalCount);
+
+		$sortInfo = get_sort_info();
+
+		$dataList = $Case->lists($sortInfo,$Page->firstRow,$Page->listRows,$condition);
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
+
 
 		$this->assign('dataList', $dataList);
 		$this->display();
 	}
 
-	public function add(){
+	public function add($city = '517'){
 		$this->authView(109);
 
 		if(IS_POST){
 
-			$Article = D('Article');
-			$data = $Article->create();
+			if(!isset($_POST['comp_register'])){
+				$_POST['comp_register'] = 'N';
+			}
+			$Case = D('Officemarket');
+			$data = $Case->create();
 
 			if(!$data){
-				$this->errorInput($Article->getError(), 'houseNews/add');
+				$this->errorInput($Case->getError(), 'OfficeMarket/add');
 			}
 
 			$data['uid'] = session('uid');
 
-			$id = $Article->data($data)->add();
+			$id = $Case->data($data)->add();
 
 			if(!$id){
-				$this->errorMessage('添加失败', 'HouseNews/index');
+				$this->errorMessage('添加失败', 'OfficeMarket/index');
 			}
 
-			$this->successMessage('添加成功', 'HouseNews/index');
+			$this->successMessage('添加成功', 'OfficeMarket/index');
 		}
 		
+		$this->assign('city',$city);
 		$this->display();
 	}
 
-	public function edit(){
-		$this->authView(114);
-		if(IS_POST){
-
-		}else{
-			$id = I('id','0');
-			if(empty($id)){
-				$this->error('参数不正确');
-			}
-			$article = M('Article')->find($id);
-			if(empty($article)){
-				$this->error('数据不存在');
-			}
-			$this->assign('data', $article);
+	public function edit($city = '517'){
+		$this->authView(110);
+		
+		$id = I('id','0');
+		if(empty($id)){
+			$this->error('参数不正确');
 		}
+		$Case = M('Officemarket')->find($id);
+		if(empty($Case)){
+			$this->error('数据不存在');
+		}
+		$this->assign('data', $Case);
 		
-		
+		$this->assign('city',$city);
 		$this->display();
 	}
 	//更新
@@ -107,11 +109,11 @@ class OfficeMarketController extends AdminController{
 			$this->error('错误的请求类型');
 		}
 
-		$res = D('Article')->update();
+		$res = D('Officemarket')->update();
 		if(!$res){
-			$this->errorMessage('更新失败','HouseNews/lists');
+			$this->errorMessage('更新失败','OfficeMarket/lists');
 		}else{
-			$this->successMessage('更新成功','HouseNews/lists');
+			$this->successMessage('更新成功','OfficeMarket/lists');
 		}
 	}
 
@@ -119,17 +121,17 @@ class OfficeMarketController extends AdminController{
 
 		$id = I('id');
 		if(empty($id)){
-			$this->errorMessage('请选择要删除的记录', get_return_url(U('HouseNews/lists')));
+			$this->errorMessage('请选择要删除的记录', get_return_url(U('OfficeMarket/lists')));
 		}
 
-		$Article = M('Article');
+		$Case = M('Officemarket');
 
 		if(is_array($id)){
-			$Article->where(array('id'=>array('IN', $id)))->delete();
+			$Case->where(array('id'=>array('IN', $id)))->delete();
 		}else{
-			$Article->where(array('id'=>(int)$id))->delete();
+			$Case->where(array('id'=>(int)$id))->delete();
 		}
 
-		$this->successMessage('删除成功', get_return_url(U('HouseNews/lists')));
+		$this->successMessage('删除成功', get_return_url(U('OfficeMarket/lists')));
 	}
 }
