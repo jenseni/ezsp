@@ -1,10 +1,10 @@
 <?php
 namespace Admin\Controller;
 
-class HouseNewsController extends AdminController{
+class ActivityController extends AdminController{
 	
 	public function lists(){
-		$this->authView(114);
+		$this->authView(116);
 		
 		$title = I('get.title');
 		$condition = array();
@@ -14,20 +14,20 @@ class HouseNewsController extends AdminController{
 
 		$Article = D('Article');
 		
-		$totalCount = $Article->listCount('1',$condition);
+		$totalCount = $Article->listCount('2',$condition);
 		$Page = new \Org\Util\Page($totalCount);
 
 		$sortInfo = get_sort_info();
 
-		$houseNews = $Article->lists('1',$sortInfo,$Page->firstRow,$Page->listRows,$condition);
+		$activity = $Article->lists('2',$sortInfo,$Page->firstRow,$Page->listRows,$condition);
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 
-		$this->assign('dataList', $houseNews);
+		$this->assign('dataList', $activity);
 		$this->display();
 	}
 
 	public function index(){
-		$this->authView(113);
+		$this->authView(115);
 
 		$title = I('get.title');
 		$condition = array();
@@ -37,21 +37,21 @@ class HouseNewsController extends AdminController{
 
 		$Article = D('Article');
 
-		$totalCount = $Article->listCount('1',$condition);
+		$totalCount = $Article->listCount('2',$condition);
 		$Page = new \Org\Util\Page($totalCount);
 
 		$sortInfo = get_sort_info();
 
-		$houseNews = $Article->lists('1',$sortInfo,$Page->firstRow,$Page->listRows,$condition);
+		$activity = $Article->lists('2',$sortInfo,$Page->firstRow,$Page->listRows,$condition);
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 
-		$this->assign('dataList', $houseNews);
+		$this->assign('dataList', $activity);
 		$this->display();
 	}
 
 	public function add(){
-		$this->authView(113);
+		$this->authView(115);
 
 		if(IS_POST){
 
@@ -59,25 +59,26 @@ class HouseNewsController extends AdminController{
 			$data = $Article->create();
 
 			if(!$data){
-				$this->errorInput($Article->getError(), 'houseNews/add');
+				$this->errorInput($Article->getError(), 'Activity/add');
 			}
 
 			$data['uid'] = session('uid');
+			$data['category_id'] = '5';
 
 			$id = $Article->data($data)->add();
 
 			if(!$id){
-				$this->errorMessage('添加失败', 'HouseNews/index');
+				$this->errorMessage('添加失败', 'Activity/index');
 			}
 
-			$this->successMessage('添加成功', 'HouseNews/index');
+			$this->successMessage('添加成功', 'Activity/index');
 		}
 		
 		$this->display();
 	}
 
 	public function edit(){
-		$this->authView(114);
+		$this->authView(116);
 		if(IS_POST){
 
 		}else{
@@ -103,9 +104,9 @@ class HouseNewsController extends AdminController{
 
 		$res = D('Article')->update();
 		if(!$res){
-			$this->errorMessage('更新失败','HouseNews/lists');
+			$this->errorMessage('更新失败','Activity/lists');
 		}else{
-			$this->successMessage('更新成功','HouseNews/lists');
+			$this->successMessage('更新成功','Activity/lists');
 		}
 	}
 
@@ -113,7 +114,7 @@ class HouseNewsController extends AdminController{
 
 		$id = I('id');
 		if(empty($id)){
-			$this->errorMessage('请选择要删除的记录', get_return_url(U('HouseNews/lists')));
+			$this->errorMessage('请选择要删除的记录', get_return_url(U('Activity/lists')));
 		}
 
 		$Article = M('Article');
@@ -124,6 +125,6 @@ class HouseNewsController extends AdminController{
 			$Article->where(array('id'=>(int)$id))->delete();
 		}
 
-		$this->successMessage('删除成功', get_return_url(U('HouseNews/lists')));
+		$this->successMessage('删除成功', get_return_url(U('Activity/lists')));
 	}
 }

@@ -1,0 +1,54 @@
+<extend name="Public/base"/>
+
+<block name="content">
+
+<div class="data-table">
+	<div class="btn-group btn-group-sm pull-right">
+		<a href="{:U('OfficeMarket/add')}" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> 添加写字楼商铺</a>
+	</div>
+
+	<form action="{:U('OfficeMarket/index')}" method="get" role="form" class="form-search">
+	<div class="form-inline">
+		{:W('App/searchInput', array('title', I('title'), '标题'))}
+		<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span> 查询</button>
+	</div>
+	</form>
+
+	<table class="table table-striped table-condensed table-hover table-bordered">
+		<thead>
+			<tr>
+				<th>标题</th>
+                <th>地段</th>
+                <th>区域</th>            
+                <th>类型</th>
+                <th>价格</th>
+                <th>供求</th>
+                <th>面积</th>
+                <th>联系人类型</th>
+                <th>状态</th>
+                <th>创建时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="dataList" id="data">
+				<tr>
+					<td>{$data.title}</td>
+	                <td>{$data.area_sector}</td>
+	                <td>{$data.busi_area_name}</td>
+	                <td>{$data.bd_type|get_lookup_value='OFFICE_MARKET_BD_TYPE',###}</td>
+	                <td>{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT',###}</td>                       
+	                <td>{$data.sd_type|get_lookup_value='HOUSE_SUPPLY_DEMAND',###}</td>
+	                <td>{$data.square}</td>
+	                <td>{$data.contact_type|get_lookup_value='HOUSE_CONTACT_TYPE',###}</td>
+	                <td>{$data.status|get_lookup_value='DOC_STATUS',###}</td>
+	                <td>{$data.ctime}</td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+
+	{$page}
+
+</div>
+	
+</block>

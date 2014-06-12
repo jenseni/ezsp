@@ -69,7 +69,15 @@ function get_return_url($defaultUrl = ''){
 
 	return $url;
 }
+function format_timestamp($date){
+	$time = date('Y-m-d h:i:s',$date);
+	return $time;
+}
 
+function get_lookup_value($id){
+	$Lookup = M('Lookup')->find($id);
+	return $Lookup['val'];
+}
 function array2string($arr, $split = ','){
 	if(empty($arr)){
 		return '';

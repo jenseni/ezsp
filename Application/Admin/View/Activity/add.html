@@ -14,29 +14,17 @@ $(function(){
 
 <block name="content">
 
-<form role="form" action="{:U('HouseNews/update')}" method="post" class="form-horizontal">
-	<input type="hidden" name="id" value="{$data.id}"/>
+<form role="form" action="{:U('Activity/add')}" method="post" class="form-horizontal">
 	<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/>
 	<bs:textfield name="description" value="{$data.description}" label="描述" layout="1:4"/>
 	<div class="form-group">
 		<label for='level' class='control-label col-sm-1'>优先级</label>
 		<div class='col-sm-4'>
 			<select class="form-control" name="level">
-			  <option <eq name="data['level']" value="0">selected</eq>>0</option>
-			  <option <eq name="data['level']" value="1">selected</eq>>1</option>
-			  <option <eq name="data['level']" value="2">selected</eq>>2</option>
-			  <option <eq name="data['level']" value="3">selected</eq>>3</option>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for='category_id' class='control-label col-sm-1'>分类</label>
-		<div class='col-sm-4'>
-			<select class="form-control" name="category_id">
-			  <option value="1" <eq name="data['category_id']" value="1">selected</eq>>专题推荐</option>
-			  <option value="2" <eq name="data['category_id']" value="2">selected</eq>>买房小道</option>
-			  <option value="3" <eq name="data['category_id']" value="3">selected</eq>>今日要闻</option>
-			  <option value="4" <eq name="data['category_id']" value="4">selected</eq>>访谈活动</option>
+			  <option>0</option>
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
 			</select>
 		</div>
 	</div>
@@ -49,10 +37,10 @@ $(function(){
 
 	<div class="form-group">
 		<div class="col-sm-offset-1 col-sm-2">
-			<input type="submit" class="btn btn-info form-control" value="更&nbsp;&nbsp;新"/>
+			<input type="submit" class="btn btn-info form-control" value="提&nbsp;&nbsp;交"/>
 		</div>
 		<div class="col-sm-2">
-			<a href="{:U('HouseNews/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
+			<a href="{:U('Activity/index')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
 		</div>
 	</div>
 

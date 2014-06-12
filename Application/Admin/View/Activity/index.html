@@ -1,0 +1,40 @@
+<extend name="Public/base"/>
+
+<block name="content">
+
+<div class="data-table">
+	<div class="btn-group btn-group-sm pull-right">
+		<a href="{:U('Activity/add')}" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> 添加活动</a>
+	</div>
+
+	<form action="{:U('Activity/index')}" method="get" role="form" class="form-search">
+	<div class="form-inline">
+		{:W('App/searchInput', array('title', I('title'), '活动标题'))}
+		<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span> 查询</button>
+	</div>
+	</form>
+
+	<table class="table table-striped table-condensed table-hover table-bordered">
+		<thead>
+			<tr>
+				<th>标题</th>
+				<th>作者</th>
+				{:W('App/sortColumn', array('create_time', '创建时间'))}
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="dataList" id="data">
+			<tr>
+				<td>{$data.title}</td>
+				<td>{$data.username}</td>
+				<td>{$data.create_time|format_timestamp}</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+
+	{$page}
+
+</div>
+	
+</block>

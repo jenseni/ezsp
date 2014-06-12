@@ -138,13 +138,13 @@ return array(
 				array(
 					'id'	=>	109,
 					'name'	=>	'写字楼商铺发布',
-					'action'	=>	'Article/edit',
+					'action'	=>	'OfficeMarket/index',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				),
 				array(
 					'id'	=>	110,
 					'name'	=>	'写字楼商铺管理',
-					'action'	=>	'Article/edit',
+					'action'	=>	'OfficeMarket/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
 				)
 			)
@@ -186,7 +186,7 @@ return array(
 				array(
 					'id'	=>	113,
 					'name'	=>	'房产动态发布',
-					'action'	=>	'HouseNews/edit',
+					'action'	=>	'HouseNews/index',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				),
 				array(
@@ -205,14 +205,14 @@ return array(
 			'children'	=>	array(
 				array(
 					'id'	=>	115,
-					'name'	=>	'房产动态发布',
-					'action'	=>	'Article/edit',
+					'name'	=>	'优惠活动发布',
+					'action'	=>	'Activity/index',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				),
 				array(
 					'id'	=>	116,
-					'name'	=>	'房产动态管理',
-					'action'	=>	'Article/edit',
+					'name'	=>	'优惠活动管理',
+					'action'	=>	'Activity/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
 				)
 			)
