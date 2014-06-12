@@ -1,16 +1,60 @@
 <extend name="Public/base"/>
 <block name="script">
-<script type="text/javascript" src="__STATIC__/ueditor/ueditor.config.my.js"></script>
-<script type="text/javascript" src="__STATIC__/ueditor/ueditor.all.min.js"></script>
-<script type="text/javascript" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" src="__STATIC__/jquery/jquery.chained.min.js"></script>
+<script type="text/javascript" src="__STATIC__/plugins/jquery.chained.remote.min.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.mymin.js"></script>
+<script type="text/javascript" src="__STATIC__/scripts/imageexplorer.js"></script>
+<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#desc_txt').removeClass('form-control');
-	window.UEDITOR_HOME_URL = "__STATIC__/ueditor/";
-	var editor = UE.getEditor('desc_txt');
+  var chainOptions = {url:"<?php echo U('District/getchildren'); ?>",clear:true,loading:"加载中..."};
+  $('#area').remoteChained($.extend({parents: '#city'},chainOptions));
+  $('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
 
-	$("#busi_area").chained("#area");
+  var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', column: 8});
+
+  $("#file_upload").uploadify({
+    'height': 34,
+    'swf': '__STATIC__/uploadify/uploadify.swf',
+    'uploader': '<?php echo U("File/uploadhousepic");?>',
+    'fileObjName': 'fileUpload',
+    'buttonClass': 'btn btn-primary',
+    'multi': true,
+    'queueID': 'queue_container',
+    'formData': {'busi_type': 3},
+    //'uploadLimit': 5,
+    //'queueSizeLimit': 5,
+    'fileSizeLimit': '2MB',
+    'buttonText': '上传图片',
+    'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+    'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+    'removeTimeout': 1,
+    'onUploadSuccess': function(file, data, response){
+      var info = $.parseJSON(data);
+      if(info.status == 0){
+        imgExplorer.addItem(info);
+      }else{
+        alert(info.info);
+      }
+    },
+    'onUploadError': function(file, errorCode, errorMsg, errorString){
+      //alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+    },
+    'onFallback': function(){
+      alert('请先安装Flash插件');
+    }
+  });
+});
+
+KindEditor.ready(function(K) {
+  window.editor = K.create('#desc_txt', {
+    resizeType : 1,
+    allowPreviewEmoticons : false,
+    allowImageUpload : false,
+    items : [
+      'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+      'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+      'insertunorderedlist', '|', 'emoticons', 'link']
+  });
 });
 </script>
 </block>
@@ -19,99 +63,85 @@ $(function(){
 
 <form role="form" action="{:U('OfficeMarket/update')}" method="post" class="form-horizontal">
 
-	<input type="hidden" name="id" value="{$data.id}"/>
+  <input type="hidden" name="id" value="{$data.id}"/>
 
-	<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/>
-	<bs:textfield name="description" value="{$data.description}" label="描述" layout="1:4"/>
-	
-	<div class="form-group">
-		<label class="control-label col-sm-1">区域</label>
-		<div class="col-sm-4">
-			{:W('Admin/District/showSelect', array($city, $data['area'], $data['busi_area']))}
-		</div>
-	</div>
-	<bs:textfield name="real_estate" value="{$data.real_estate}" label="楼盘" layout="1:4"/>
-	<div class="form-group">
-    	<label for="" class="col-sm-1 control-label">地段</label>
-    	<div class="col-sm-4">
-    		<div class="row">
-      			<div class="col-sm-5"><input type="text" class="form-control" value="{$data.area_sector|default=''}" name="area_sector" /></div>
-      			<label class="col-sm-2 control-label">附近的</label>
-      			<div class="col-sm-5"><input type="text" class="form-control" name="area_sector_nearby" value="{$data.area_sector_nearby|default=''}" /></div>
-      		</div>
-    	</div>
-  	</div>
-  	<div class="form-group">
-    	<label for="bd_type" class="col-sm-1 control-label">类型</label>
-    	<div class="col-sm-4">
-    		<div class="row">
-      			<div class="col-sm-6">
-      				{:W('Admin/Lookup/showSelect', array('bd_type', $data['bd_type'], 'OFFICE_MARKET_BD_TYPE', false, array('id'=>'bd_type')))}
-      			</div>
-      			<div class="col-sm-6">
-      				<input type="checkbox" name="comp_register" value="Y" <eq name="data['comp_register']" value="Y"> checked</eq>/>可注册公司
-      			</div>
-      		</div>
-    	</div>
-  	</div>
-  	<div class="form-group">
-  		<label class="col-sm-1 control-label">面积</label>
-  		<div class="col-sm-2">
-  			<div class="input-group">
-			  <input type="text" class="form-control" name="square" value="{$data.square}" />
-			  <span class="input-group-addon">m<sup>2</sup></span>
-			</div>
-  		</div>
-  	</div>
+  <bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/>
+  <bs:textfield name="description" value="{$data.description}" label="描述" layout="1:4"/>
+  
+  {:W('App/showRegionSelect', array($data['city'], $data['area'], $data['busi_area'], '区域', '1:6', $fieldErrors))}
+  
+  <bs:textfield name="real_estate" value="{$data.real_estate}" label="楼盘" layout="1:4"/>
+  <div class="form-group">
+      <label for="" class="col-sm-1 control-label">地段</label>
+      <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-5"><input type="text" class="form-control" value="{$data.area_sector|default=''}" name="area_sector" /></div>
+            <label class="col-sm-2 control-label">附近的</label>
+            <div class="col-sm-5"><input type="text" class="form-control" name="area_sector_nearby" value="{$data.area_sector_nearby|default=''}" /></div>
+          </div>
+      </div>
+    </div>
+    
+    <bs:formgroup field="bd_type" label="类型" cssClass="control-inline" layout="1:11" errorclass="false">
+      <label<bs:haserrorclass field='bd_type'/>>
+        {:W('App/lookupSelect', array('bd_type', $data['bd_type'], 'OFFICE_MARKET_BD_TYPE', '建筑类型'))} 
+      </label>
+      <input type="checkbox" name="comp_register" value="Y" <eq name="data['comp_register']" value="Y"> checked</eq>/>可注册公司
+    </bs:formgroup>
 
-  	<div class="form-group">
-  		<label class="col-sm-1 control-label">价格</label>
-  		<div class="col-sm-4">
-  			<div class="row">
-  				<div class="col-sm-6">  					
-					 <input type="text" class="form-control" name="price" value="{$data.price}" />					
-  				</div>
-  				<label class="col-sm-1 control-label">--</label>
-  				<div class="col-sm-5">
-  					 {:W('Admin/Lookup/showSelect', array('price_unit', $data['price_unit'], 'OFFICE_MARKET_PRICE_UNIT', false, array('id'=>'price_unit')))}
-  				</div>
-  			</div>			
-  		</div>
-  	</div>
-  	<div class="form-group">
-    	<label for="bd_type" class="col-sm-1 control-label">联系人</label>
-    	<div class="col-sm-4">
-    		<div class="row">
-    			<div class="col-sm-4">
-      				<input type="text" class="form-control" name="contact" value="{$data.contact|default=''}" placeholder="姓名"/>
-      			</div>
-      			<div class="col-sm-5">
-      				<input type="text" class="form-control" name="contact_tel" value="{$data.contact_tel|default=''}" placeholder="联系电话"/>
-      			</div>
-      			<div class="col-sm-3">
-      				{:W('Admin/Lookup/showSelect', array('contact_type', $data['contact_type'], 'HOUSE_CONTACT_TYPE', false, array('id'=>'contact_type')))}
-      			</div>
-      		</div>
-    	</div>
-  	</div>
+    <bs:formgroup field="square" label="面积" cssClass="control-inline" layout="1:11">
+      <label<bs:haserrorclass field='square'/>>
+        <input type="text" name="square" value="{$data.square}" class="form-control control-len-3"/> m<sup>2</sup>
+      </label>
+    </bs:formgroup>
+      
+    <bs:formgroup field="price,price_unit" label="价格" cssClass="control-inline" layout="1:11" errorclass="false">
+      <label<bs:haserrorclass field='price'/>>
+        <input type="text" class="form-control" name="price" value="{$data.price}" />- 
+      </label>
+      <label<bs:haserrorclass field='price_unit'/>>
+        {:W('App/lookupSelect', array('price_unit', $data['price_unit'], 'OFFICE_MARKET_PRICE_UNIT', '价格单位'))}
+      </label>
+    </bs:formgroup>
+    
+    <bs:formgroup field="contact,contact_tel,contact_type" label="联系人" cssClass="control-inline" layout="1:11" errorclass="false">
+      <label<bs:haserrorclass field='contact'/>>
+        <input type="text" class="form-control" name="contact" value="{$data.contact|default=''}" placeholder="姓名"/> 
+      </label>
+      <label<bs:haserrorclass field='contact_tel'/>>
+        <input type="text" class="form-control" name="contact_tel" value="{$data.contact_tel|default=''}" placeholder="联系电话"/>
+      </label>
+      <label<bs:haserrorclass field='contact_type'/>>
+        {:W('App/lookupSelect', array('contact_type', $data['contact_type'], 'HOUSE_CONTACT_TYPE', '联系人类型'))}
+      </label>
+    </bs:formgroup>
+  
+
+    <div class="form-group" style="position:relative">
+    <div class="col-sm-offset-1 col-sm-2">
+      <input type="file" name="fileUpload" id="file_upload"/>
+      <input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
+    </div>
+    <div id="queue_container" style="position:absolute;right:0;top:0"></div>
+  </div>
+  <div class="form-group">
+    <div id="item_container" class="col-sm-offset-1 col-sm-10">
+    
+    </div>
+  </div>
 
 
-	<div class="form-group">
-		<label class='control-label col-sm-1'>补充说明</label>
-		<div class='col-sm-11'>
-			<bs:textarea name="desc_txt" value="{$data.desc_txt}" layout="0:12"/>
-		</div>
-	</div>
+  <bs:textarea name="desc_txt" value="{$data.desc_txt}" label="描述" layout="1:8"/>
 
-	<div class="form-group">
-		<div class="col-sm-offset-1 col-sm-2">
-			<input type="submit" class="btn btn-info form-control" value="更&nbsp;&nbsp;新"/>
-		</div>
-		<div class="col-sm-2">
-			<a href="{:U('OfficeMarket/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
-		</div>
-	</div>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-2">
+      <input type="submit" class="btn btn-info form-control" value="更&nbsp;&nbsp;新"/>
+    </div>
+    <div class="col-sm-2">
+      <a href="{:U('OfficeMarket/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
+    </div>
+  </div>
 
 </form>
-	
+  
 </block>
