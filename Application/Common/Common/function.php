@@ -14,3 +14,5 @@ function default_value($value, $default = ''){
 	}
 	return $default;
 }
+
+function format_time(){}

@@ -64,24 +64,8 @@ $(function(){
     </volist>
      <div class="index_left_tt">地理位置</div>
     <div id="baidumap_forpick" style="height:300px;max-width:726px"></div>
-    <div class="left_hotlp_tt">附近推荐</div>
-      <ul class="hotlp_box">
-        <volist name="info.nearbyList" id="nearby">
-   	    <li>
-            <div class="hotlp_box_line">
-            <a href="__ROOT__/home/hs/detail/{$nearby.id}"><img src="__ROOT__{$nearby.thumbnail}" /></a>
-            <a href="__ROOT__/home/hs/detail/{$nearby.id}" class="hotlp_lpname">{$nearby.title}</a>
-            <div class="clear"></div>
-            价格：{$nearby.price}万<br />
-            电话：{$nearby.contact_tel}<br />
-            地址：{$nearby.area_name}{$nearby.busi_area_name}<br />
-   	        </div>
-        </li>
-        </volist>
-        <div class="clear"></div>
-        </ul>
+    {:W('House/houseSaleNearby', array($data['id'], array('busi_area'=>$data['busi_area'])))}
     </div>
-    
     <!--left end-->
     <!--rigth start-->
     <div class="right_hotlp">
@@ -90,31 +74,7 @@ $(function(){
         
         </div>
    	  <br /><BR />
-    <table width="260" border="0" cellspacing="0" cellpadding="0" class="news_tt">
-      <tr>
-        <td width="82" class="news_tt_left">推荐二手房</td>
-        <td width="158" align="right" class="news_tt_right">&nbsp;</td>
-      </tr>
-    </table>
-    <ul class="hotlp_box" style="padding-left:10px; padding-right:10px;">
-        <li>
-          <div class="hotlp_box_line">
-            <a href="#"><img  /></a>
-            <div class="clear"></div>
-              沙河口-和平现代<br />
-    3室2厅，精装修<br />
-    <em>6500元/月</em></div>
-       </li>
-           
-            <li>
-               <div class="hotlp_box_line">
-            <a href="#"><img  /></a>
-            <div class="clear"></div>
-              沙河口-和平现代<br />
-    3室2厅，精装修<br />
-    <em>6500元/月</em></div>
-            </li>
-            </ul>
+    {:W('House/houseSaleSuggest')}
     </div>
     <!--rigth end-->
     

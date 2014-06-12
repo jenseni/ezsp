@@ -1,6 +1,13 @@
 <extend name="Public/base"/>
 
 <block name="content">
+	<div class="mapbreak"><span>房屋买卖&nbsp;&gt;&nbsp;</span> {$city.name}二手房 </div>
+	<div class="right_hotlp">
+		<div class="guanzhu">
+		</div>
+		{:W('House/houseSaleSuggest')}
+	</div>
+
 	<div class="left_hotlp">
 		<div class="filter-group">
 			<div class="filter-label">区域：</div>
@@ -20,67 +27,38 @@
 		</div>
 		<div class="sort-group">
 			<div class="filter-label">排序：</div>
-			{:W('Sort/showSort', array(array('hs.square'=>'面积','hs.price'=>'价格','doc.create_time'=>'时间'), "__ROOT__/home/house_sale/index/area/$area/price/$price/square/$square/room/$room.html"))}
+			{:W('Sort/showSort', array(array('h.square'=>'面积','h.price'=>'价格','h.create_time'=>'时间'), "__ROOT__/home/house_sale/index/area/$area/price/$price/square/$square/room/$room.html"))}
 		</div>
-	</div>
 
-	<div class="right_hotlp">
-		<div class="guanzhu">
-		</div>
-		<table width="260" border="0" cellspacing="0" cellpadding="0" class="news_tt">
-			<tr>
-				<td width="82" class="news_tt_left">推荐二手房</td>
-				<td width="158" align="right" class="news_tt_right">&nbsp;</td>
-			</tr>
-		</table>
-		<ul class="hotlp_box" style="padding-left:10px; padding-right:10px;">
+		<ul class="ssjg">
+			<volist name="dataList" id="data">
 			<li>
-				<div class="hotlp_box_line">
-					<a href="#"><img  /></a>
-					<div class="clear"></div>
-					沙河口-和平现代<br />
-					3室2厅，精装修<br />
-					<em>6500元/月</em>
-				</div>
+				<a href="{:U('HouseSale/detail', array('id'=>$data['id']))}" target="_blank">
+					<img src="__ROOT__{$data.thumbnail}"/>
+					<div class="ssjg_tt">{$data.title}</div>
+					<div class="ssjg_xq">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td align="left">{$data.community}</td>
+								<td align="left">{$data.bed_room}室{$data.live_room}厅</td>
+								<td align="left">{$data.square}平米</td>
+								<td align="left"><span>{$data.price}万</span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ssjg_text">
+						{$data.floor}/{$data.floor_max}层,{$data.face|get_lookup_value='HOUSE_FACE_TYPE',###},{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}<br />
+						{$data.busi_area_name},{$data.build_year}年建,{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}<br />
+						{$data.create_time|substr=0,16}发布
+						{:W('Tag/showTag', array($data['add_on']))}
+					</div>
+				</a>
 			</li>
-			<li>
-				<div class="hotlp_box_line">
-					<a href="#"><img  /></a>
-					<div class="clear"></div>
-					沙河口-和平现代<br />
-					3室2厅，精装修<br />
-					<em>6500元/月</em>
-				</div>
-			</li>
+			</volist>
 		</ul>
+		<div class="page">
+		{$page}
+		</div>
 	</div>
-
-	<ul class="ssjg">
-		<volist name="dataList" id="data">
-		<li>
-			<a href="{:U('HouseSale/detail', array('id'=>$data['id']))}" target="_blank">
-				<img src="{$data.thumbnail}"/>
-				<div class="ssjg_tt">{$data.title}</div>
-				<div class="ssjg_xq">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td align="left">{$data.community}</td>
-							<td align="left">{$data.bed_room}室{$data.live_room}厅</td>
-							<td align="left">{$data.square}平米</td>
-							<td align="left"><span>{$data.price}万</span></td>
-						</tr>
-					</table>
-				</div>
-				<div class="ssjg_text">
-					{$data.floor}/{$data.floor_max}层,{$data.face|get_lookup_value='HOUSE_FACE_TYPE',###},{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}<br />
-					{$data.busi_area_name},{$data.build_year}年建,{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}<br />
-					{$data.create_time}发布
-					{:W('Tag/showTag', array($data['add_on']))}
-				</div>
-			</a>
-		</li>
-		</volist>
-	</ul>
-
-	{$page}
+	
 </block>

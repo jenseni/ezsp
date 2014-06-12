@@ -10,11 +10,15 @@ return array(
         '__JS__'     => __ROOT__ . '/Public/' . MODULE_NAME . '/js',
     ),
 
+    'WEB_SITE_TITLE'	=>	'恒润房产',
+    'WEB_SITE_KEYWORD'	=>	'大连租房,大连二手房,大连楼盘,大连短租',
+    'WEB_SITE_DESCRIPTION'	=>	'恒润房产,大连房屋信息',
+
     'SYS_MENU'	=> array(
 		array(
 			'id'	=>	1,
 			'name'	=>	'首页',
-			'url'	=>	'Index'
+			'url'	=>	'Index/index'
 		),
 		array(
 			'id'	=>	2,

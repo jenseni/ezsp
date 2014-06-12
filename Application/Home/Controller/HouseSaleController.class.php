@@ -60,7 +60,9 @@ class HouseSaleController extends HomeController{
 			->where($map)
 			->count(1);
 
-		$page = new \Think\Page($totalCount, 2);
+		$page = new \Think\Page($totalCount);
+		$page->setConfig('prev', '上一页');
+		$page->setConfig('next', '下一页');
 
 		$dataList = $model->field('h.id,h.title,h.create_time,h.community,h.bed_room,h.live_room,h.floor,h.floor_max,h.decorate,h.structure,h.build_year,h.face,h.thumbnail, h.price, h.add_on, h.square, busi_area.name busi_area_name')
 			->alias('h')
