@@ -11,7 +11,7 @@ $(function(){
 	$('#area').remoteChained($.extend({parents: '#city'},chainOptions));
 	$('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
 
-	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', column: 8});
+	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', countLimit: 6});
 
 	$("#file_upload").uploadify({
 		'height': 34,
@@ -32,7 +32,9 @@ $(function(){
 		'onUploadSuccess': function(file, data, response){
 			var info = $.parseJSON(data);
 			if(info.status == 0){
-				imgExplorer.addItem(info);
+				if(!imgExplorer.addItem(info)){
+					$('#file_upload').uploadify('cancel', '*');
+				}
 			}else{
 				alert(info.info);
 			}
@@ -125,7 +127,7 @@ KindEditor.ready(function(K) {
 			<input type="file" name="fileUpload" id="file_upload"/>
 			<input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
 		</div>
-		<div id="queue_container" style="position:absolute;right:0;top:0"></div>
+		<div id="queue_container" style="position:absolute;right:0;top:0;z-index:999;"></div>
 	</div>
 	<div class="form-group">
 		<div id="item_container" class="col-sm-offset-1 col-sm-10">
