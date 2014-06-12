@@ -278,6 +278,36 @@ class AppWidget extends Controller{
 		return $html;
 	}
 
+	public function lookupRadio($name, $value, $type, $htmlOptions=array()){
+		$lookupList = get_lookup_list($type);
+		if(empty($lookupList)){
+			return;
+		}
+		$html = '';
+		foreach ($lookupList as $lu) {
+			$html .= '<label class="radio-inline"';
+			if(isset($htmlOptions['lable'])){
+				foreach ($htmlOptions['label'] as $key => $val) {
+					$html .= " {$key}={$val}";
+				}
+			}
+			$html .= '>';
+			$html .= "<input type=\"radio\" name=\"{$name}\" value=\"{$lu['name']}\"";
+			if($value == $lu['name']){
+				$html .= ' checked';
+			}
+			if(isset($htmlOptions['input'])){
+				foreach ($htmlOptions['input'] as $key => $val) {
+					$html .= " {$key}={$val}";
+				}
+			}
+			$html .= '/> ' . $lu['val'];
+			$html .= '</label>';
+		}
+
+		return $html;
+	}
+
 	public function showTag($name, $value, $count=4, $label, $layout='1:11'){
 		list($labelSpace, $controlSpace) = explode(':', $layout);
 		$tagList = explode(',', $value);
