@@ -13,7 +13,9 @@ class Bs extends TagLib {
         'actionError'=>array('close'=>0),
         'actionMessage'=>array('close'=>0),
 		'textfield'=>array('attr'=>'id,name,label,type,layout,value','close'=>0),
-		'textarea'=>array('attr'=>'id,name,label,layout,value', 'close'=>0)
+		'textarea'=>array('attr'=>'id,name,label,layout,value', 'close'=>0),
+		'formgroup'=>array('attr'=>'label,layout,field,cssclass,errorclass,errormsg', 'close'=>1),
+		'haserrorclass'=>array('attr'=>'field,cssclass', 'close'=>0)
     );
 
     public function _actionError($tag, $content){
@@ -112,8 +114,110 @@ class Bs extends TagLib {
 		return $str;
 	}
 
+	public function _formgroup($tag, $content){
+		$label = $this->getAttrValue($tag, 'label');
+		$field = $this->getAttrValue($tag, 'field');
+		$layout = $this->getAttrValue($tag, 'layout', '1:11');
+		$cssClass = $this->getAttrValue($tag, 'cssclass');
+		$errorClass = $this->getAttrValue($tag, 'errorclass', true);
+		$errorMsg = $this->getAttrValue($tag, 'errormsg', true);
+
+		list($labelSpace, $controlSpace) = explode(':', $layout);
+
+		$str = '<?php $__ERRTTXT__ = "";?>';
+		$str .= '<div class="form-group ';
+		if($cssClass){
+			$str .= $cssClass;
+		}
+
+		$str .= '<?php if(isset($fieldErrors)){ ?>';
+		$str .= 	'<?php $field = explode(",", "' . $field . '"); ?>';
+		$str .= 	'<?php foreach($field as $f){ ?>';
+		$str .=			'<?php if(isset($fieldErrors[$f])){ ?>';
+		$str .= 		'<?php $__ERRTTXT__ .= (empty($__ERRTTXT__) ? "" : ",") . $fieldErrors[$f];?>';
+		if($errorClass){
+			$str .= 	'<?php echo " has-error";?>';
+		}
+		$str .= 		'<?php break; ?>';
+		$str .= 		'<?php } ?>';
+		$str .= 	'<?php } ?>';
+		$str .= '<?php }?>';
+
+		$str .= '">';
+
+		if($label){
+			$str .= '<label class="control-label';
+			if($labelSpace){
+				$str .= ' col-sm-'.$labelSpace;
+			}
+			$str .= '">'.$label.'</label>';
+		}
+
+		$str .= '<div class="';
+		if($labelSpace && !$label){
+			$str .= ' col-sm-offset-'.$labelSpace;
+		}
+		if($controlSpace){
+			$str .= ' col-sm-' . $controlSpace;
+		}
+		$str .= '">';
+
+		$str .= $this->tpl->parse($content);
+		if($errorMsg){
+			if($errorClass){
+				$str .= '<?php if(!empty($__ERRTTXT__)){ ?>';
+				$str .= 	'<span class="help-block small"><?php echo $__ERRTTXT__; ?></span>';
+				$str .= '<?php } ?>';
+			}else{
+				$str .= '<?php if(!empty($__ERRTTXT__)){ ?>';
+				$str .= '<p class="has-error">';
+				$str .= 	'<span class="help-block small"><?php echo $__ERRTTXT__; ?></span>';
+				$str .= '</p>';
+				$str .= '<?php } ?>';
+			}
+		}
+		$str .= '</div>';
+
+		$str .= '</div>';
+
+		return $str;
+	}
+
+	public function _haserrorclass($tag, $content){
+		$field = $this->getAttrValue($tag, 'field');
+		$cssClass = $this->getAttrValue($tag, 'cssclass');
+
+		$str = '<?php $__CSSCLASS__ = "'.$cssClass.'";?>';
+
+		$str .= '<?php if(isset($fieldErrors)){ ?>';
+		$str .= 	'<?php $field = explode(",", "' . $field . '"); ?>';
+		$str .= 	'<?php foreach($field as $f){ ?>';
+		$str .=			'<?php if(isset($fieldErrors[$f])){ ?>';
+		$str .=				'<?php if(empty($__CSSCLASS__)){ ?>';
+		$str .= 				'<?php echo " class=\"has-error\""; ?>';
+		$str .= 			'<?php }else{?>';
+		$str .= 				'<?php echo \' class=\"\'.$__CSSCLASS__.\' has-error\"\'; ?>';
+		$str .= 			'<?php } ?>';
+		$str .= 			'<?php break; ?>';
+		$str .= 		'<?php } ?>';
+		$str .= 	'<?php } ?>';
+		$str .= '<?php }?>';
+
+		return $str;
+	}
+
 	private function getAttrValue($tag, $name, $default=false){
-		return isset($tag[$name]) ? $tag[$name] : $default;
+		if(isset($tag[$name])){
+			if($tag[$name] == 'false'){
+				return false;
+			}
+			if($tag[$name] == 'true'){
+				return true;
+			}
+
+			return $tag[$name];
+		}
+		return $default;
 	}
 
 }

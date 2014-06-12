@@ -1,4 +1,10 @@
 <?php
+function is_login(){
+	$user = get_login_user();
+	if($user && isset($user['id'])){
+		return $user['id'];
+	}
+}
 
 function get_login_user(){
 	if(Admin\Model\AdminUserModel::$loginUser){
@@ -62,4 +68,23 @@ function get_return_url($defaultUrl = ''){
 	}
 
 	return $url;
+}
+
+function array2string($arr, $split = ','){
+	if(empty($arr)){
+		return '';
+	}else{
+		$feature = '';
+		$i = 0;
+		foreach ($arr as $value) {
+			if(empty($value)){
+				continue;
+			}
+			if($i++ > 0){
+				$feature .= $split;
+			}
+			$feature .= $value;
+		}
+		return $feature;
+	}
 }

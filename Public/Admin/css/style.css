@@ -74,3 +74,18 @@ th.column-check{
 th.sortable{
 	cursor: pointer;
 }
+
+/*area select*/
+.control-inline .form-control{
+	width: auto;
+	display: inline;
+}
+.control-len-1{
+	width: 50px !important;
+}
+.control-len-2{
+	width: 70px !important;
+}
+label select, label input{
+	font-weight: normal;
+}

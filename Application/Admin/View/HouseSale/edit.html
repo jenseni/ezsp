@@ -1,5 +1,177 @@
 <extend name="Public/base"/>
 
+<block name="script">
+<script type="text/javascript" src="__STATIC__/plugins/jquery.chained.remote.min.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.mymin.js"></script>
+<script type="text/javascript" src="__STATIC__/scripts/imageexplorer.js"></script>
+<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var chainOptions = {url:"<?php echo U('District/getchildren'); ?>",clear:true,loading:"加载中..."};
+	$('#area').remoteChained($.extend({parents: '#city'},chainOptions));
+	$('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
+
+	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', column: 8});
+
+	$("#file_upload").uploadify({
+		'height': 34,
+		'swf': '__STATIC__/uploadify/uploadify.swf',
+		'uploader': '<?php echo U("File/uploadhousepic");?>',
+		'fileObjName': 'fileUpload',
+		'buttonClass': 'btn btn-primary',
+		'multi': true,
+		'queueID': 'queue_container',
+		'formData': {'busi_type': 1},
+		//'uploadLimit': 5,
+		//'queueSizeLimit': 5,
+		'fileSizeLimit': '2MB',
+		'buttonText': '上传图片',
+		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+		'removeTimeout': 1,
+		'onUploadSuccess': function(file, data, response){
+			var info = $.parseJSON(data);
+			if(info.status == 0){
+				imgExplorer.addItem(info);
+			}else{
+				alert(info.info);
+			}
+		},
+		'onUploadError': function(file, errorCode, errorMsg, errorString){
+			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+		},
+		'onFallback': function(){
+			alert('请先安装Flash插件');
+		}
+	});
+});
+
+KindEditor.ready(function(K) {
+	window.editor = K.create('#desc_txt', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'link']
+	});
+});
+</script>
+</block>
+
 <block name="content">
-aaa
+<form action="<notempty name='data.id'>{:U('HouseSale/edit')}<else/>{:U('HouseSale/add')}</notempty>" method="post" class="form-horizontal">
+	<notempty name='data.id'>
+		<input type="hidden" name="id" value="{$data.id}" />
+	</notempty>
+
+	<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:5"/> 
+
+	<bs:textfield name="community" value="{$data.community}" label="小区" layout="1:5"/> 
+
+	{:W('App/showRegionSelect', array($data['city'], $data['area'], $data['busi_area'], '区域', '1:6', $fieldErrors))} 
+
+	<bs:formgroup field="bed_room,live_room,toilet" label="户型" cssClass="control-inline" layout="1:11" errorclass="false">
+		<label<bs:haserrorclass field='bed_room'/>>
+			<input type="text" name="bed_room" value="{$data.bed_room}" class="form-control control-len-1"/> 室
+		</label>
+		<label<bs:haserrorclass field='live_room'/>>
+			<input type="text" name="live_room" value="{$data.live_room}" class="form-control control-len-1"/> 厅
+		</label>
+		<label<bs:haserrorclass field='toilet'/>>
+			<input type="text" name="toilet" value="{$data.toilet}" class="form-control control-len-1"/> 卫
+		</label>
+	</bs:formgroup> 
+
+	<bs:formgroup field="floor,floor_max" label="楼层" cssClass="control-inline" layout="1:11" errorclass="false">
+		<label<bs:haserrorclass field='floor'/>>
+			第 <input type="text" name="floor" value="{$data.floor}" class="form-control control-len-1"/> 层
+		</label>
+		<label<bs:haserrorclass field='floor_max'/>>
+			共 <input type="text" name="floor_max" value="{$data.floor_max}" class="form-control control-len-1"/> 层
+		</label>
+	</bs:formgroup> 
+
+	<bs:formgroup field="build_type,structure,decorate,face" label="类型" cssClass="control-inline" layout="1:11" errorclass="false">
+		<label<bs:haserrorclass field='build_type'/>>
+		{:W('App/lookupSelect', array('build_type', $data['build_type'], 'HOUSE_BUILD_TYPE', '建筑类型'))} 
+		</label>
+		<label<bs:haserrorclass field='structure'/>>
+		{:W('App/lookupSelect', array('structure', $data['structure'], 'HOUSE_STRUCTURE_TYPE', '建筑结构'))} 
+		</label>
+		<label<bs:haserrorclass field='decorate'/>>
+		{:W('App/lookupSelect', array('decorate', $data['decorate'], 'HOUSE_DECORATE_TYPE', '装修情况'))} 
+		</label>
+		<label<bs:haserrorclass field='face'/>>
+		{:W('App/lookupSelect', array('face', $data['face'], 'HOUSE_FACE_TYPE', '朝向'))} 
+		</label>
+		<label<bs:haserrorclass field='build_year'/>>
+			建筑年代 <input type="text" name="build_year" value="{$data.build_year}" class="form-control control-len-2"/> 年
+		</label>
+	</bs:formgroup> 
+
+	<bs:formgroup field="price,down_payment,monthly" label="价格" cssClass="control-inline" layout="1:11">
+		<label<bs:haserrorclass field='price'/>>
+			<input type="text" name="price" value="{$data.price}" class="form-control control-len-2"/> 万
+		</label>
+		<label<bs:haserrorclass field='down_payment'/>>
+			首付 <input type="text" name="down_payment" value="{$data.down_payment}" class="form-control control-len-2"/> 万
+		</label>
+		<label<bs:haserrorclass field='monthly'/>>
+			月供 <input type="text" name="monthly" value="{$data.monthly}" class="form-control control-len-2"/> 元/月
+		</label>
+	</bs:formgroup>
+
+	<bs:formgroup field="square,inner_square" label="面积" cssClass="control-inline" layout="1:11">
+		<label<bs:haserrorclass field='square'/>>
+			<input type="text" name="square" value="{$data.square}" class="form-control control-len-2"/> m<sup>2</sup>
+		</label>
+		<label<bs:haserrorclass field='inner_square'/>>
+			套内面积 <input type="text" name="inner_square" value="{$data.inner_square}" class="form-control control-len-2"/> m<sup>2</sup>
+		</label>
+	</bs:formgroup>
+
+	<bs:formgroup field="property_type,property_right" label="产权" cssClass="control-inline" layout="1:11">
+		<label<bs:haserrorclass field='property_type'/>>
+		{:W('App/lookupSelect', array('property_type', $data['property_type'], 'HOUSE_PROPERTY_TYPE', '产权类型'))} 
+		</label>
+		<label<bs:haserrorclass field='property_right'/>>
+		{:W('App/lookupSelect', array('property_right', $data['property_right'], 'HOUSE_PROPERTY_RIGHT', '产权期限'))} 
+		</label>
+	</bs:formgroup>
+
+	{:W('App/showTag', array('add_on', $data['add_on'], 4, '配套设施'))} 
+	{:W('App/showTag', array('feature', $data['feature'], 4, '特色'))} 
+
+	<bs:textfield name="contact" value="{$data.contact}" label="联系人" layout="1:3"/> 
+	<bs:textfield name="contact_tel" value="{$data.contact_tel}" label="联系电话" layout="1:3"/> 
+
+	<div class="form-group" style="position:relative">
+		<div class="col-sm-offset-1 col-sm-2">
+			<input type="file" name="fileUpload" id="file_upload"/>
+			<input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
+		</div>
+		<div id="queue_container" style="position:absolute;right:0;top:0"></div>
+	</div>
+	<div class="form-group">
+		<div id="item_container" class="col-sm-offset-1 col-sm-10">
+		
+		</div>
+	</div>
+
+	<bs:textarea name="desc_txt" value="{$data.desc_txt}" label="描述" layout="1:8"/> 
+
+	<div class="form-group">
+		<div class="col-sm-offset-1 col-sm-3">
+			<input type="submit" class="btn btn-primary form-control" value="保&nbsp&nbsp存" />
+		</div>
+		<notempty name='data.id'>
+		<div class="col-sm-3">
+			<a class="btn btn-primary form-control" href="{:get_return_url(U('HouseSale/lists'))}">返回</a>
+		</div>
+		</notempty>
+	</div>
+
+</form>
 </block>
