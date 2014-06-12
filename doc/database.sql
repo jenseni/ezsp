@@ -203,3 +203,20 @@ CREATE TABLE `t_shortrent` (
    `contact_type` TINYINT(4) NOT NULL COMMENT '联系方式',
    PRIMARY KEY (`id`)
  ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_member`;
+CREATE TABLE `t_member` (
+   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+   `username` VARCHAR(32) NOT NULL COMMENT '用户名',
+   `password` CHAR(32) NOT NULL COMMENT '密码',
+   PRIMARY KEY (`id`)
+)
+
+DROP TABLE IF EXISTS `t_info_submit`;
+CREATE TABLE `t_info_submit`(
+   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+   `contact` VARCHAR(32) NOT NULL COMMENT '联系人',
+   `contact_tel` VARCHAR(32) NOT NULL COMMENT '联系电话',
+   `content` TEXT NOT NULL COMMENT '内容',
+   PRIMARY KEY (`id`)
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;

@@ -1,0 +1,141 @@
+<extend name="Public/base"/>
+
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/adgallery/jquery.ad-gallery.css">
+<style type="text/css">
+.mapbreak{
+	margin-bottom: 10px;
+}
+</style>
+</block>
+
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.ad-gallery').adGallery();
+});
+</script>
+</block>
+
+<block name="content">
+	<div class="mapbreak"><span>房屋买卖&nbsp;&gt;&nbsp;</span> {$city.name}二手房> {$data.area_name}二手房 </div>
+	<div class="left_hotlp">
+		<div class="left_hotlp_tt">{$data.title} {:W('Tag/showTag', array($data['feature'], 'fortab'))}</div>
+		<div class="home_pic">
+            <div class="ad-gallery">
+    			<div class="ad-image-wrapper"></div>
+                <div class="ad-nav">
+                    <div class="ad-thumbs">
+                        <ul class="ad-thumb-list">
+                            <volist id='housePic' name='info.picList'>
+                            <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+		</div>
+		<div class="fcxq">
+		售价：<span class="redtext">{$data.price}</span>万
+		<br />
+		单价：<em><php> echo round($data['price'] * 10000 / $data['square'], 2)</php>元/平米</em>&nbsp;&nbsp;&nbsp;&nbsp;首付：<em>{$data.down_payment}万</em>&nbsp;&nbsp;&nbsp;&nbsp;月供：<em>{$data.monthly}元</em>
+		<br />
+        房型：<em>{$data.bed_room}室{$data.live_room}厅</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建筑面积：<em>{$data.square}平米</em>
+        <br />
+        朝向：<em>{$data.face|get_lookup_value='HOUSE_FACE_TYPE', ###}</em>
+        <br />
+        楼层：<em>{$data.floor}层({$data.floor_max}层)</em>
+        <br />
+        <div class="tel_bp">{$data.contact_tel}</div>
+        年代：<em>{$data.build_year}年</em> &nbsp;&nbsp;&nbsp;&nbsp;结构：<em>{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}</em>
+        <br /> 
+        装修：<em>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</em>&nbsp;&nbsp;&nbsp;&nbsp;  住宅类别：<em>{$data.build_type|get_lookup_value='HOUSE_BUILD_TYPE',###}</em><br />
+        产权性质：<em>{$data.property_type|get_lookup_value='HOUSE_PROPERTY_TYPE',###}</em><br/>
+    </div>
+    <div class="clear"></div>
+    <div class="index_left_tt">房源描述</div>
+    配套设施：{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
+    <div>
+    {$data.desc_txt}
+    </div>
+    <volist id='housePic' name='info.picList'>
+    <img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
+    </volist>
+     <div class="index_left_tt">地理位置</div>
+    <div id="baidumap_forpick" style="height:300px;max-width:726px"></div>
+    <div class="left_hotlp_tt">附近推荐</div>
+      <ul class="hotlp_box">
+        <volist name="info.nearbyList" id="nearby">
+   	    <li>
+            <div class="hotlp_box_line">
+            <a href="__ROOT__/home/hs/detail/{$nearby.id}"><img src="__ROOT__{$nearby.thumbnail}" /></a>
+            <a href="__ROOT__/home/hs/detail/{$nearby.id}" class="hotlp_lpname">{$nearby.title}</a>
+            <div class="clear"></div>
+            价格：{$nearby.price}万<br />
+            电话：{$nearby.contact_tel}<br />
+            地址：{$nearby.area_name}{$nearby.busi_area_name}<br />
+   	        </div>
+        </li>
+        </volist>
+        <div class="clear"></div>
+        </ul>
+    </div>
+    
+    <!--left end-->
+    <!--rigth start-->
+    <div class="right_hotlp">
+   
+    	<div class="guanzhu">
+        
+        </div>
+   	  <br /><BR />
+    <table width="260" border="0" cellspacing="0" cellpadding="0" class="news_tt">
+      <tr>
+        <td width="82" class="news_tt_left">推荐二手房</td>
+        <td width="158" align="right" class="news_tt_right">&nbsp;</td>
+      </tr>
+    </table>
+    <ul class="hotlp_box" style="padding-left:10px; padding-right:10px;">
+        <li>
+          <div class="hotlp_box_line">
+            <a href="#"><img  /></a>
+            <div class="clear"></div>
+              沙河口-和平现代<br />
+    3室2厅，精装修<br />
+    <em>6500元/月</em></div>
+       </li>
+           
+            <li>
+               <div class="hotlp_box_line">
+            <a href="#"><img  /></a>
+            <div class="clear"></div>
+              沙河口-和平现代<br />
+    3室2厅，精装修<br />
+    <em>6500元/月</em></div>
+            </li>
+            </ul>
+    </div>
+    <!--rigth end-->
+    
+    <div class="clear"></div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
+<script type="text/javascript">
+(function(){
+    var lng = {$data.longitude|default=0};
+    var lat = {$data.latitude|default=0};
+    if(lng == 0 || lat == 0){
+        return ;
+    }
+    var map = new BMap.Map("baidumap_forpick");
+
+    var marker = new BMap.Marker(new BMap.Point(lng, lat));
+    map.centerAndZoom(marker.getPosition(),15);
+    map.enableScrollWheelZoom();
+    map.addOverlay(marker);
+})();
+</script>
+</block>
