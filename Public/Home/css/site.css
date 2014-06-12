@@ -630,6 +630,7 @@ a.hotlp_lpname:hover{
 	padding-right:5px;
 	font-weight:bold;}
 ul.ssjg {
+	width: 726px;
 	padding-bottom: 10px;
 	color: #888888;
 	line-height: 25px;
@@ -652,7 +653,7 @@ ul.ssjg li img{
 	text-align:left;
 	padding-left:10px;
 	float:left;
-	width:810px;}
+	width:544px;}
 .ssjg_text span{
 	color:#FFF;
 	display:inline-block;
@@ -686,19 +687,18 @@ span.e{
 	background-color:#ff7f7f;
 	}
 .ssjg_tt {
-
 	color: #0041d9;
 	font-size: 16px;
 	text-decoration: none;
 	display: block;
 	float: left;
-	width: 810px;
+	width: 544px;
 	text-align: left;
 	padding-left: 10px;
 }
 .ssjg_xq {
 	float: left;
-	width: 810px;
+	width: 544px;
 	padding-left: 10px;
 	height: 35px;
 	line-height: 30px;
