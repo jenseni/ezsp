@@ -69,7 +69,9 @@ function format_timestamp($date){
 	return $time;
 }
 
-function get_lookup_value($id){
-	$Lookup = M('Lookup')->find($id);
+function get_lookup_value($type,$name){
+	$map['type'] = array('eq',$type);
+	$map['name'] = array('eq',$name);
+	$Lookup = M('Lookup')->where($map)->find();
 	return $Lookup['val'];
 }

@@ -52,7 +52,6 @@ class OfficemarketModel extends RelationModel{
 
     /**
      * 获取文档列表
-     * @param  integer  $category 分类ID, 1：房产，2：优惠活动
      * @param  string   $order    排序规则
      * @param  integer  $status   状态
      * @param  string   $field    字段 true-所有字段
@@ -61,31 +60,19 @@ class OfficemarketModel extends RelationModel{
      * @return array              文档列表
      * @author huajie <banhuajie@163.com>
      */
-    public function lists($category = '1', $order = '`create_time` DESC', $limit = '10', $limitRows = '10', $map = array(), $status = 1, $field = true){
-        if($category=='1'){
-        	$map['category_id'] = array('IN','1,2,3,4');
-        }else{
-        	$map['category_id'] = array('eq','5');
-        }
-        $map['status'] = array('eq','1');
-
+    public function lists($order = '`create_time` DESC', $limit = '10', $limitRows = '10', $map = array(), $status = 1, $field = true){
+        $map['status'] = array('eq',$status);
         return $this->field($field)->relation(true)->where($map)->order($order)->limit($limit,$limitRows)->select();
     }
 
     /**
      * 计算列表总数
-     * @param  number  $category 分类ID, 1：房产，2：优惠活动
      * @param  integer $status   状态
      * @param  array   $map     查询条件参数
      * @return integer           总数
      */
-    public function listCount($category = '1', $map = array(), $status = 1){
-        if($category=='1'){
-        	$map['category_id'] = array('IN','1,2,3,4');
-        }else{
-        	$map['category_id'] = array('eq','5');
-        }
-        $map['status'] = array('eq','1');
+    public function listCount($map = array(), $status = 1){
+        $map['status'] = array('eq',$status);
         return $this->where($map)->count('id');
     }
 }

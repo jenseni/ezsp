@@ -3,47 +3,103 @@
 <script type="text/javascript" src="__STATIC__/ueditor/ueditor.config.my.js"></script>
 <script type="text/javascript" src="__STATIC__/ueditor/ueditor.all.min.js"></script>
 <script type="text/javascript" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="__STATIC__/jquery/jquery.chained.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#content').removeClass('form-control');
+	$('#desc_txt').removeClass('form-control');
 	window.UEDITOR_HOME_URL = "__STATIC__/ueditor/";
-	var editor = UE.getEditor('content');
+	var editor = UE.getEditor('desc_txt');
+
+	$("#busi_area").chained("#area");
 });
 </script>
 </block>
 
 <block name="content">
 
-<form role="form" action="{:U('HouseNews/update')}" method="post" class="form-horizontal">
+<form role="form" action="{:U('OfficeMarket/update')}" method="post" class="form-horizontal">
+
 	<input type="hidden" name="id" value="{$data.id}"/>
+
 	<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/>
 	<bs:textfield name="description" value="{$data.description}" label="描述" layout="1:4"/>
+	
 	<div class="form-group">
-		<label for='level' class='control-label col-sm-1'>优先级</label>
-		<div class='col-sm-4'>
-			<select class="form-control" name="level">
-			  <option <eq name="data['level']" value="0">selected</eq>>0</option>
-			  <option <eq name="data['level']" value="1">selected</eq>>1</option>
-			  <option <eq name="data['level']" value="2">selected</eq>>2</option>
-			  <option <eq name="data['level']" value="3">selected</eq>>3</option>
-			</select>
+		<label class="control-label col-sm-1">区域</label>
+		<div class="col-sm-4">
+			{:W('Admin/District/showSelect', array($city, $data['area'], $data['busi_area']))}
 		</div>
 	</div>
+	<bs:textfield name="real_estate" value="{$data.real_estate}" label="楼盘" layout="1:4"/>
 	<div class="form-group">
-		<label for='category_id' class='control-label col-sm-1'>分类</label>
-		<div class='col-sm-4'>
-			<select class="form-control" name="category_id">
-			  <option value="1" <eq name="data['category_id']" value="1">selected</eq>>专题推荐</option>
-			  <option value="2" <eq name="data['category_id']" value="2">selected</eq>>买房小道</option>
-			  <option value="3" <eq name="data['category_id']" value="3">selected</eq>>今日要闻</option>
-			  <option value="4" <eq name="data['category_id']" value="4">selected</eq>>访谈活动</option>
-			</select>
-		</div>
-	</div>
+    	<label for="" class="col-sm-1 control-label">地段</label>
+    	<div class="col-sm-4">
+    		<div class="row">
+      			<div class="col-sm-5"><input type="text" class="form-control" value="{$data.area_sector|default=''}" name="area_sector" /></div>
+      			<label class="col-sm-2 control-label">附近的</label>
+      			<div class="col-sm-5"><input type="text" class="form-control" name="area_sector_nearby" value="{$data.area_sector_nearby|default=''}" /></div>
+      		</div>
+    	</div>
+  	</div>
+  	<div class="form-group">
+    	<label for="bd_type" class="col-sm-1 control-label">类型</label>
+    	<div class="col-sm-4">
+    		<div class="row">
+      			<div class="col-sm-6">
+      				{:W('Admin/Lookup/showSelect', array('bd_type', $data['bd_type'], 'OFFICE_MARKET_BD_TYPE', false, array('id'=>'bd_type')))}
+      			</div>
+      			<div class="col-sm-6">
+      				<input type="checkbox" name="comp_register" value="Y" <eq name="data['comp_register']" value="Y"> checked</eq>/>可注册公司
+      			</div>
+      		</div>
+    	</div>
+  	</div>
+  	<div class="form-group">
+  		<label class="col-sm-1 control-label">面积</label>
+  		<div class="col-sm-2">
+  			<div class="input-group">
+			  <input type="text" class="form-control" name="square" value="{$data.square}" />
+			  <span class="input-group-addon">m<sup>2</sup></span>
+			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<label class="col-sm-1 control-label">价格</label>
+  		<div class="col-sm-4">
+  			<div class="row">
+  				<div class="col-sm-6">  					
+					 <input type="text" class="form-control" name="price" value="{$data.price}" />					
+  				</div>
+  				<label class="col-sm-1 control-label">--</label>
+  				<div class="col-sm-5">
+  					 {:W('Admin/Lookup/showSelect', array('price_unit', $data['price_unit'], 'OFFICE_MARKET_PRICE_UNIT', false, array('id'=>'price_unit')))}
+  				</div>
+  			</div>			
+  		</div>
+  	</div>
+  	<div class="form-group">
+    	<label for="bd_type" class="col-sm-1 control-label">联系人</label>
+    	<div class="col-sm-4">
+    		<div class="row">
+    			<div class="col-sm-4">
+      				<input type="text" class="form-control" name="contact" value="{$data.contact|default=''}" placeholder="姓名"/>
+      			</div>
+      			<div class="col-sm-5">
+      				<input type="text" class="form-control" name="contact_tel" value="{$data.contact_tel|default=''}" placeholder="联系电话"/>
+      			</div>
+      			<div class="col-sm-3">
+      				{:W('Admin/Lookup/showSelect', array('contact_type', $data['contact_type'], 'HOUSE_CONTACT_TYPE', false, array('id'=>'contact_type')))}
+      			</div>
+      		</div>
+    	</div>
+  	</div>
+
+
 	<div class="form-group">
-		<label class='control-label col-sm-1'>详细信息</label>
+		<label class='control-label col-sm-1'>补充说明</label>
 		<div class='col-sm-11'>
-			<bs:textarea name="content" value="{$data.content}" layout="0:12"/>
+			<bs:textarea name="desc_txt" value="{$data.desc_txt}" layout="0:12"/>
 		</div>
 	</div>
 
@@ -52,7 +108,7 @@ $(function(){
 			<input type="submit" class="btn btn-info form-control" value="更&nbsp;&nbsp;新"/>
 		</div>
 		<div class="col-sm-2">
-			<a href="{:U('HouseNews/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
+			<a href="{:U('OfficeMarket/lists')}" class="btn btn-info form-control">返&nbsp;&nbsp;回</a>
 		</div>
 	</div>
 
