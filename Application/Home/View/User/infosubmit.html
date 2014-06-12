@@ -1,0 +1,33 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	<div style="text-align:left;">
+
+	<form action="{:U('User/infosubmit')}" method="post">
+
+		<div>
+			<label>联系人</label>
+			<input type="text" name="contact" value=""/>
+		</div>
+
+		<div>
+			<label>联系电话</label>
+			<input type="text" name="contact_tel" value=""/>
+		</div>
+
+		<div>
+			<label>描述</label>
+		</div>
+		<div>
+			<textarea name="content"></textarea>
+		</div>
+
+		<div>
+			<input type="submit" value="提交"/>
+		</div>
+
+	</form>
+
+	</div>
+
+</block>

@@ -19,12 +19,12 @@ return array(
 		array(
 			'id'	=>	2,
 			'name'	=>	'公司简介',
-			'url'	=>	'Article/index'
+			'url'	=>	'Company/index'
 		),
 		array(
 			'id'	=>	3,
 			'name'	=>	'房屋买卖',
-			'url'	=>	'#'
+			'url'	=>	'HouseSale/index'
 		),
 		array(
 			'id'	=>	4,

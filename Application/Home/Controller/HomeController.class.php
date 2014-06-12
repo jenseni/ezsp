@@ -1,12 +1,4 @@
 <?php
-// +----------------------------------------------------------------------
-// | OneThink [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
-// +----------------------------------------------------------------------
-
 namespace Home\Controller;
 use Think\Controller;
 
@@ -29,6 +21,8 @@ class HomeController extends Controller {
         $this->site_description = C('WEB_SITE_DESCRIPTION');
         //获取导航菜单数组
         $this->site_menus = C('SYS_MENU');
+
+        $this->city = get_current_city();
     }
 
     /* 用户登录检测 */

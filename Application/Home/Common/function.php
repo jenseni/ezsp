@@ -11,3 +11,7 @@ function is_login(){
         return session('user_auth_sign') == data_auth_sign($user) ? $user['uid'] : 0;
     }
 }
+
+function get_current_city(){
+	return array('id'=>517, 'name'=>'大连');
+}
