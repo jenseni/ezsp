@@ -1,0 +1,96 @@
+<extend name="Public/base"/>
+
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/adgallery/jquery.ad-gallery.css">
+<style type="text/css">
+.mapbreak{
+	margin-bottom: 10px;
+}
+</style>
+</block>
+
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.ad-gallery').adGallery();
+});
+</script>
+</block>
+
+<block name="content">
+	<div class="mapbreak"><span>房屋租赁&nbsp;&gt;&nbsp;</span> {$city.name}租房> {$data.area_name}租房 </div>
+	<div class="left_hotlp">
+		<div class="left_hotlp_tt">{$data.title} {:W('Tag/showTag', array($data['feature'], 'fortab'))}</div>
+		<div class="home_pic">
+            <div class="ad-gallery">
+    			<div class="ad-image-wrapper"></div>
+                <div class="ad-nav">
+                    <div class="ad-thumbs">
+                        <ul class="ad-thumb-list">
+                            <volist id='housePic' name='info.picList'>
+                            <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+		</div>
+		<div class="fcxq">
+		租金：<span class="redtext">{$data.price}</span>元/月
+		<br />
+        房型：<em>{$data.bed_room}室{$data.live_room}厅</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;面积：<em>{$data.square}平米</em>
+        <br />
+        朝向：<em>{$data.face|get_lookup_value='HOUSE_FACE_TYPE', ###}</em>
+        <br />
+        楼层：<em>{$data.floor}层({$data.floor_max}层)</em>
+        <br />
+        <div class="tel_bp">{$data.contact_tel}</div>
+        装修：<em>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</em>
+    </div>
+    <div class="clear"></div>
+    <div class="index_left_tt">房源描述</div>
+    配套设施：{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
+    <div>
+    {$data.desc_txt}
+    </div>
+    <volist id='housePic' name='info.picList'>
+    <img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
+    </volist>
+     <div class="index_left_tt">地理位置</div>
+    <div id="baidumap_forpick" style="height:300px;max-width:726px"></div>
+    {:W('House/houseSaleNearby', array($data['id'], array('busi_area'=>$data['busi_area'])))}
+    </div>
+    <!--left end-->
+    <!--rigth start-->
+    <div class="right_hotlp">
+   
+    	<div class="guanzhu">
+        
+        </div>
+   	  <br /><BR />
+    {:W('House/houseSaleSuggest')}
+    </div>
+    <!--rigth end-->
+    
+    <div class="clear"></div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
+<script type="text/javascript">
+(function(){
+    var lng = {$data.longitude|default=0};
+    var lat = {$data.latitude|default=0};
+    if(lng == 0 || lat == 0){
+        return ;
+    }
+    var map = new BMap.Map("baidumap_forpick");
+
+    var marker = new BMap.Marker(new BMap.Point(lng, lat));
+    map.centerAndZoom(marker.getPosition(),15);
+    map.enableScrollWheelZoom();
+    map.addOverlay(marker);
+})();
+</script>
+</block>

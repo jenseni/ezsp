@@ -33,7 +33,7 @@ return array(
 		array(
 			'id'	=>	4,
 			'name'	=>	'房屋租赁',
-			'url' 	=>	'#'
+			'url' 	=>	'HouseRent/index'
 		),
 		array(
 			'id'	=>	5,

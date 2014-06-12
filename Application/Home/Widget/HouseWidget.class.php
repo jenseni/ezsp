@@ -56,21 +56,17 @@ class HouseWidget extends Controller{
 		}
 	}
 
-	public function houseSaleNearby($whoId, $condition, $count = 3){
+	public function houseSaleNearby($whoId, $condition = array(), $count = 3){
 		$HouseSale = M('Housesale');
 
-		$map = array();
-		$map['h.status'] = array('NEQ', 0);
-		$map['h.id'] = array('NEQ', (int)$whoId);
-		if(!empty($condition)){
-			array_merge($map, $condition);
-		}
+		$condition['h.status'] = array('NEQ', 0);
+		$condition['h.id'] = array('NEQ', (int)$whoId);
 
 		$dataList = $HouseSale->alias('h')
 			->field('h.title,h.id,h.thumbnail,h.price,h.contact_tel,area.name area_name,busi_area.name busi_area_name')
 			->join('__DISTRICT__ area on h.area=area.id', 'LEFT')
 			->join('__DISTRICT__ busi_area on h.busi_area=busi_area.id', 'LEFT')
-			->where($map)
+			->where($condition)
 			->order('id desc')
 			->limit($count)
 			->select();
@@ -78,6 +74,27 @@ class HouseWidget extends Controller{
 		if(!empty($dataList)){
 			$this->assign('dataList', $dataList);
 			$this->display('Widget/houseSaleNearby');
+		}
+	}
+
+	public function houseRentNearby($whoId, $condition = array(), $count = 3){
+		$HouseRent = M('Houserent');
+
+		$condition['h.status'] = array('NEQ', 0);
+		$condition['h.id'] = array('NEQ', (int)$whoId);
+
+		$dataList = $HouseRent->alias('h')
+			->field('h.title,h.id,h.thumbnail,h.price,h.contact_tel,area.name area_name,busi_area.name busi_area_name')
+			->join('__DISTRICT__ area on h.area=area.id', 'LEFT')
+			->join('__DISTRICT__ busi_area on h.busi_area=busi_area.id', 'LEFT')
+			->where($condition)
+			->order('id desc')
+			->limit($count)
+			->select();
+
+		if(!empty($dataList)){
+			$this->assign('dataList', $dataList);
+			$this->display('Widget/houseRentNearby');
 		}
 	}
 }

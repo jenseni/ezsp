@@ -1,14 +1,14 @@
 <?php
 namespace Home\Controller;
 
-class HouseSaleController extends HomeController{
+class HouseRentController extends HomeController{
 
 	public function _initialize(){
 		parent::_initialize();
-		$this->assign('currentNav', 3);
+		$this->assign('currentNav', 4);
 	}
 
-	public function index($area = '0', $price = '0', $square = '0', $room = '0', $sort = ''){
+	public function index($area='0', $price='0', $room='0', $sort = ''){
 		$map = array();
 
 		$map['h.city'] = (int)$this->city['id'];
@@ -24,16 +24,6 @@ class HouseSaleController extends HomeController{
 				$map['h.price'] = array('GT', (int)$priceRange[0]);
 			}elseif(is_numeric($priceRange[1])){
 				$map['h.price'] = array('LT', (int)$priceRange[1]);
-			}
-		}
-		if($square != '0'){
-			$squareRange = explode('-', $square);
-			if(is_numeric($squareRange[0]) && is_numeric($squareRange[1])){
-				$map['h.square'] = array('BETWEEN', array_map(function($v){return (int)$v;}, $squareRange));
-			}elseif(is_numeric($squareRange[0])){
-				$map['h.square'] = array('GT', (int)$squareRange[0]);
-			}elseif(is_numeric($squareRange[1])){
-				$map['h.square'] = array('LT', (int)$squareRange[1]);
 			}
 		}
 		if($room != '0'){
@@ -52,7 +42,7 @@ class HouseSaleController extends HomeController{
 			}
 		}
 
-		$model = M('Housesale');
+		$model = M('Houserent');
 
 		$totalCount = $model->alias('h')
 			->where($map)
@@ -62,7 +52,7 @@ class HouseSaleController extends HomeController{
 		$page->setConfig('prev', '上一页');
 		$page->setConfig('next', '下一页');
 
-		$dataList = $model->field('h.id,h.title,h.create_time,h.community,h.bed_room,h.live_room,h.floor,h.floor_max,h.decorate,h.structure,h.build_year,h.face,h.thumbnail, h.price, h.add_on, h.square, busi_area.name busi_area_name')
+		$dataList = $model->field('h.id,h.title,h.create_time,h.community,h.bed_room,h.live_room,h.floor,h.floor_max,h.decorate,h.face,h.thumbnail, h.price, h.add_on, h.square, busi_area.name busi_area_name')
 			->alias('h')
 			->join('__DISTRICT__ busi_area on h.busi_area=busi_area.id', 'LEFT')
 			->where($map)
@@ -73,7 +63,6 @@ class HouseSaleController extends HomeController{
 		$this->assign('dataList', $dataList);
 		$this->assign('area', $area);
 		$this->assign('price', $price);
-		$this->assign('square', $square);
 		$this->assign('room', $room);
 		$this->assign('page', $page->show());
 
@@ -81,7 +70,7 @@ class HouseSaleController extends HomeController{
 	}
 
 	public function detail($id){
-		$House = M('Housesale');
+		$House = M('Houserent');
 
 		$data = $House->field('h.*,area.name area_name,busi_area.name busi_area_name')
 			->alias('h')
@@ -91,11 +80,11 @@ class HouseSaleController extends HomeController{
 			->find();
 
 		if(empty($data)){
-			$this->error('404:信息已删除或不存在');
+			$this->error('404:页面不存在');
 		}
 
 		$Picture = M('Picture');
-		$housePicList = $Picture->field('path')->where(array('pid'=>$id,'type'=>1))->select();
+		$housePicList = $Picture->field('path')->where(array('pid'=>$id, 'type'=>2))->select();
 		$data['picList'] = $housePicList;
 
 		$this->assign('data', $data);
