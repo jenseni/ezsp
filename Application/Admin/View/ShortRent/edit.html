@@ -1,0 +1,129 @@
+<extend name="Public/base"/>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/plugins/jquery.chained.remote.min.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.mymin.js"></script>
+<script type="text/javascript" src="__STATIC__/scripts/imageexplorer.js"></script>
+<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var chainOptions = {url:"<?php echo U('District/getchildren'); ?>",clear:true,loading:"加载中..."};
+	$('#area').remoteChained($.extend({parents: '#city'},chainOptions));
+	$('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
+
+	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', column: 8});
+
+	$("#file_upload").uploadify({
+		'height': 34,
+		'swf': '__STATIC__/uploadify/uploadify.swf',
+		'uploader': '<?php echo U("File/uploadhousepic");?>',
+		'fileObjName': 'fileUpload',
+		'buttonClass': 'btn btn-primary',
+		'multi': true,
+		'queueID': 'queue_container',
+		'formData': {'busi_type': 1},
+		//'uploadLimit': 5,
+		//'queueSizeLimit': 5,
+		'fileSizeLimit': '2MB',
+		'buttonText': '上传图片',
+		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+		'removeTimeout': 1,
+		'onUploadSuccess': function(file, data, response){
+			var info = $.parseJSON(data);
+			if(info.status == 0){
+				imgExplorer.addItem(info);
+			}else{
+				alert(info.info);
+			}
+		},
+		'onUploadError': function(file, errorCode, errorMsg, errorString){
+			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+		},
+		'onFallback': function(){
+			alert('请先安装Flash插件');
+		}
+	});
+});
+
+KindEditor.ready(function(K) {
+	window.editor = K.create('#desc_txt', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'link']
+	});
+});
+</script>
+</block>
+
+<block name="content">
+<form action="<notempty name='data.id'>{:U('ShortRent/edit')}<else/>{:U('ShortRent/add')}</notempty>" method="post" class="form-horizontal">
+	<notempty name='data.id'>
+		<input type="hidden" name="id" value="{$data.id}" />
+	</notempty>
+
+	<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/> 
+
+	<bs:textfield name="description" value="{$data.description}" label="描述" layout="1:4"/> 
+
+	{:W('App/showRegionSelect', array($data['city'], $data['area'], $data['busi_area'], '区域', '1:6', $fieldErrors))} 
+
+	<div class="form-group">
+    	<label for="" class="col-sm-1 control-label">位置</label>
+    	<div class="col-sm-4">
+    		<div class="row">
+      			<div class="col-sm-5"><input type="text" class="form-control" value="{$data.loc_txt|default=''}" name="loc_txt" /></div>
+      			<label class="col-sm-2 control-label">附近的</label>
+      			<div class="col-sm-5"><input type="text" class="form-control" name="loc_nearby" value="{$data.loc_nearby|default=''}" /></div>
+      		</div>
+    	</div>
+  	</div>	
+
+	<bs:formgroup field="type,min_limit" label="类型" cssClass="control-inline" layout="1:11" errorclass="false">
+		<label<bs:haserrorclass field='type'/>>
+			{:W('App/lookupSelect', array('type', $data['type'], 'SHORT_RENT_TYPE', '短租类型'))} 
+		</label>
+		<label<bs:haserrorclass field='min_limit'/>>
+			最短租期 <input type="text" name="min_limit" value="{$data.min_limit}" class="form-control control-len-2"/> 天
+		</label>
+	</bs:formgroup>
+	<bs:formgroup field="price" label="价格" cssClass="control-inline" layout="1:11" errorclass="false">
+		<label<bs:haserrorclass field='price'/>>
+			<input type="text" name="price" value="{$data.price}" class="form-control control-len-2"/> 元/天
+		</label>
+	</bs:formgroup>
+	<bs:textfield name="contact" value="{$data.contact}" label="联系人" layout="1:3"/> 
+	<bs:textfield name="contact_tel" value="{$data.contact_tel}" label="联系电话" layout="1:3"/> 
+
+	<div class="form-group" style="position:relative">
+		<div class="col-sm-offset-1 col-sm-2">
+			<input type="file" name="fileUpload" id="file_upload"/>
+			<input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
+		</div>
+		<div id="queue_container" style="position:absolute;right:0;top:0"></div>
+	</div>
+	<div class="form-group">
+		<div id="item_container" class="col-sm-offset-1 col-sm-10">
+		
+		</div>
+	</div>
+
+	<bs:textarea name="desc_txt" value="{$data.desc_txt}" label="描述" layout="1:8"/> 
+
+	<div class="form-group">
+		<div class="col-sm-offset-1 col-sm-3">
+			<input type="submit" class="btn btn-primary form-control" value="保&nbsp&nbsp存" />
+		</div>
+		<notempty name='data.id'>
+		<div class="col-sm-3">
+			<a class="btn btn-primary form-control" href="{:get_return_url(U('ShortRent/lists'))}">返回</a>
+		</div>
+		</notempty>
+	</div>
+
+</form>
+</block>

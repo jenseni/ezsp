@@ -118,13 +118,13 @@ return array(
 				array(
 					'id'	=>	107,
 					'name'	=>	'短期租房发布',
-					'action'	=>	'Article/edit',
+					'action'	=>	'ShortRent/add',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				),
 				array(
 					'id'	=>	108,
 					'name'	=>	'短期租房管理',
-					'action'	=>	'Article/edit',
+					'action'	=>	'ShortRent/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
 				)
 			)

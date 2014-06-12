@@ -1,0 +1,68 @@
+<extend name="Public/base"/>
+
+<block name="content">
+
+<div class="data-table">
+	<div class="btn-group btn-group-sm pull-right">
+		<a href="{:U('ShortRent/changeStatus',array('status'=>'1'))}" class="btn btn-default app-btn" target="#data-form" confirm="确定启用选中记录？"><i class="glyphicon glyphicon-eye-open"></i> 批量启用</a>
+		<a href="{:U('ShortRent/changeStatus',array('status'=>'0'))}" class="btn btn-default app-btn" target="#data-form" confirm="确定禁用选中记录？"><i class="glyphicon glyphicon-eye-close"></i> 批量禁用</a>
+		<a href="{:U('ShortRent/delete')}" class="btn btn-default app-btn" target="#data-form" confirm="确定删除选中记录？"><i class="glyphicon glyphicon-remove"></i> 批量删除</a>
+	</div>
+
+	<form action="{:U('ShortRent/lists')}" method="get" role="form" class="form-inline form-search">
+		{:W('App/searchInput', array('title', I('title'), '标题'))}
+		{:W('App/searchSelect', array('status', I('status'), 'DOC_STATUS', '状态'))}
+		<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span> 查询</button>
+	</form>
+
+	<form action="{:U('ShortRent/lists')}" method="post" role="form" id="data-form">
+		
+	<table class="table table-striped table-condensed table-hover table-bordered">
+		<thead>
+			<tr>
+				<th class="column-check">
+					<input type="checkbox" check-group=":checkbox[name='id[]']"/>
+				</th>
+				<th>标题</th>
+				<th>地区</th>
+				<th>描述</th>
+				<th>发布时间</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<notempty name="dataList">
+				<volist name="dataList" id="data">
+				<tr>
+					<td>
+						<input type="checkbox" name="id[]" value="{$data.id}"/>
+					</td>
+					<td><a href="{:U('ShortRent/edit', array('id'=>$data['id']))}">{$data.title}</a></td>
+					<td>{$data.area_name}{$data.busi_area_name}</td>
+					<td>{$data.description}</td>
+					<td>{$data.create_time|format_timestamp}</td>
+					<td>
+						{$data.status|get_lookup_value='DOC_STATUS',###}
+					</td>
+					<td>
+						<if condition="$data.status eq 0">
+							<a class="btn btn-xs btn-success app-btn" href="{:U('ShortRent/changeStatus', array('id'=>$data['id'], 'status'=>'1'))}">启用</a>
+						<else />						
+							<a class="btn btn-xs btn-warning app-btn" confirm="确认禁用该条数据？" href="{:U('ShortRent/changeStatus', array('id'=>$data['id'], 'status'=>'0'))}">禁用</a>
+						</if>
+						<a class="btn btn-xs btn-danger app-btn" confirm="确认删除？" href="{:U('ShortRent/delete', array('id'=>$data['id']))}">删除</a>
+					</td>
+				</tr>
+				</volist>
+			</notempty>
+		</tbody>
+	</table>
+	<empty name="dataList"><p>暂无数据</p></empty>
+	</form>
+
+	{$page}
+
+</div>
+
+</block>
