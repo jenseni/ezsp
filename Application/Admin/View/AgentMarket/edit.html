@@ -1,0 +1,27 @@
+<extend name="Public/base"/>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/ueditor/ueditor.config.my.js"></script>
+<script type="text/javascript" src="__STATIC__/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#content').removeClass('form-control');
+	window.UEDITOR_HOME_URL = "__STATIC__/ueditor/";
+	var editor = UE.getEditor('content');
+});
+</script>
+</block>
+
+<block name="content">
+	<form action="{:U('AgentMarket/edit')}" method="post" class="form-horizontal">
+
+		<bs:textarea name="content" value="{$content}" layout="0:12"/>
+
+		<div class="form-group">
+			<div class="col-sm-offset-1 col-sm-3">
+				<input type="submit" class="btn btn-primary form-control" value="保&nbsp;&nbsp;存"/>
+			</div>
+		</div>
+	</form>
+</block>

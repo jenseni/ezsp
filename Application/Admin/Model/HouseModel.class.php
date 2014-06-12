@@ -4,7 +4,7 @@ namespace Admin\Model;
 use \Think\Model;
 
 abstract class HouseModel extends Model{
-	public function updateHousePic($houseId, $picList){
+	public function updateHousePic($houseId, $type, $picList){
 		$picList = json_decode($picList);
 
 		$picIdList = array();
@@ -19,7 +19,7 @@ abstract class HouseModel extends Model{
 		if(!empty($picIdList)){
 			$Picture = M('Picture');
 			//失效之前的
-			$Picture->where(array('pid'=>$houseId))->setField('pid', 0);
+			$Picture->where(array('pid'=>(int)$houseId, 'type'=>(int)$type))->setField('pid', 0);
 			//设置自己的
 			$Picture->where(array('id'=>array('IN', $picIdList)))->setField('pid', $houseId);
 			$firstPic = $Picture->find($picIdList[0]);

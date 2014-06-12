@@ -98,13 +98,13 @@ return array(
 				array(
 					'id'	=>	105,
 					'name'	=>	'房屋租赁发布',
-					'action'	=>	'HouseSale/add',
+					'action'	=>	'HouseRent/add',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				),
 				array(
 					'id'	=>	106,
 					'name'	=>	'房屋租赁管理',
-					'action'	=>	'HouseSale/lists',
+					'action'	=>	'HouseRent/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
 				)
 			)
@@ -158,7 +158,7 @@ return array(
 				array(
 					'id'	=>	111,
 					'name'	=>	'代理楼盘编辑',
-					'action'	=>	'Article/edit',
+					'action'	=>	'AgentMarket/edit',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)

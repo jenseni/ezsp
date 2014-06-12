@@ -7,7 +7,8 @@ function ImageExplorer(options){
 	this.defaults = {
 		container: '#img_box',
 		picsHolder: '#house_pic',
-		itemHeight: 150
+		itemHeight: 150,
+		countLimit: 0
 	};
 
 	this.config = $.extend({}, this.defaults, options);
@@ -133,11 +134,18 @@ ImageExplorer.prototype.addItem = function(pic){
 		}
 	}
 
+	if(this.config.countLimit != 0 && pics.length >= this.config.countLimit){
+		alert('数量超过限制，最多' + this.config.countLimit + '张');
+		return false;
+	}
+
 	pics.push(pic);
 
 	this.getPicsHolder().val(this.picsToJSON(pics));
 
 	this.renderItem(pic);
+
+	return true;
 };
 
 ImageExplorer.prototype.deletePic = function(id){

@@ -194,13 +194,16 @@ class Bs extends TagLib {
 		$str .= 	'<?php foreach($field as $f){ ?>';
 		$str .=			'<?php if(isset($fieldErrors[$f])){ ?>';
 		$str .=				'<?php if(empty($__CSSCLASS__)){ ?>';
-		$str .= 				'<?php echo " class=\"has-error\""; ?>';
+		$str .= 				'<?php $__CSSCLASS__ = "has-error"; ?>';
 		$str .= 			'<?php }else{?>';
-		$str .= 				'<?php echo \' class=\"\'.$__CSSCLASS__.\' has-error\"\'; ?>';
+		$str .= 				'<?php $__CSSCLASS__ .= " has-error"; ?>';
 		$str .= 			'<?php } ?>';
 		$str .= 			'<?php break; ?>';
 		$str .= 		'<?php } ?>';
 		$str .= 	'<?php } ?>';
+		$str .= '<?php }?>';
+		$str .= '<?php if(!empty($__CSSCLASS__)){ ?>';
+		$str .= 	'<?php echo " class=\'" . $__CSSCLASS__ . "\'"; ?>';
 		$str .= '<?php }?>';
 
 		return $str;
