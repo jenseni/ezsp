@@ -53,6 +53,7 @@ CREATE TABLE `t_picture` (
    `status` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '状态',
    `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
    `type` TINYINT(4) NOT NULL DEFAULT '0',
+   `pid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '所属实体ID',
    PRIMARY KEY (`id`)
  ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
@@ -117,10 +118,8 @@ CREATE TABLE `t_housesale` (
    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
    `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
    `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户ID',
-   `description` CHAR(140) NOT NULL DEFAULT '' COMMENT '描述',
    `level` INT(10) NOT NULL DEFAULT '0' COMMENT '优先级',
-   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
-   `update_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
+   `create_time` timestamp NOT NULL COMMENT '创建时间',
    `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
    `community` varchar(128) NOT NULL COMMENT '小区',
    `city` int(10) unsigned NOT NULL COMMENT '城市',
@@ -131,7 +130,6 @@ CREATE TABLE `t_housesale` (
    `toilet` tinyint(4) NOT NULL COMMENT '卫',
    `floor` tinyint(4) NOT NULL COMMENT '楼层',
    `floor_max` tinyint(4) NOT NULL COMMENT '楼层（共）',
-   `contact_type` tinyint(4) NOT NULL COMMENT '身份',
    `contact` varchar(32) NOT NULL COMMENT '联系人',
    `contact_tel` varchar(11) NOT NULL COMMENT '联系电话',
    `longitude` double DEFAULT NULL COMMENT '纬度',
@@ -142,17 +140,16 @@ CREATE TABLE `t_housesale` (
    `face` tinyint(4) DEFAULT NULL COMMENT '朝向',
    `add_on` varchar(255) DEFAULT NULL COMMENT '配套设施',
    `feature` varchar(255) DEFAULT NULL COMMENT '特色',
-   `desc_txt` text COMMENT '描述信息',
    `thumbnail` varchar(255) DEFAULT NULL COMMENT '缩略图',
    `price` int(11) NOT NULL COMMENT '价格',
    `square` int(11) NOT NULL COMMENT '建筑面积',
    `inner_square` int(11) NOT NULL COMMENT '套内面积',
-   `loan_enable` char(1) NOT NULL DEFAULT 'Y' COMMENT '是否可贷款',
    `down_payment` int(11) DEFAULT NULL COMMENT '首付',
    `monthly` int(11) DEFAULT NULL COMMENT '月供',
    `property_right` tinyint(4) DEFAULT NULL COMMENT '产权',
    `property_type` tinyint(4) DEFAULT NULL COMMENT '产权类型',
    `build_year` int(11) DEFAULT NULL COMMENT '建筑年代',
+   `desc_txt` text COMMENT '描述信息',
    PRIMARY KEY (`id`)
  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

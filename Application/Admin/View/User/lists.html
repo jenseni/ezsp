@@ -8,11 +8,9 @@
 		<a href="{:U('User/delete')}" class="btn btn-default app-btn" target="#data-form" confirm="确定删除选中记录？"><i class="glyphicon glyphicon-remove"></i> 删除</a>
 	</div>
 
-	<form action="{:U('User/lists')}" method="get" role="form" class="form-search">
-	<div class="form-inline">
+	<form action="{:U('User/lists')}" method="get" role="form" class="form-inline form-search">
 		{:W('App/searchInput', array('username', I('username'), '用户名'))}
 		<button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span> 查询</button>
-	</div>
 	</form>
 
 	<form action="{:U('User/lists')}" method="post" role="form" id="data-form">

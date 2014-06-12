@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Model;
 
-use Think\Model;
+use \Think\Model;
 
 class DistrictModel extends Model{
 	
@@ -13,18 +13,18 @@ class DistrictModel extends Model{
 	const TYPE_AREA = 3;
 	const TYPE_BUSI_AREA = 4; //商区
 
-	public static function getChild($pid){
-		$model = D('District')->field('id,pid,name,type');
+	public function getChild($pid){
+		$this->field('id,pid,name,type');
 		$map['inactive'] = 'N';
 		if(is_array($pid)){
 			$map['pid'] = array('in', $pid);
 		}else{
-			$map['pid'] = $pid;
+			$map['pid'] = (int)$pid;
 		}
-		return $model->where($map)->select();
+		return $this->where($map)->select();
 	}
 
-	public static function getAreaOfCity($city){
+	public function getAreaOfCity($city){
 
 		$areaList = array();
 
@@ -32,7 +32,7 @@ class DistrictModel extends Model{
 			return $areaList;
 		}
 
-		$districtList = DistrictModel::getChild($city);
+		$districtList = $this->getChild($city);
 
 		if(empty($districtList)){
 			return $areaList;
@@ -45,17 +45,15 @@ class DistrictModel extends Model{
 			if($district['type'] == self::TYPE_AREA){
 				$areaList[] = $district;
 			}elseif($districtList == self::TYPE_PCITY){
-				$areaList = array_combine($areaList, DistrictModel::getChild($district['id']));
+				$areaList = array_combine($areaList, $this->getChild($district['id']));
 			}
 		}
 
 		return $areaList;
 	}
 
-	public static function getCityByChild($area){
-		$district = D('District')
-			->field('id,pid,name,type')
-			->find($area);
+	public function getCityByChild($area){
+		$district = $this->field('id,pid,name,type')->find($area);
 
 		if(empty($district) || $district['type'] <= self::TYPE_PROVINCE){
 			return C('DEFAULT_CITY');
@@ -65,17 +63,17 @@ class DistrictModel extends Model{
 			return $district;
 		}
 
-		return DistrictModel::getCitiByChild($district['pid']);
+		return $this->getCitiByChild($district['pid']);
 		
 	}
 
-	public static function getTree($root, $leafType){
-		return D('District')->where(array('type'=>array('in', '2,12')))->select();
+	public function getTree($root, $leafType){
+		return $this->where(array('type'=>array('in', '2,12')))->select();
 
 	}
 
-	public static function cityList(){
+	public function cityList(){
 		
-		return D('District')->where(array('type'=>self::TYPE_CITY, 'inactive'=>'N'))->select();
+		return $this->where(array('type'=>self::TYPE_CITY, 'inactive'=>'N'))->select();
 	}
 }

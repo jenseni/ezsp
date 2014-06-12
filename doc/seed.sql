@@ -122,6 +122,13 @@ insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) valu
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('137','DOC_STATUS','1','正常','N','3');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('138','DOC_STATUS','2','待审核','N','4');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('139','DOC_STATUS','3','草稿','N','5');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('140','AGENT_MARKET_PIC_TYPE','1','户型图','N','1');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('141','AGENT_MARKET_PIC_TYPE','2','道路交通','N','2');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('142','AGENT_MARKET_PIC_TYPE','3','小区','N','3');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('143','AGENT_MARKET_PIC_TYPE','4','售楼处','N','4');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('144','AGENT_MARKET_PIC_TYPE','5','效果图','N','5');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('145','AGENT_MARKET_PIC_TYPE','6','规划图','N','6');
+
 
 insert into `t_district` (`id`, `pid`, `name`, `type`, `code`, `inactive`) values('1','1','中华人民共和国','0','000086','Y');
 insert into `t_district` (`id`, `pid`, `name`, `type`, `code`, `inactive`) values('2','1','北京','12','110000','Y');

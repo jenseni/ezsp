@@ -7,7 +7,7 @@ class LookupModel extends Model{
 
 	private static $_cache = array();
 
-	public static function getList($type){
+	public function getList($type){
 		$nvList = D('Lookup')
 			->field('name,val')
 			->where(array('type'=>$type, 'inactive'=>'N'))
@@ -17,14 +17,14 @@ class LookupModel extends Model{
 		return $nvList;
 	}
 
-	public static function getValue($type, $name){
-		if(isset(LookupModel::$_cache[$type])){
-			return isset(LookupModel::$_cache[$type][$name]) ? LookupModel::$_cache[$type][$name] : $name;
+	public function getValue($type, $name){
+		if(isset(static::$_cache[$type])){
+			return isset(static::$_cache[$type][$name]) ? static::$_cache[$type][$name] : $name;
 		}
 
 		$nvList = D('Lookup')
 			->field('name,val')
-			->where(array('type'=>$type))
+			->where(array('type'=>$type, 'inactive'=>'N'))
 			->select();
 
 		if(empty($nvList)){
@@ -32,10 +32,10 @@ class LookupModel extends Model{
 		}
 
 		foreach($nvList as $nv){
-			LookupModel::$_cache[$type][$nv['name']] = $nv['val'];
+			static::$_cache[$type][$nv['name']] = $nv['val'];
 		}
 
-		return isset(LookupModel::$_cache[$type][$name]) ? LookupModel::$_cache[$type][$name] : $name;
+		return isset(static::$_cache[$type][$name]) ? static::$_cache[$type][$name] : $name;
 
 	}
 }
