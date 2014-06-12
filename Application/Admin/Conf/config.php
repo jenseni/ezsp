@@ -158,7 +158,7 @@ return array(
 				array(
 					'id'	=>	111,
 					'name'	=>	'代理楼盘编辑',
-					'action'	=>	'Article/edit',
+					'action'	=>	'AgentMarket/edit',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
