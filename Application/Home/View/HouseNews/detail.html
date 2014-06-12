@@ -2,15 +2,12 @@
 
 <block name="content">
 <div class="mapbreak"><span>房产动态&nbsp;&gt;&nbsp;</span> {$category_title} </div>	
-<!--content start-->
-<div class="content_box">
 <!--left start-->
 	<div class="news_left">
-    <div class="left_hotlp_tt">{$news.title}
-    	<p>
-    		{$news.content|htmlspecialchars_decode}
-    	<p>
-    </div>
+    <div class="left_hotlp_tt">{$news.title}</div>
+  	<div style="position:relative;text-align:left;">
+  		{$news.content|htmlspecialchars_decode}
+  	</div>
 	</div>
 <!--left end-->
   
@@ -48,5 +45,4 @@
     </ul>
   </div>
     <!--right end-->
-</div>
 </block>

@@ -1,15 +1,12 @@
 <extend name="Public/base"/>
 
 <block name="content">
-<div class="mapbreak"><span>优惠活动&nbsp;&gt;&nbsp;</span> {$category_title} </div>	
-<!--content start-->
-<div class="content_box">
+<div class="mapbreak"><span>优惠活动&nbsp;&gt;&nbsp;</span> {$category_title} </div>
 <!--left start-->
-	<div class="news_left">
-    <div class="left_hotlp_tt">{$news.title}
-    	<p>
-    		{$news.content|htmlspecialchars_decode}
-    	<p>
+  <div class="news_left">
+    <div class="left_hotlp_tt">{$news.title}</div>
+    <div style="position:relative;text-align:left;">
+      {$news.content|htmlspecialchars_decode}
     </div>
 	</div>
 <!--left end-->
@@ -18,15 +15,14 @@
   <div class="news_right">
     <div class="index_guanzhu"></div>
     <div class="clear"></div>
-	<table width="246" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="60"> <a href="#"><img src="images/maifang3.gif" width="245" height="52" /></a>
-        </td>
-          </tr>
-          <tr>
-            <td height="60"> <a href="#"><img src="images/maifang4.gif" width="245" height="52" /></a></td>
-          </tr>
-        </table>
+    <table width="246" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="60"> <a href="#"><img src="images/maifang3.gif" width="245" height="52" /></a></td>
+      </tr>
+      <tr>
+        <td height="60"> <a href="#"><img src="images/maifang4.gif" width="245" height="52" /></a></td>
+      </tr>
+    </table>
 
     <table width="240" border="0" cellspacing="0" cellpadding="0" class="news_tt">
       <tr>
@@ -35,7 +31,8 @@
       </tr>
     </table>
     <ul class="hotlp_box">
-   	    <li><div class="hotlp_box_line">
+      <li>
+        <div class="hotlp_box_line">
             <a href="#"><img  /></a>
             <a href="#" class="hotlp_lpname">城市印象在售</a><span>在售</span>
             <div class="clear"></div>
@@ -43,10 +40,9 @@
             电话：400-606-6969 转 27829<br />
             地址：甘井子区迎客路中段(机场附近)<br />
             <a href="#">实景6张</a>&nbsp;&nbsp;<a href="#"> 户型4张</a>
-           <a href="#"></a></div>
-            </li></ul>
+           <a href="#"></a>
+        </div>
+      </li>
+    </ul>
   </div>
-    <!--right end-->
-
-<div class="clear"></div>
 </block>
