@@ -163,20 +163,20 @@ return array(
 				)
 			)
 		),
-		array(
-			'id'	=>	8,
-			'name'	=>	'信息发布',
-			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-comment',
-			'children'	=>	array(
-				array(
-					'id'	=>	112,
-					'name'	=>	'信息发布管理',
-					'action'	=>	'Article/edit',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				)
-			)
-		),
+		// array(
+		// 	'id'	=>	8,
+		// 	'name'	=>	'信息发布',
+		// 	'action'	=>	'#',
+		// 	'icon'	=> 'glyphicon glyphicon-comment',
+		// 	'children'	=>	array(
+		// 		array(
+		// 			'id'	=>	112,
+		// 			'name'	=>	'信息发布管理',
+		// 			'action'	=>	'Article/edit',
+		// 			'icon'	=>	'glyphicon glyphicon-edit'
+		// 		)
+		// 	)
+		// ),
 		array(
 			'id'	=>	9,
 			'name'	=>	'房产动态',
@@ -217,20 +217,20 @@ return array(
 				)
 			)
 		),
-		array(
-			'id'	=>	11,
-			'name'	=>	'用户管理',
-			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-user',
-			'children'	=>	array(
-				array(
-					'id'	=>	117,
-					'name'	=>	'用户管理',
-					'action'	=>	'Article/edit',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				)
-			)
-		),
+		// array(
+		// 	'id'	=>	11,
+		// 	'name'	=>	'用户管理',
+		// 	'action'	=>	'#',
+		// 	'icon'	=> 'glyphicon glyphicon-user',
+		// 	'children'	=>	array(
+		// 		array(
+		// 			'id'	=>	117,
+		// 			'name'	=>	'用户管理',
+		// 			'action'	=>	'Article/edit',
+		// 			'icon'	=>	'glyphicon glyphicon-edit'
+		// 		)
+		// 	)
+		// ),
 		array(
 			'id'	=>	12,
 			'name'	=>	'权限管理',
@@ -245,33 +245,33 @@ return array(
 				)
 			)
 		),
-		array(
-			'id'	=>	13,
-			'name'	=>	'咨询留言',
-			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-comment',
-			'children'	=>	array(
-				array(
-					'id'	=>	119,
-					'name'	=>	'咨询留言管理',
-					'action'	=>	'User/lists',
-					'icon'	=>	'glyphicon glyphicon-wrench'
-				)
-			)
-		),
-		array(
-			'id'	=>	14,
-			'name'	=>	'积分派发',
-			'action'	=>	'#',
-			'icon'	=> 'glyphicon glyphicon-heart',
-			'children'	=>	array(
-				array(
-					'id'	=>	120,
-					'name'	=>	'积分管理',
-					'action'	=>	'User/lists',
-					'icon'	=>	'glyphicon glyphicon-wrench'
-				)
-			)
-		)
+		// array(
+		// 	'id'	=>	13,
+		// 	'name'	=>	'咨询留言',
+		// 	'action'	=>	'#',
+		// 	'icon'	=> 'glyphicon glyphicon-comment',
+		// 	'children'	=>	array(
+		// 		array(
+		// 			'id'	=>	119,
+		// 			'name'	=>	'咨询留言管理',
+		// 			'action'	=>	'User/lists',
+		// 			'icon'	=>	'glyphicon glyphicon-wrench'
+		// 		)
+		// 	)
+		// ),
+		// array(
+		// 	'id'	=>	14,
+		// 	'name'	=>	'积分派发',
+		// 	'action'	=>	'#',
+		// 	'icon'	=> 'glyphicon glyphicon-heart',
+		// 	'children'	=>	array(
+		// 		array(
+		// 			'id'	=>	120,
+		// 			'name'	=>	'积分管理',
+		// 			'action'	=>	'User/lists',
+		// 			'icon'	=>	'glyphicon glyphicon-wrench'
+		// 		)
+		// 	)
+		// )
 	)
 );

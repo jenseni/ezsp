@@ -48,7 +48,7 @@ return array(
 		array(
 			'id'	=>	7,
 			'name'	=>	'代理楼盘',
-			'url'	=>	'#'
+			'url'	=>	'AgentMarket/index'
 		),
 		array(
 			'id'	=>	8,
