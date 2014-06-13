@@ -24,8 +24,6 @@ class ShortRentModel extends HouseModel{
 	);
 
 	public function saveOrUpdate(){
-		$_POST['add_on'] = array2string($_POST['add_on']);
-		$_POST['feature'] = array2string($_POST['feature']);
 
 		$data = $this->create();
 		
@@ -40,7 +38,7 @@ class ShortRentModel extends HouseModel{
 		}
 
 		if($data['id']){
-			$this->updateHousePic($data['id'], empty($_POST['house_pic']) ? '[]' : $_POST['house_pic']);
+			$this->updateHousePic($data['id'], 4, empty($_POST['house_pic']) ? '[]' : $_POST['house_pic']);
 		}
 
 		return true;

@@ -21,7 +21,7 @@ class HouseNewsController extends HomeController{
 		$CATEGORY_NEWS_NUM = 7;
 		$map['category_id'] = array('eq',$CATEGORY_RECOMMEND); 
 		//专题推荐
-		//$recommend_topline = $Document->listone($CATEGORY_RECOMMEND,'level desc, update_time desc');
+		$recommend_topline = $Document->where($map)->order('level desc, update_time desc')->find();
 		$recommend_news    = $Document->where($map)->order('level desc, update_time desc')->limit(1,$CATEGORY_NEWS_NUM)->select();
 		$this->assign('recommend_topline',$recommend_topline);
 		$this->assign('recommend_news',$recommend_news);
