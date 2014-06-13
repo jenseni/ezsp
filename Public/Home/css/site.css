@@ -68,6 +68,7 @@
 	text-indent: 30px;
 }
 .nav_box {
+	text-align: center;
 	line-height: 45px;
 	height: 45px;
 	border-bottom-width: 2px;
@@ -1070,6 +1071,7 @@ ul.busi-area{
 }
 .filter-group, .sort-group{
 	clear: both;
+	font-size: 12px;
 }
 .filter-label{
 	float: left;
