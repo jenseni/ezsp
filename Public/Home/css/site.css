@@ -400,7 +400,9 @@ a.hotlp_lpname:hover{
 	width: 70px;
 	display: block;
 	text-align: left;
-		}.footerbox {
+}
+.footerbox {
+	text-align: center;
 	width: 1000px;
 	margin-right: auto;
 	margin-left: auto;
