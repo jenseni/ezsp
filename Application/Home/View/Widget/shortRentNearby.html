@@ -1,0 +1,16 @@
+<div class="left_hotlp_tt">附近推荐</div>
+<ul class="hotlp_box">
+    <volist name="dataList" id="data">
+	    <li>
+        <div class="hotlp_box_line">
+        <a href="{:U('ShortRent/detail', array('id'=>$data['id']))}"><img src="__ROOT__{$data.thumbnail}" /></a>
+        <a href="{:U('ShortRent/detail', array('id'=>$data['id']))}" class="hotlp_lpname">{$data.title}</a>
+        <div class="clear"></div>
+        价格：{$data.price}元/天<br />
+        电话：{$data.contact_tel}<br />
+        地址：{$data.area_name}{$data.busi_area_name}<br />
+	        </div>
+    </li>
+    </volist>
+    <div class="clear"></div>
+</ul>

@@ -101,6 +101,17 @@ KindEditor.ready(function(K) {
 			{:W('App/lookupSelect', array('price_unit', $data['price_unit'], 'OFFICE_MARKET_PRICE_UNIT', '价格单位'))}
 		</label>
 	</bs:formgroup>
+	<div class="form-group">
+		<label for='level' class='control-label col-sm-1'>优先级</label>
+		<div class='col-sm-2'>
+			<select class="form-control" name="level">
+			  <option <eq name="data['level']" value="0">selected</eq>>0</option>
+			  <option <eq name="data['level']" value="1">selected</eq>>1</option>
+			  <option <eq name="data['level']" value="2">selected</eq>>2</option>
+			  <option <eq name="data['level']" value="3">selected</eq>>3</option>
+			</select>
+		</div>
+	</div>
 
 	<bs:formgroup field="contact,contact_tel,contact_type" label="联系人" cssClass="control-inline" layout="1:11" errorclass="false">
 		<label<bs:haserrorclass field='contact'/>>

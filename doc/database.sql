@@ -174,7 +174,7 @@ CREATE TABLE `t_officemarket` (
    `price_max` INT(10) UNSIGNED DEFAULT NULL COMMENT '到',
    `square_max` INT(10) UNSIGNED DEFAULT NULL COMMENT '到',
    `price_unit` TINYINT(4) NOT NULL,
-   `thumb` VARCHAR(128) DEFAULT NULL COMMENT '缩略图',
+   `thumbnail` VARCHAR(128) DEFAULT NULL COMMENT '缩略图',
    PRIMARY KEY (`id`)
  ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 

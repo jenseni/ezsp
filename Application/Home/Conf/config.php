@@ -38,12 +38,12 @@ return array(
 		array(
 			'id'	=>	5,
 			'name'	=>	'短期租房',
-			'url'	=>	'#'
+			'url'	=>	'ShortRent/lists'
 		),
 		array(
 			'id'	=>	6,
 			'name'	=>	'写字楼商铺',
-			'url'	=>	'#'
+			'url'	=>	'OfficeMarket/lists'
 		),
 		array(
 			'id'	=>	7,

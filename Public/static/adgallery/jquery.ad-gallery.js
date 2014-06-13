@@ -9,7 +9,7 @@
  */
 (function($) {
   $.fn.adGallery = function(options) {
-    var defaults = { loader_image: 'loader.gif',
+    var defaults = { loader_image: '/Public/static/adgallery/loader.gif',
                      start_at_index: 0,
                      thumb_opacity: 0.7,
                      animate_first_image: false,

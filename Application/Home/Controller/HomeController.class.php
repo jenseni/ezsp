@@ -31,10 +31,5 @@ class HomeController extends Controller {
         is_login() || $this->error('您还没有登录，请先登录！', U('User/login'));
     }
 
-    public function get_url($id,$url){
-        $currentNav = $id;
-        $this->assign('currentNav',$currentNav);
-        redirect('www.baidu.com');
-    }
 
 }
