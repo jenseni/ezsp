@@ -76,7 +76,7 @@ class ShortRentController extends AdminController{
 			}
 
 			$Picture = M('Picture');
-			$picList = $Picture->field('id,path')->where(array('pid'=>$data['id'], 'type'=>1))->select();
+			$picList = $Picture->field('id,path')->where(array('pid'=>$data['id'], 'type'=>4))->select();
 			if(empty($picList)){
 				$data['house_pic'] = '[]';
 			}else{

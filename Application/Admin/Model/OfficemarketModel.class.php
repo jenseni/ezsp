@@ -10,6 +10,7 @@ class OfficemarketModel extends RelationModel{
 		array('status','1'),
 		array('create_time','time',1,'function'),
 		array('update_time','time',2,'function'),
+        array('uid', 'is_login', self::MODEL_INSERT, 'function'),
 	);
 
 	protected $_validate = array(
@@ -74,5 +75,63 @@ class OfficemarketModel extends RelationModel{
     public function listCount($map = array(), $status = 1){
         $map['status'] = array('eq',$status);
         return $this->where($map)->count('id');
+    }
+
+    public function saveOrUpdate(){
+
+        $data = $this->create();
+        
+        if(!$data){
+            return false;
+        }
+
+        if(isset($data['id'])){
+            $this->save();
+        }else{
+            $data['id'] = $this->add();
+        }
+
+        if($data['id']){
+            $this->updateHousePic($data['id'], 3,empty($_POST['house_pic']) ? '[]' : $_POST['house_pic']);
+        }
+
+        return true;
+    }
+
+
+    public function updateHousePic($houseId, $type, $picList){
+        $picList = json_decode($picList);
+
+        $picIdList = array();
+
+        if(!empty($picList)){
+            foreach($picList as $pic){
+                $picIdList[] = (int)$pic->id;
+            }
+        }
+
+        $thumbUri = NULL;
+        if(!empty($picIdList)){
+            $Picture = M('Picture');
+            //失效之前的
+            $Picture->where(array('pid'=>(int)$houseId, 'type'=>(int)$type))->setField('pid', 0);
+            //设置自己的
+            $Picture->where(array('id'=>array('IN', $picIdList)))->setField('pid', $houseId);
+            $firstPic = $Picture->find($picIdList[0]);
+
+            //取第一张为封面缩略图
+            $picPath = '.'.$firstPic['path'];
+            $pathInfo = pathinfo($picPath);
+            $thumbPath = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . '_' . C('HOUSE_PIC_CONFIG.THUMB_WIDTH') . '_' . C('HOUSE_PIC_CONFIG.THUMB_HEIGHT') . '.' . $pathInfo['extension'];
+
+            $Image = new \Think\Image();
+            $Image->open($picPath)
+                ->thumb(C('HOUSE_PIC_CONFIG.THUMB_WIDTH'), C('HOUSE_PIC_CONFIG.THUMB_HEIGHT'))
+                ->save($thumbPath);
+
+            $thumbUri = substr($thumbPath, strpos($thumbPath, '/'));
+        }
+
+        $this->where(array('id'=>(int)$houseId))->setField('thumbnail', $thumbUri);
     }
 }

@@ -74,10 +74,9 @@ class OfficeMarketController extends AdminController{
 
 			$data['uid'] = session('uid');
 
-			$id = $Case->data($data)->add();
-
-			if(!$id){
-				$this->errorMessage('添加失败', 'OfficeMarket/index');
+			$data = $Case->saveOrUpdate();
+			if(!$data){
+				$this->errorInput($Case->getError(), 'OfficeMarket/index');
 			}
 
 			$this->successMessage('添加成功', 'OfficeMarket/index');
@@ -90,32 +89,39 @@ class OfficeMarketController extends AdminController{
 	public function edit($city = '517'){
 		$this->authView(110);
 		
-		$id = I('id','0');
-		if(empty($id)){
-			$this->error('参数不正确');
-		}
-		$Case = M('Officemarket')->find($id);
-		if(empty($Case)){
-			$this->error('数据不存在');
-		}
-		$this->assign('data', $Case);
-		
-		$this->assign('city',$city);
-		$this->display();
-	}
-	//更新
-	public function update(){
-		if(!IS_POST){
-			$this->error('错误的请求类型');
-		}
+		if(IS_POST){
+			$Case = D('Officemarket');
+			$data = $Case->saveOrUpdate();
+			if(!$data){
+				$this->errorInput($Case->getError(), 'OfficeMarket/lists');
+			}
 
-		$res = D('Officemarket')->update();
-		if(!$res){
-			$this->errorMessage('更新失败','OfficeMarket/lists');
+			$this->successMessage('修改成功', get_return_url('OfficeMarket/lists'));
 		}else{
-			$this->successMessage('更新成功','OfficeMarket/lists');
+			$Case = D('Officemarket');
+			$id = I('id');
+			if(empty($id)){
+				$this->error('参数不正确');
+			}
+			$data = $Case->find($id);
+			if(empty($data)){
+				$this->error('数据不存在');
+			}
+
+			$Picture = M('Picture');
+			$picList = $Picture->field('id,path')->where(array('pid'=>$data['id'], 'type'=>3))->select();
+			if(empty($picList)){
+				$data['house_pic'] = '[]';
+			}else{
+				$data['house_pic'] = json_encode($picList);
+			}
+
+			$this->assign('data', $data);
+
+			$this->display('edit');
 		}
 	}
+	
 
 	public function delete(){
 
