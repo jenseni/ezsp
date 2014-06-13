@@ -49,7 +49,7 @@
 					<div class="ssjg_text">
 						{$data.floor}/{$data.floor_max}层,{$data.face|get_lookup_value='HOUSE_FACE_TYPE',###},{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}<br />
 						{$data.busi_area_name},{$data.build_year}年建,{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}<br />
-						{$data.create_time|substr=0,16}发布
+						{$data.create_time|date='Y-m-d',###}发布
 						{:W('Tag/showTag', array($data['add_on']))}
 					</div>
 				</a>

@@ -28,7 +28,7 @@ $(function(){
                 <div class="ad-nav">
                     <div class="ad-thumbs">
                         <ul class="ad-thumb-list">
-                            <volist id='housePic' name='info.picList'>
+                            <volist id='housePic' name='data.picList'>
                             <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
                             </volist>
                         </ul>
@@ -47,6 +47,8 @@ $(function(){
         <br />
         楼层：<em>{$data.floor}层({$data.floor_max}层)</em>
         <br />
+        联系人：{$data.contact}
+        <br />
         <div class="tel_bp">{$data.contact_tel}</div>
         年代：<em>{$data.build_year}年</em> &nbsp;&nbsp;&nbsp;&nbsp;结构：<em>{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}</em>
         <br /> 
@@ -59,7 +61,7 @@ $(function(){
     <div>
     {$data.desc_txt}
     </div>
-    <volist id='housePic' name='info.picList'>
+    <volist id='housePic' name='data.picList'>
     <img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
     </volist>
      <div class="index_left_tt">地理位置</div>

@@ -3,6 +3,8 @@ namespace Home\Controller;
 
 class AgentMarketController extends HomeController{
 	public function index(){
+		$this->currentNav = 7;
+
 		$pagePath = C('STATIC_PAGE_PATH') . '/agentmarket.html';
 
 		\Think\Storage::connect();

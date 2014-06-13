@@ -39,7 +39,7 @@
 					<td><a href="{:U('HouseSale/edit', array('id'=>$data['id']))}">{$data.title}</a></td>
 					<td>{$data.area_name}{$data.busi_area_name}</td>
 					<td>{$data.community}</td>
-					<td>{$data.create_time}</td>
+					<td>{$data.create_time|date='Y-m-d H:i',###}</td>
 					<td>
 						{$data.status|get_lookup_value='DOC_STATUS',###}
 					</td>
