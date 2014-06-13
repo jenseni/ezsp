@@ -9,7 +9,7 @@ class HouseWidget extends Controller{
 	 */
 	public function houseNewsLatest($count = 6){
 		$Article = M('Article');
-		$dataList = $Article->field('content', true)
+		$dataList = $Article->cache(true, 60)->field('content', true)
 			->where(array('status'=>array('NEQ', 0),'category_id'=>array('NEQ',5)))
 			->order('level desc,update_time desc')
 			->limit($count)
@@ -26,7 +26,7 @@ class HouseWidget extends Controller{
 	 */
 	public function officeMarketHot($count=5){
 		$OfficeMarket = M('Officemarket');
-		$dataList = $OfficeMarket->field('content', true)
+		$dataList = $OfficeMarket->field('desc_txt', true)
 			->where(array('status'=>array('NEQ', 0)))
 			->order('level desc, id desc')
 			->limit($count)
@@ -53,6 +53,25 @@ class HouseWidget extends Controller{
 		if(!empty($dataList)){
 			$this->assign('dataList', $dataList);
 			$this->display('Widget/houseSaleSuggest');
+		}
+	}
+
+	/**
+	 * 推荐租赁
+	 */
+	public function houseRentSuggest($count = 2){
+		$HouseRent = M('Houserent');
+		$dataList = $HouseRent->alias('h')
+			->field('h.id,h.bed_room,h.live_room,h.decorate,h.price,h.thumbnail,h.community,busi_area.name busi_area_name')
+			->join('__DISTRICT__ busi_area on busi_area.id=h.busi_area', 'LEFT')
+			->where(array('h.status'=>array('NEQ', 0)))
+			->order('level desc, id desc')
+			->limit($count)
+			->select();
+
+		if(!empty($dataList)){
+			$this->assign('dataList', $dataList);
+			$this->display('Widget/houseRentSuggest');
 		}
 	}
 

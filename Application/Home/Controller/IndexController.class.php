@@ -7,10 +7,10 @@ class IndexController extends HomeController {
 		$this->currentNav = 1;
 
 		$HouseSale = D('HouseSale');
-		$houseSaleList = $HouseSale->listForIndex($this->city);
+		$houseSaleList = $HouseSale->listForIndex($this->city, 8);
 
 		$HouseRent = D('HouseRent');
-		$houseRentList = $HouseRent->listForIndex($this->city);
+		$houseRentList = $HouseRent->listForIndex($this->city, 4);
 
 		$this->assign('houseSaleList', $houseSaleList);
 		$this->assign('houseRentList', $houseRentList);

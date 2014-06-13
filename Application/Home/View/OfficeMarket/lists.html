@@ -1,7 +1,7 @@
 <extend name="Public/base"/>
 
 <block name="content">
-	<div class="mapbreak"><span>写字楼商铺（{$totalCount}）&nbsp;&gt;&nbsp;</span></div>
+	<div class="mapbreak"><span>写字楼商铺 &nbsp;&gt;&nbsp;</span>{$city.name}写字楼商铺信息</div>
 	<div class="right_hotlp">
 		<div class="guanzhu">
 
@@ -17,18 +17,11 @@
 			<div class="filter-label">类别：</div>
 			{:W('Lookup/showFilter', array("__ROOT__/home/office_market/lists/area/$area/bdType/[bdType]/sdType/$sdType.html", '[bdType]', 'OFFICE_MARKET_BD_TYPE', $bdType))}
 		</div>
-		<div class="filter-group last">
-			<div class="filter-label">分类：</div>
-			{:W('Lookup/showFilter', array("__ROOT__/home/office_market/lists/area/$area/bdType/$bdType/sdType/[sdType].html", '[sdType]', 'HOUSE_SUPPLY_DEMAND', $sdType))}
-		</div>
 		<div class="sort-group">
 			<div class="filter-label">排序：</div>
 			{:W('Sort/showSort', array(array('h.square'=>'面积','h.price'=>'价格','h.create_time'=>'时间'), "__ROOT__/home/office_market/lists/area/$area/bdType/$bdType/sdType/$sdType.html"))}
 		</div>
-	
-	
-	
-	<!--搜索结果-->
+		<!--搜索结果-->
 		<ul class="ssjg">
 			<volist name="dataList" id="data">
 				<li>

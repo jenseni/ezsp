@@ -62,7 +62,7 @@ class OfficemarketModel extends RelationModel{
      * @author huajie <banhuajie@163.com>
      */
     public function lists($order = '`create_time` DESC', $limit = '10', $limitRows = '10', $map = array(), $status = 1, $field = true){
-        $map['status'] = array('eq',$status);
+        //$map['status'] = array('eq',$status);
         return $this->field($field)->relation(true)->where($map)->order($order)->limit($limit,$limitRows)->select();
     }
 

@@ -1,0 +1,19 @@
+<table width="260" border="0" cellspacing="0" cellpadding="0" class="news_tt">
+	<tr>
+		<td width="82" class="news_tt_left">推荐租房</td>
+		<td width="158" align="right" class="news_tt_right">&nbsp;</td>
+	</tr>
+</table>
+<ul class="hotlp_box" style="padding-left:10px; padding-right:10px;">
+	<volist name="dataList" id="data">
+	<li>
+		<div class="hotlp_box_line">
+			<a href="{:U('HouseSale/detail', array('id'=>$data['id']))}"><img src="{$data.thumbnail}" /></a>
+			<div class="clear"></div>
+			{$data.busi_area_name}{$data.community}<br />
+			{$data.bed_room}室{$data.live_room}厅，{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}<br />
+			<em>{$data.price}元/月</em>
+		</div>
+	</li>
+	</volist>
+</ul>

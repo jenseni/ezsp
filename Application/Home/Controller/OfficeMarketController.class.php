@@ -51,7 +51,7 @@ class OfficeMarketController extends HomeController{
 
 		$model = M('Officemarket');
 
-		$totalCount = $model->alias('a')
+		$totalCount = $model->alias('h')
 			->where($map)
 			->count(1);
 
