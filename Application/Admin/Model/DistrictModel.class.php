@@ -4,7 +4,7 @@ namespace Admin\Model;
 use \Think\Model;
 
 class DistrictModel extends Model{
-	
+
 	const TYPE_PROVINCE = 1;
 	const TYPE_CITY = 2;
 	const TYPE_PCITY = 12; //直辖市

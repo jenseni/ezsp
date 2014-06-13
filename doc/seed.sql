@@ -129,3 +129,21 @@ insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) valu
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('143','AGENT_MARKET_PIC_TYPE','4','售楼处','N','4');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('144','AGENT_MARKET_PIC_TYPE','5','效果图','N','5');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('145','AGENT_MARKET_PIC_TYPE','6','规划图','N','6');
+
+/*测试数据复制 - 房屋买卖*/
+insert into t_housesale(title,uid,level,create_time,status,community,city,area,busi_area,bed_room,live_room,toilet,floor,floor_max,contact,contact_tel,longitude,latitude,build_type,structure,decorate,face,add_on,feature,thumbnail,price,square,inner_square,down_payment,monthly,property_right,property_type,build_year,desc_txt)
+select title,uid,level,create_time + 60,status,community,city,area,busi_area,bed_room,live_room,toilet,floor,floor_max,contact,contact_tel,longitude,latitude,build_type,structure,decorate,face,add_on,feature,thumbnail,price,square,inner_square,down_payment,monthly,property_right,property_type,build_year,desc_txt
+from t_housesale where id=1;
+
+/*测试数据复制 - 房屋租赁*/
+insert into t_houserent(title,uid,level,create_time,status,community,city,area,busi_area,bed_room,live_room,toilet,floor,floor_max,contact,contact_tel,longitude,latitude,decorate,face,add_on,feature,thumbnail,price,deposit_type,square,desc_txt)
+select title,uid,level,create_time + 60,status,community,city,area,busi_area,bed_room,live_room,toilet,floor,floor_max,contact,contact_tel,121.560037,38.987971,decorate,face,add_on,feature,thumbnail,price,deposit_type,square,desc_txt
+from t_houserent where id=20;
+
+/*测试数据复制 - 图片*/
+insert into t_picture(path,url,md5,sha1,status,create_time,type,pid)
+select path,url,md5,sha1,status,now(),type,1
+from t_picture
+where pid=1
+and type=1;
+

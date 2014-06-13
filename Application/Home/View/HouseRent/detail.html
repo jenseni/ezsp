@@ -52,9 +52,11 @@ $(function(){
     </div>
     <div class="clear"></div>
     <div class="index_left_tt">房源描述</div>
-    配套设施：{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
     <div>
-    {$data.desc_txt}
+        <strong>配套设施：</strong>{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
+    </div>
+    <div>
+    {$data.desc_txt|htmlspecialchars_decode}
     </div>
     <volist id='housePic' name='data.picList'>
     <img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
