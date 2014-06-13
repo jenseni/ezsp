@@ -119,10 +119,10 @@ insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) valu
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('133','SHORT_RENT_PRICE_RANGE','200-300','200-300元','N','3');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('134','SHORT_RENT_PRICE_RANGE','300-MAX','300元以上','N','4');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('135','DOC_STATUS','-1','删除','N','1');
-insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('136','DOC_STATUS','0','禁用','N','2');
-insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('137','DOC_STATUS','1','正常','N','3');
-insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('138','DOC_STATUS','2','待审核','N','4');
-insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('139','DOC_STATUS','3','草稿','N','5');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('136','DOC_STATUS','0','未审核','N','2');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('137','DOC_STATUS','1','禁用','N','3');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('138','DOC_STATUS','2','启用','N','4');
+insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('139','DOC_STATUS','3','草稿','Y','5');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('140','AGENT_MARKET_PIC_TYPE','1','户型图','N','1');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('141','AGENT_MARKET_PIC_TYPE','2','道路交通','N','2');
 insert into `t_lookup` (`id`, `type`, `name`, `val`, `inactive`, `seq_num`) values('142','AGENT_MARKET_PIC_TYPE','3','小区','N','3');

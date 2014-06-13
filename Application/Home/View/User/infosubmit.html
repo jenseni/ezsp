@@ -3,26 +3,26 @@
 <block name="content">
 	<div style="text-align:left;">
 
-	<form action="{:U('User/infosubmit')}" method="post">
+	<form action="{:U('User/infosubmit')}" method="post" class="form-horizontal">
 
-		<div>
+		<div class="form-group">
 			<label>联系人</label>
 			<input type="text" name="contact" value=""/>
 		</div>
 
-		<div>
+		<div class="form-group">
 			<label>联系电话</label>
 			<input type="text" name="contact_tel" value=""/>
 		</div>
 
-		<div>
+		<div class="form-group">
 			<label>描述</label>
 		</div>
-		<div>
+		<div class="form-group">
 			<textarea name="content"></textarea>
 		</div>
 
-		<div>
+		<div class="form-group">
 			<input type="submit" value="提交"/>
 		</div>
 

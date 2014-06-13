@@ -37,7 +37,7 @@ class HouseSaleModel extends HouseModel{
     );
 
 	protected $_auto = array(
-		array('create_time', 'date', self::MODEL_INSERT, 'function', array('Y-m-d H:i:s', NOW_TIME)),
+		array('create_time', NOW_TIME, self::MODEL_INSERT),
 		array('status', 0, self::MODEL_INSERT),
 		array('uid', 'is_login', self::MODEL_INSERT, 'function')
 	);
