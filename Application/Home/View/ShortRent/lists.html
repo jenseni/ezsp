@@ -1,0 +1,57 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	<div class="mapbreak"><span>短期租房（{$totalCount}）&nbsp;&gt;&nbsp;</span></div>
+	<div class="right_hotlp">
+		<div class="guanzhu">
+
+		</div>
+		{:W('House/shortRentSuggest')}
+	</div>
+	<div class="left_hotlp">
+		<div class="filter-group">
+			<div class="filter-label">区域：</div>
+			{:W('District/showFilter', array("__ROOT__/home/short_rent/lists/area/[area]/type/$type/price/$price.html", $city, $area))}
+		</div>
+		<div class="filter-group">
+			<div class="filter-label">类型：</div>
+			{:W('Lookup/showFilter', array("__ROOT__/home/short_rent/lists/area/$area/type/[type]/price/$price", '[type]', 'SHORT_RENT_TYPE', $type))}
+		</div>
+		<div class="filter-group">
+			<div class="filter-label">价格：</div>
+			{:W('Lookup/showFilter', array("__ROOT__/home/short_rent/lists/area/$area/type/$type/price/[price]", '[price]', 'SHORT_RENT_PRICE_RANGE', $price))}
+		</div>
+		<div class="sort-group">
+			<div class="filter-label">排序：</div>
+			{:W('Sort/showSort', array(array('sr.min_limit'=>'最短租期','sr.price'=>'价格','sr.create_time'=>'时间'), "__ROOT__/home/short_rent/lists/area/$area/type/$type/price/$price.html"))}
+		</div>	
+	<!--搜索结果-->
+	<ul class="ssjg">
+		<volist name="dataList" id="data">
+			<li>
+				<a href="{:U('ShortRent/detail', array('id'=>$data['id']))}" target="_blank">
+					<img src="__ROOT__{$data.thumbnail}"/>
+					<div class="ssjg_tt">{$data.title}</div>
+					<div class="ssjg_xq">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td align="left" style="width:33%">{$data.type|get_lookup_value='SHORT_RENT_TYPE',###}</td>
+								<td align="left" style="width:33%">最短租期{$data.min_limit}天</td>
+								<td align="left"><span>{$data.price}元/天</span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ssjg_text">
+						概要：{$data.description}<br />
+						位置：{$data.busi_area_name},{$data.loc_txt}附近的{$data.loc_nearby}<br />
+						{$data.create_time|substr=0,16}发布
+					</div>
+				</a>
+			</li>
+		</volist>
+    </ul>
+    <div class="page">
+		{$page}
+	</div>
+	</div>
+</block>

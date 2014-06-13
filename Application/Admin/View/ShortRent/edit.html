@@ -21,7 +21,7 @@ $(function(){
 		'buttonClass': 'btn btn-primary',
 		'multi': true,
 		'queueID': 'queue_container',
-		'formData': {'busi_type': 1},
+		'formData': {'busi_type': 4},
 		//'uploadLimit': 5,
 		//'queueSizeLimit': 5,
 		'fileSizeLimit': '2MB',
@@ -96,6 +96,17 @@ KindEditor.ready(function(K) {
 			<input type="text" name="price" value="{$data.price}" class="form-control control-len-2"/> 元/天
 		</label>
 	</bs:formgroup>
+	<div class="form-group">
+		<label for='level' class='control-label col-sm-1'>优先级</label>
+		<div class='col-sm-2'>
+			<select class="form-control" name="level">
+			  <option <eq name="data['level']" value="0">selected</eq>>0</option>
+			  <option <eq name="data['level']" value="1">selected</eq>>1</option>
+			  <option <eq name="data['level']" value="2">selected</eq>>2</option>
+			  <option <eq name="data['level']" value="3">selected</eq>>3</option>
+			</select>
+		</div>
+	</div>
 	<bs:textfield name="contact" value="{$data.contact}" label="联系人" layout="1:3"/> 
 	<bs:textfield name="contact_tel" value="{$data.contact_tel}" label="联系电话" layout="1:3"/> 
 
@@ -112,7 +123,7 @@ KindEditor.ready(function(K) {
 		</div>
 	</div>
 
-	<bs:textarea name="desc_txt" value="{$data.desc_txt}" label="描述" layout="1:8"/> 
+	<bs:textarea name="desc_txt" value="{$data.desc_txt}" label="详细信息" layout="1:8"/> 
 
 	<div class="form-group">
 		<div class="col-sm-offset-1 col-sm-3">

@@ -1,7 +1,7 @@
 <extend name="Public/base"/>
 
 <block name="content">
-<div class="mapbreak"><span>优惠活动&nbsp;&gt;&nbsp;</span> {$category_title} </div>
+<div class="mapbreak"><span>优惠活动&nbsp;&gt;&nbsp; {$category_title} </span></div>
 <!--left start-->
   <div class="news_left">
     <div class="left_hotlp_tt">{$news.title}</div>
@@ -23,26 +23,6 @@
         <td height="60"> <a href="#"><img src="__IMG__/maifang4.gif" width="245" height="52" /></a></td>
       </tr>
     </table>
-
-    <table width="240" border="0" cellspacing="0" cellpadding="0" class="news_tt">
-      <tr>
-        <td width="82" class="news_tt_left">代理楼盘</td>
-        <td width="158" align="right" class="news_tt_right"><a href="#">更多&gt;&gt;</a></td>
-      </tr>
-    </table>
-    <ul class="hotlp_box">
-      <li>
-        <div class="hotlp_box_line">
-            <a href="#"><img  /></a>
-            <a href="#" class="hotlp_lpname">城市印象在售</a><span>在售</span>
-            <div class="clear"></div>
-            均价：14000元/平米<br />
-            电话：400-606-6969 转 27829<br />
-            地址：甘井子区迎客路中段(机场附近)<br />
-            <a href="#">实景6张</a>&nbsp;&nbsp;<a href="#"> 户型4张</a>
-           <a href="#"></a>
-        </div>
-      </li>
-    </ul>
+    {:W('House/houseSaleSuggest')}
   </div>
 </block>

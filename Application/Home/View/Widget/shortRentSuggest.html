@@ -1,0 +1,20 @@
+<table width="260" border="0" cellspacing="0" cellpadding="0" class="news_tt">
+	<tr>
+		<td width="82" class="news_tt_left">推荐房屋短租</td>
+		<td width="158" align="right" class="news_tt_right">&nbsp;</td>
+	</tr>
+</table>
+<ul class="hotlp_box" style="padding-left:10px; padding-right:10px;">
+	<volist name="dataList" id="data">
+	<li>
+		<div class="hotlp_box_line">
+			<a href="{:U('ShortRent/detail', array('id'=>$data['id']))}"><img src="{$data.thumbnail}" /></a>
+			<div class="clear"></div>
+			{$data.title}<br />
+			位置：{$data.busi_area_name},{$data.loc_txt}附近的{$data.loc_nearby}<br />
+			{$data.type|get_lookup_value='SHORT_RENT_TYPE',###}
+			<em>{$data.price}元/天</em>
+		</div>
+	</li>
+	</volist>
+</ul>
