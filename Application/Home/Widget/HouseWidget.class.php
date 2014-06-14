@@ -193,7 +193,7 @@ class HouseWidget extends Controller{
 	/**
 	 * 新闻图片轮播
 	 */
-	public function houseNewsImages($count = 5){
+	public function houseNewsImages($count = 5, $width=350, $height=200){
 		$Article = M('Article');
 		$dataList = $Article->field('id,title, cover_url')
 			->where(array('status'=>1, '_string'=>'cover_url IS NOT NULL'))
@@ -201,6 +201,8 @@ class HouseWidget extends Controller{
 			->select();
 
 		if(!empty($dataList)){
+			$this->assign('w', $width);
+			$this->assign('h', $height);
 			$this->assign('dataList', $dataList);
 			$this->display('Widget/houseNewsImages');
 		}
