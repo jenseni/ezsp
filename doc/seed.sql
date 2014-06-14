@@ -146,6 +146,12 @@ select title,uid,description,level,create_time+60,update_time,status,loc_txt,loc
 from t_shortrent
 where id=1;
 
+/*测试数据 - 新闻*/
+insert into t_article(title,category_id,uid,description,content,level,create_time,update_time,status,cover_url)
+select title,category_id,uid,description,content,level,create_time+60,update_time+60,status,cover_url
+from t_article
+where id=20
+
 /*测试数据复制 - 图片*/
 insert into t_picture(path,url,md5,sha1,status,create_time,type,pid)
 select path,url,md5,sha1,status,create_time+60,type,1

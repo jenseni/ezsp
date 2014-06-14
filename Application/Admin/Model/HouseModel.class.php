@@ -31,7 +31,7 @@ abstract class HouseModel extends Model{
 
 			$Image = new \Think\Image();
 			$Image->open($picPath)
-				->thumb(C('HOUSE_PIC_CONFIG.THUMB_WIDTH'), C('HOUSE_PIC_CONFIG.THUMB_HEIGHT'))
+				->thumb(C('HOUSE_PIC_CONFIG.THUMB_WIDTH'), C('HOUSE_PIC_CONFIG.THUMB_HEIGHT'), \Think\Image::IMAGE_THUMB_CENTER)
 				->save($thumbPath);
 
 			$thumbUri = substr($thumbPath, strpos($thumbPath, '/'));
