@@ -26,3 +26,13 @@ function get_first_img($content){
 		return $match[1];
 	}
 }
+
+function get_string_diy($str,$len){
+	 if (strlen($str) > $len)
+    {
+        for($i=0; $i < $len; $i++)
+        if (ord($str[$i]) > 127)    $i++;
+        $str = substr($str,0,$i)."···";
+    }
+	return $str;
+}

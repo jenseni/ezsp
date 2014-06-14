@@ -3,30 +3,21 @@
 </div>
 <div class="index_spcs_box">
 	<ul>
-		<li class="top">
-			<img />
-			亿丰国际汽车城 <span>11000元</span>/平米亿丰大连国际汽车城项目位于大连市甘井子区西 北路872号，向北是大连 
-		</li>
-		<li class="top">
-			<img />
-			亿丰国际汽车城 <span>11000元</span>/平米亿丰大连国际汽车城项目位于大连市甘井子区西 北路872号，向北是大连 
-		</li>
+		<volist name="dataList" id="data" offset="0" length="2">
+			<li class="top"><a href="{:U('OfficeMarket/detail', array('id'=>$data['id']))}" style="">
+				<img src="{$data.thumbnail}" />
+				{$data.title} <span>{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT', ###}</span>
+				楼盘：<em>{$data.real_estate}</em></a>
+			</li>
+		</volist>	
 	</ul>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td width="51%">城市印象</td>
-			<td width="30%" align="center">甘井子区</td>
-			<td width="19%" align="right"><span>100</span>万元</td>
-		</tr>
-		<tr>
-			<td>城市印象</td>
-			<td align="center">甘井子区</td>
-			<td align="right"><span>100</span>万元</td>
-		</tr>
-		<tr>
-			<td>城市印象</td>
-			<td align="center">甘井子区</td>
-			<td align="right"><span>100</span>万元</td>
-		</tr>
+		<volist name="dataList" id="data" offset="2" length="3">
+			<tr>
+				<td width="70%"><a href="{:U('OfficeMarket/detail', array('id'=>$data['id']))}">{$data.title|get_string_diy=###,42}</a></td>
+				
+				<td width="30%" align="right"><span>{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT', ###}</span></td>
+			</tr>
+		</volist>
 	</table>
 </div>

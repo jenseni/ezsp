@@ -1155,3 +1155,16 @@ ul.busi-area{
 	color: white;
 	font-weight: bold;
 }
+
+.index_spcs_box a{
+	color: #333;
+	padding-left:5px;
+	padding-right:5px;
+	text-decoration:none;
+	
+}
+
+.index_spcs_box a:hover{
+	color: #d62a38;
+	
+}

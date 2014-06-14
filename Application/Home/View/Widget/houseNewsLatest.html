@@ -10,7 +10,7 @@
 <div class="index_news_list">
     <ul>
         <volist name="dataList" id="data">
-        <li class="<eq name='data.level' value='3'>top<else />ntop</eq>"><span>{$key + 1}</span><a href="{:U('HouseNews/detail', array('document_id'=>$data['id'], 'category_title'=>$data['title']))}" >{$data.title}</a><em>{$data.create_time|date='Y-m-d',###}</em></li><div class="clear"></div>
+        <li class="<eq name='data.level' value='3'>top<else />ntop</eq>"><span style="text-align:center">{$key + 1}</span><a class="ntop" href="{:U('HouseNews/detail', array('document_id'=>$data['id'], 'category_title'=>$data['title']))}" >{$data.title|get_string_diy=###,42}</a><em>{$data.create_time|date='Y-m-d',###}</em></li><div class="clear"></div>
         </volist>
     </ul>
     <div class="clear"></div>
