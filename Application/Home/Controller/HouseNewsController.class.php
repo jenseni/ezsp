@@ -8,6 +8,10 @@ class HouseNewsController extends HomeController{
 		$this->assign('site_title','恒润房产-房产动态');
 	}
 
+	public function data(){
+		echo file_get_contents('./Uploads/data.xml');
+	}
+
 	public function index(){
 		$Document = D('Article');
 		$CATEGORY_RECOMMEND = '1';

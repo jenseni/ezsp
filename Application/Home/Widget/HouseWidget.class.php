@@ -189,4 +189,20 @@ class HouseWidget extends Controller{
 			$this->display('Widget/houseRentNearby');
 		}
 	}
+
+	/**
+	 * 新闻图片轮播
+	 */
+	public function houseNewsImages($count = 5){
+		$Article = M('Article');
+		$dataList = $Article->field('id,title, cover_url')
+			->where(array('status'=>1, '_string'=>'cover_url IS NOT NULL'))
+			->limit($count)
+			->select();
+
+		if(!empty($dataList)){
+			$this->assign('dataList', $dataList);
+			$this->display('Widget/houseNewsImages');
+		}
+	}
 }

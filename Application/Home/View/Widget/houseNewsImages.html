@@ -1,0 +1,27 @@
+<div class="img5">
+	<?php
+	$newsPicList = '';
+	$newsLinkList = '';
+	$newsTitleList = '';
+	foreach ($dataList as $data) {
+		$newsPicList .= (empty($newsPicList) ? '' : '|') . $data['cover_url'];
+		$newsLinkList .= (empty($newsLinkList) ? '' : '|') . U('HouseNews/detail', array('document_id'=>$data['id']));
+		$newsTitleList .= (empty($newsTitleList) ? '' : '|') . $data['title'];
+	}
+	?>
+	<script language = "javascript"> 
+		var focus_width = 350; 
+		var focus_height = 180; 
+		var text_height = 20; 
+		var swf_height = focus_height + text_height; 
+		var pics = '{$newsPicList}';
+		var links = '{$newsLinkList}';
+		var texts = '{$newsTitleList}';
+		document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ focus_width +'" height="'+ swf_height +'">'); 
+		document.write('<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="__STATIC__/imageslide/pixviewer.swf"><param name="quality" value="high"><param name="bgcolor" value="#E3E3E3">'); 
+		document.write('<param name="menu" value="false"><param name=wmode value="opaque">'); 
+		document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'">'); 
+		document.write('<embed src="__STATIC__/imageslide/pixviewer.swf" wmode="opaque" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'" menu="false" bgcolor="#E3E3E3" quality="high" width="'+ focus_width +'" height="'+ focus_height +'" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'); 
+		document.write('</object>'); 
+	</script>
+</div>
