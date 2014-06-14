@@ -55,6 +55,11 @@ class HouseNewsController extends AdminController{
 
 		if(IS_POST){
 
+			$cover = get_first_img($_POST['content']);
+			if($cover){
+				$_POST['cover_url'] = $cover;
+			}
+
 			$Article = D('Article');
 			$data = $Article->create();
 
@@ -62,9 +67,9 @@ class HouseNewsController extends AdminController{
 				$this->errorInput($Article->getError(), 'houseNews/add');
 			}
 
-			$data['uid'] = session('uid');
+			//$data['uid'] = session('uid');
 
-			$id = $Article->data($data)->add();
+			$id = $Article->add();
 
 			if(!$id){
 				$this->errorMessage('添加失败', 'HouseNews/index');
@@ -99,6 +104,11 @@ class HouseNewsController extends AdminController{
 	public function update(){
 		if(!IS_POST){
 			$this->error('错误的请求类型');
+		}
+
+		$cover = get_first_img($_POST['content']);
+		if($cover){
+			$_POST['cover_url'] = $cover;
 		}
 
 		$res = D('Article')->update();

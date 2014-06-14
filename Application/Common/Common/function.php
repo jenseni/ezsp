@@ -15,4 +15,14 @@ function default_value($value, $default = ''){
 	return $default;
 }
 
-function format_time(){}
+function get_first_img($content){
+	if(empty($content)){
+		return false;
+	}
+
+	preg_match("<img.+src=[\"\'](.*?)[\"\'].*?>", $content, $match);
+
+	if(isset($match[1])){
+		return $match[1];
+	}
+}

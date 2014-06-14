@@ -89,7 +89,7 @@ class ShortRentController extends HomeController{
 		}
 
 		$Picture = M('Picture');
-		$housePicList = $Picture->field('path')->where(array('pid'=>$id,'type'=>1))->select();
+		$housePicList = $Picture->field('path')->where(array('pid'=>$id,'type'=>4))->select();
 		$data['picList'] = $housePicList;
 
 		$this->assign('data', $data);

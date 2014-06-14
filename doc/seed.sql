@@ -140,9 +140,15 @@ insert into t_houserent(title,uid,level,create_time,status,community,city,area,b
 select title,uid,level,create_time + 60,status,community,city,area,busi_area,bed_room,live_room,toilet,floor,floor_max,contact,contact_tel,121.560037,38.987971,decorate,face,add_on,feature,thumbnail,price,deposit_type,square,desc_txt
 from t_houserent where id=20;
 
+/*测试数据复制 - 房屋短租*/
+insert into t_shortrent(title,uid,description,level,create_time,update_time,status,loc_txt,loc_nearby,city,area,busi_area,type,min_limit,price,price_unit,desc_txt,thumbnail,contact,contact_tel,contact_type,longitude,latitude)
+select title,uid,description,level,create_time+60,update_time,status,loc_txt,loc_nearby,city,area,busi_area,type,min_limit,price,price_unit,desc_txt,thumbnail,contact,contact_tel,contact_type,121.561623,38.978579
+from t_shortrent
+where id=1;
+
 /*测试数据复制 - 图片*/
 insert into t_picture(path,url,md5,sha1,status,create_time,type,pid)
-select path,url,md5,sha1,status,now(),type,1
+select path,url,md5,sha1,status,create_time+60,type,1
 from t_picture
 where pid=1
 and type=1;
