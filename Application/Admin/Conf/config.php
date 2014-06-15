@@ -76,16 +76,16 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-home',
 			'children'	=>	array(
 				array(
-					'id'	=>	102,
-					'name'	=>	'发布信息',
-					'action'	=>	'HouseSale/add',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				),
-				array(
 					'id'	=>	103,
 					'name'	=>	'房屋买卖管理',
 					'action'	=>	'HouseSale/lists',
 					'icon'	=>	'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	102,
+					'name'	=>	'发布信息',
+					'action'	=>	'HouseSale/add',
+					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
 		),
@@ -96,16 +96,16 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-home',
 			'children'	=>	array(
 				array(
-					'id'	=>	105,
-					'name'	=>	'房屋租赁发布',
-					'action'	=>	'HouseRent/add',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				),
-				array(
 					'id'	=>	106,
 					'name'	=>	'房屋租赁管理',
 					'action'	=>	'HouseRent/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	105,
+					'name'	=>	'房屋租赁发布',
+					'action'	=>	'HouseRent/add',
+					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
 		),
@@ -116,16 +116,16 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-home',
 			'children'	=>	array(
 				array(
-					'id'	=>	107,
-					'name'	=>	'短期租房发布',
-					'action'	=>	'ShortRent/add',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				),
-				array(
 					'id'	=>	108,
 					'name'	=>	'短期租房管理',
 					'action'	=>	'ShortRent/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	107,
+					'name'	=>	'短期租房发布',
+					'action'	=>	'ShortRent/add',
+					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
 		),
@@ -136,16 +136,16 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-home',
 			'children'	=>	array(
 				array(
-					'id'	=>	109,
-					'name'	=>	'写字楼商铺发布',
-					'action'	=>	'OfficeMarket/index',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				),
-				array(
 					'id'	=>	110,
 					'name'	=>	'写字楼商铺管理',
 					'action'	=>	'OfficeMarket/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	109,
+					'name'	=>	'写字楼商铺发布',
+					'action'	=>	'OfficeMarket/index',
+					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
 		),
@@ -184,16 +184,16 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-eye-open',
 			'children'	=>	array(
 				array(
-					'id'	=>	113,
-					'name'	=>	'房产动态发布',
-					'action'	=>	'HouseNews/index',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				),
-				array(
 					'id'	=>	114,
 					'name'	=>	'房产动态管理',
 					'action'	=>	'HouseNews/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	113,
+					'name'	=>	'房产动态发布',
+					'action'	=>	'HouseNews/index',
+					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
 		),
@@ -204,16 +204,16 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-fire',
 			'children'	=>	array(
 				array(
-					'id'	=>	115,
-					'name'	=>	'优惠活动发布',
-					'action'	=>	'Activity/index',
-					'icon'	=>	'glyphicon glyphicon-edit'
-				),
-				array(
 					'id'	=>	116,
 					'name'	=>	'优惠活动管理',
 					'action'	=>	'Activity/lists',
 					'icon'	=> 'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	115,
+					'name'	=>	'优惠活动发布',
+					'action'	=>	'Activity/index',
+					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
 		),

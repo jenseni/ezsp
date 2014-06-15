@@ -14,32 +14,40 @@
 <![endif]-->
 <style type="text/css">
 body{
-	background-color: #003366;
+	background-color: #3271af;
 }
-.panel-login{
-	max-width: 400px;
-	margin: 100px auto 0 auto;
-	background-color: white;
+.admin-login{
+	background: url(__IMG__/admin_login.jpg) no-repeat center center;
+	height: 768px;
+	padding-left: 600px;
+	padding-top: 260px;
+}
+.admin-login .control-label{
+	font-weight: normal;
+}
+.admin-login .help-block{
+	display: inline;
 }
 </style>
 </head>
 <body>
-<div class="container">
-	<div class="panel panel-info panel-login">
-		<div class="panel-heading">恒润房产管理平台</div>
-		<div class="panel-body">
-			<bs:actionError />
-			<form action="{:U('User/login')}" method="post" class="form-horizontal" role="form">
-			<bs:textfield name="username" value="{$data.username}" label="用户名"/>
-			<bs:textfield name="password" value="" label="密码" type="password"/>
-			<div class="form-group">
-				<div class="col-sm-offset-3 col-sm-6">
-					<input type="submit" class="btn btn-info form-control" value="登&nbsp;&nbsp;录"/>
-				</div>
-			</div>
-			</form>
+<div class="container-fluid admin-login">
+	<form action="{:U('User/login')}" method="post" class="form-horizontal" role="form">
+	<?php if(isset($actionError)):?>
+	<div class="form-group has-error">
+		<div class="col-sm-offset-2 col-sm-4">
+			<span class="help-block small"><?php echo $actionError;?></span>
 		</div>
 	</div>
+	<?php endif;?>
+	<bs:textfield name="username" value="{$data.username}" label="用户名" layout="2:4"/>
+	<bs:textfield name="password" value="" label="密码" type="password" layout="2:4"/>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-3">
+			<input type="submit" class="btn btn-primary form-control" value="登&nbsp;&nbsp;录"/>
+		</div>
+	</div>
+	</form>
 </div>
 </body>
 </html>

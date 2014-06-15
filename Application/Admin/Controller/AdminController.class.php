@@ -16,7 +16,8 @@ abstract class AdminController extends Controller{
 		$user = get_login_user();
 		if(!in_array(CONTROLLER_NAME.'/'.ACTION_NAME, $this->accessControl['public']) && empty($user)){
 			cookie('return_url', $_SERVER['REQUEST_URI']);
-			$this->error('请先登录', U('User/login'));
+			//$this->error('请先登录', U('User/login'));
+			$this->redirect(U('User/login'));
 		}
 		$this->assign('loginUser', $user);
 	}
@@ -95,7 +96,8 @@ abstract class AdminController extends Controller{
 		$user = get_login_user();
 
 		if(empty($user)){
-			$this->error('请先登录');
+			//$this->error('请先登录');
+			$this->redirect('User/login');
 		}
 
 		if(!has_auth($user, $viewId)){
