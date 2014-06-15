@@ -23,15 +23,11 @@
 					<input type="checkbox" check-group=":checkbox[name='id[]']"/>
 				</th>
 				<th>标题</th>
-                <th>地段</th>
-                <th>区域</th>            
+                <th>地段</th>           
                 <th>类型</th>
                 <th>价格</th>
-                <th>供求</th>
                 <th>面积(m<sup>2</sup>)</th>
-                <th>联系人类型</th>
                 <th>状态</th>
-                <th>创建时间</th>
                 <th>操作</th>
 			</tr>
 		</thead>
@@ -41,18 +37,20 @@
 				<td>
 					<input type="checkbox" name="id[]" value="{$data.id}"/>
 				</td>				
-				<td>{$data.title}</td>
-                <td>{$data.area_sector}</td>
-                <td>{$data.busi_area_name}</td>
-                <td>{$data.bd_type|get_lookup_value='OFFICE_MARKET_BD_TYPE',###}</td>
-                <td>{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT',###}</td>                       
-                <td>{$data.sd_type|get_lookup_value='HOUSE_SUPPLY_DEMAND',###}</td>
-                <td>{$data.square}</td>
-                <td>{$data.contact_type|get_lookup_value='HOUSE_CONTACT_TYPE',###}</td>
-                <td>{$data.status|get_lookup_value='DOC_STATUS',###}</td>
-                <td>{$data.create_time|format_timestamp}</td>
 				<td>
-					<a class="btn btn-xs btn-info app-btn" href="{:U('OfficeMarket/edit', array('id'=>$data['id']))}">编辑</a>
+					<a href="{:U('OfficeMarket/edit', array('id'=>$data['id']))}">{$data.title}</a>
+				</td>
+                <td>{$data.area_sector}</td>
+                <td>{$data.bd_type|get_lookup_value='OFFICE_MARKET_BD_TYPE',###}</td>
+                <td>{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT',###}</td>
+                <td>{$data.square}</td>
+                <td>{$data.status|get_lookup_value='DOC_STATUS',###}</td>
+				<td>
+					<if condition="$data.status eq 0">
+					<a class="btn btn-xs btn-success app-btn" href="{:U('OfficeMarket/changeStatus', array('id'=>$data['id'], 'status'=>1))}">启用</a>
+					<else />
+					<a class="btn btn-xs btn-warning app-btn" confirm="确认禁用该条数据？" href="{:U('OfficeMarket/changeStatus', array('id'=>$data['id'], 'status'=>0))}">禁用</a>
+					</if>
 					<a class="btn btn-xs btn-danger app-btn" confirm="确认删除？" href="{:U('OfficeMarket/delete', array('id'=>$data['id']))}">删除</a>
 				</td>
 			</tr>

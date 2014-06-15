@@ -31,4 +31,10 @@ class IndexController extends AdminController{
 		$this->assign('statistic', $statistic);
 		$this->display();
 	}
+
+	public function test($auth){
+		$this->authView($auth);
+		
+		$this->display();
+	}
 }

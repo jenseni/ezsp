@@ -12,7 +12,7 @@ class HouseSaleController extends HomeController{
 		$map = array();
 
 		$map['h.city'] = (int)$this->city['id'];
-		$map['h.status'] = 2;
+		$map['h.status'] = 1;
 
 		if($area != '0'){
 			$map['_string'] = "h.area=$area OR h.busi_area=$area";

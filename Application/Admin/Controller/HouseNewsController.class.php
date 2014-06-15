@@ -136,4 +136,13 @@ class HouseNewsController extends AdminController{
 
 		$this->successMessage('删除成功', get_return_url(U('HouseNews/lists')));
 	}
+
+	public function changestatus($id, $status){
+		$this->authView(114);
+		$OfficeMarket = M('Article');
+
+		$OfficeMarket->where(array('id'=>(int)$id))->setField('status', $status);
+
+		$this->successMessage('操作成功', get_return_url(U('HouseNews/lists')));
+	}
 }

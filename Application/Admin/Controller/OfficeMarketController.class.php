@@ -124,6 +124,7 @@ class OfficeMarketController extends AdminController{
 	
 
 	public function delete(){
+		$this->authView(110);
 
 		$id = I('id');
 		if(empty($id)){
@@ -139,5 +140,14 @@ class OfficeMarketController extends AdminController{
 		}
 
 		$this->successMessage('删除成功', get_return_url(U('OfficeMarket/lists')));
+	}
+
+	public function changestatus($id, $status){
+		$this->authView(110);
+		$OfficeMarket = M('Officemarket');
+
+		$OfficeMarket->where(array('id'=>(int)$id))->setField('status', $status);
+
+		$this->successMessage('操作成功', get_return_url(U('OfficeMarket/lists')));
 	}
 }

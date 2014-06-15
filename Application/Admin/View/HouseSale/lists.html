@@ -45,10 +45,9 @@
 					</td>
 					<td>
 						<if condition="$data.status eq 0">
-						<a class="btn btn-xs btn-success app-btn" href="{:U('HouseSale/changeStatus', array('id'=>$data['id'], 'status'=>1))}">审核</a>
+						<a class="btn btn-xs btn-success app-btn" href="{:U('HouseSale/changeStatus', array('id'=>$data['id'], 'status'=>1))}">启用</a>
 						<else />
-						<a class="btn btn-xs btn-success app-btn" href="{:U('HouseSale/changeStatus', array('id'=>$data['id'], 'status'=>2))}">启用</a>
-						<a class="btn btn-xs btn-warning app-btn" confirm="确认禁用该条数据？" href="{:U('HouseSale/changeStatus', array('id'=>$data['id'], 'status'=>1))}">禁用</a>
+						<a class="btn btn-xs btn-warning app-btn" confirm="确认禁用该条数据？" href="{:U('HouseSale/changeStatus', array('id'=>$data['id'], 'status'=>0))}">禁用</a>
 						</if>
 						<a class="btn btn-xs btn-danger app-btn" confirm="确认删除？" href="{:U('HouseSale/delete', array('id'=>$data['id']))}">删除</a>
 					</td>
