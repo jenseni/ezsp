@@ -28,11 +28,10 @@ function get_first_img($content){
 }
 
 function get_string_diy($str,$len){
-	 if (strlen($str) > $len)
+	
+	if (strlen($str) > $len)
     {
-        for($i=0; $i < $len; $i++)
-        if (ord($str[$i]) > 127)    $i++;
-        $str = substr($str,0,$i)."···";
+        $str = mb_substr($str,0,$len)."···";
     }
-	return $str;
+	return $str; 
 }
