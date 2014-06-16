@@ -410,17 +410,17 @@ a.hotlp_lpname:hover{
 	border-top-width: 3px;
 	border-top-style: solid;
 	border-top-color: #1d347c;
-	margin-top: 10px;
+	margin-top: 20px;
 	color: #8b8b8b;
 	line-height: 30px;
 }
 .index_left_tt {
 	font-size: 16px;
-	line-height: 47px;
+	height: 35px;
+	line-height: 35px;
 	font-weight: bold;
 	text-align: left;
 	text-indent: 25px;
-	height: 47px;
 	background-image: url(../images/index_title.gif);
 	background-repeat: no-repeat;
 	background-position: left center;
@@ -432,30 +432,29 @@ a.hotlp_lpname:hover{
 	font-size:13px;
 	font-weight:normal;
 	padding-left:25px;
-	}
+}
 .index_rslist {
 	float: left;
-	height: 210px;
 	width: 240px;
 	display: block;
 	position: relative;
 	padding-top: 10px;
 	padding-right: 5px;
-	padding-bottom: 10px;
+	padding-bottom: 0;
 	padding-left: 5px;
 }
 .index_rslist img{
 	width:240px;
 	height:170px;
-	}
+}
 
 .index_rslist span{
-	line-height:35px;
+	line-height:30px;
 	font-size:14px;
 	color:#20347b;
 	float:left;
 	text-decoration:none;
-	}
+}
 .index_rslist em{
 	line-height:35px;
 	font-size:14px;
@@ -469,19 +468,20 @@ a.hotlp_lpname:hover{
 	height: 35px;
 	width: 230px;
 	position: absolute;
-	left: 6px;
+	left: 5px;
 	top: 144px;
 	background-color: #000;
 	line-height: 35px;
 	color: #FFF;
-	text-decoration: none;
-	text-align: right;
-
-
-
 	filter: Alpha(Opacity=50) /* for IE */
     background-color: rgba(0, 0, 0, 0.5); /*for FF*/
+    opacity: .5;
 	padding-right: 10px;
+}
+.pingshu span{
+	position: relative;
+	color: #FFF;
+	float:right;
 }
 .contenmid_dox {
 	padding-top: 7px;
@@ -639,7 +639,7 @@ ul.ssjg {
 	line-height: 25px;
 }
 ul.ssjg li{
-	height:140px;
+	height:126px;
 	padding-top:10px;
 	padding-bottom:10px;
 	border-bottom:#eaeaea solid 1px;
@@ -709,8 +709,11 @@ span.e{
 	color: #000;
 	font-weight: bold;
 }
+.ssjg_xq table td{
+	width: 25%;
+}
 .ssjg_xq span{
-	color: #d40000;
+	color: #FF6703;
 	font-size:16px;
 }
 .home_pic {

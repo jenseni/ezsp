@@ -75,9 +75,10 @@ class ArticleModel extends RelationModel{
         }else{
         	$map['category_id'] = array('eq','5');
         }
-        $map['status'] = array('eq','1');
+        //$map['status'] = array('eq','1');
 
-        return $this->field($field)->relation(true)->where($map)->order($order)->limit($limit,$limitRows)->select();
+        //return $this->field($field)->relation(true)->where($map)->order($order)->limit($limit,$limitRows)->select();
+        return $this->field('content', true)->relation(true)->where($map)->order($order)->limit($limit,$limitRows)->select();
     }
 
     /**

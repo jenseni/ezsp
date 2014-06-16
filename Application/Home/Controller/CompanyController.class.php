@@ -6,8 +6,6 @@ class CompanyController extends HomeController{
 
 		$pagePath = C('STATIC_PAGE_PATH') . '/company.html';
 
-		\Think\Storage::connect();
-
 		if(\Think\Storage::has($pagePath)){
 			$content = \Think\Storage::read($pagePath);
 		}

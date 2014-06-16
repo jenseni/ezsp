@@ -213,7 +213,7 @@ CREATE TABLE `t_member` (
    `username` VARCHAR(32) NOT NULL COMMENT '用户名',
    `password` CHAR(32) NOT NULL COMMENT '密码',
    PRIMARY KEY (`id`)
-)
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `t_info_submit`;
 CREATE TABLE `t_info_submit`(
@@ -222,4 +222,18 @@ CREATE TABLE `t_info_submit`(
    `contact_tel` VARCHAR(32) NOT NULL COMMENT '联系电话',
    `content` TEXT NOT NULL COMMENT '内容',
    PRIMARY KEY (`id`)
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_statistics`;
+CREATE TABLE `t_statistics`(
+   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
+   `web_user` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '网站用户数',
+   `wx_user` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '微信用户数',
+   `house_rent` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '房屋信息数',
+   `house_sale` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '房屋信息数',
+   `office_market` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '房屋信息数',
+   `short_rent` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '房屋信息数',
+   `article` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '新闻数',
+   PRIMARY KEY(`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;

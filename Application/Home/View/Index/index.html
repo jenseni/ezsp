@@ -1,21 +1,18 @@
 <extend name="Public/base"/>
 <block name="content">
 <div class="content_box">
-	<br />
-	<img src="__IMG__/banner_ad.jpg" width="1000" height="110" />
-	<br />
+	<img src="__IMG__/banner_ad.jpg" style="width:1000px;height:110px;margin:15px 0 5px;" />
 	<div class="index_left_tt">房屋买卖<span>最新二手房源</span></div>
 	<volist name="houseSaleList" id="house" mod="4">
 	<a href="{:U('HouseSale/detail', array('id'=>$house['id']))}" class="index_rslist">
 		<img src="__ROOT__{$house.thumbnail}" />
 		<span>{$house.area_name} {$house.busi_area_name}</span> <em>{$house.price}万</em>
-		<div class="pingshu">{$house.bed_room}室{$house.live_room}厅 | {$house.square}M2</div>
+		<div class="pingshu"><span>{$house.bed_room}室{$house.live_room}厅 | {$house.square}㎡</span></div>
 	</a>
 	<eq name="mod" value="3">
 	<div class="clear"></div>
 	</eq>
 	</volist>
-	<div class="clear"></div>
 
 	<div class="contenmid_dox">
 		<div class="fangwuzulin">

@@ -10,15 +10,12 @@ class CompanyController extends AdminController{
 
 		if(IS_POST){
 
-			\Think\Storage::connect();
-
 			if(\Think\Storage::put($pagePath, $_POST['content'])){
 				$this->successMessage('保存成功', 'Company/edit');
 			}
 			$this->errorMessage('保存失败', 'Company/edit');
 
 		}else{
-			\Think\Storage::connect();
 
 			if(\Think\Storage::has($pagePath)){
 				$content = \Think\Storage::read($pagePath);

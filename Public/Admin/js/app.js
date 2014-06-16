@@ -10,8 +10,9 @@
 	App.fullContent = function(){
 		var docHeight = $(document).height();
 		var contentHeight = $('.content').height();
-		if(contentHeight < docHeight){
-			$('.content').css('min-height', docHeight - 50);
+		if(contentHeight < docHeight && !App.fullContented){
+			$('.content').css('min-height', docHeight - 90);
+			App.fullContented = true;
 		}
 	};
 

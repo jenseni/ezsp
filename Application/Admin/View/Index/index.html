@@ -1,5 +1,120 @@
 <extend name="Public/base"/>
 
+<block name="script">
+<script type="text/javascript" src="__STATIC__/highcharts/highcharts.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#chartest').highcharts({
+		chart: {
+			type: 'line'
+		},
+		title: {
+			text: '用户统计'
+		},
+		subtitle: {
+			text: '网站用户与微信用户走势分析'
+		},
+		xAxis: {
+			categories: <?php echo json_encode($timeList);?>
+		},
+		yAxis: {
+			title: {
+				text: '个数'
+			}
+		},
+		tooltip: {
+			enabled: false,
+			formatter: function() {
+				return '<b>'+ this.series.name +'</b><br/>'+
+					this.x +': '+ this.y +'°C';
+			}
+		},
+		plotOptions: {
+			line: {
+				dataLabels: {
+					enabled: true,
+					style: {
+						textShadow: '0 0 3px white, 0 0 3px white'
+					}
+				},
+				enableMouseTracking: false
+			}
+		},
+		series: [{
+				name: '网站',
+				data: <?php echo json_encode($webUserCountList);?> 
+			}, {
+				name: '微信',
+				data: <?php echo json_encode($wxUserCountList);?> 
+			}
+		]
+	});
+});
+</script>
+</block>
+
 <block name="content">
-<?php echo CONTROLLER_NAME?>
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="dashboard-stat blue">
+				<div class="visual">
+					<i class="glyphicon glyphicon-user"></i>
+				</div>
+				<div class="details">
+					<div class="number">{$statistic.web_user}</div>
+					<div class="desc">网站用户数</div>
+				</div>
+				<a class="more" href="#">
+					更多 <i class="glyphicon glyphicon-circle-arrow-right"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-sm-3">
+			<div class="dashboard-stat green">
+				<div class="visual">
+					<i class="icon-comments"></i>
+				</div>
+				<div class="details">
+					<div class="number">{$statistic.wx_user}</div>
+					<div class="desc">微信用户数</div>
+				</div>
+				<a class="more" href="#">
+					更多 <i class="glyphicon glyphicon-circle-arrow-right"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-sm-3">
+			<div class="dashboard-stat purple">
+				<div class="visual">
+					<i class="glyphicon glyphicon-home"></i>
+				</div>
+				<div class="details">
+					<div class="number">{$statistic.house}</div>
+					<div class="desc">房屋信息</div>
+				</div>
+				<a class="more" href="#">
+					更多 <i class="glyphicon glyphicon-circle-arrow-right"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-sm-3">
+			<div class="dashboard-stat yellow">
+				<div class="visual">
+					<i class="glyphicon glyphicon-bookmark"></i>
+				</div>
+				<div class="details">
+					<div class="number">{$statistic.article}</div>
+					<div class="desc">房产动态</div>
+				</div>
+				<a class="more" href="#">
+					查看 <i class="glyphicon glyphicon-circle-arrow-right"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="chartest" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </block>
