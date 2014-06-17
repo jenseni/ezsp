@@ -45,14 +45,16 @@ $(function(){
         <br />
         楼层：<em>{$data.floor}层({$data.floor_max}层)</em>
         <br />
+        装修：<em>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</em>
+        <br/>
+        <div class="line_grey" ></div>
         联系人：{$data.contact}
         <br/>
         <div class="tel_bp">{$data.contact_tel}</div>
-        装修：<em>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</em>
     </div>
     <div class="clear"></div>
     <div class="index_left_tt">房源描述</div>
-    <div>
+    <div class="add-on-tag">
         <strong>配套设施：</strong>{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
     </div>
     <div>

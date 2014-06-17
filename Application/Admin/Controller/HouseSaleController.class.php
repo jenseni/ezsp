@@ -22,11 +22,16 @@ class HouseSaleController extends AdminController{
 
 		$Page = new \Org\Util\Page($totalCount);
 
-		$dataList = $HouseSale->field('hs.id,hs.title,hs.community,hs.status,hs.create_time,area.name area_name,busi_area.name busi_area_name')
+		$HouseSale->field('hs.id,hs.title,hs.community,hs.status,hs.create_time,area.name area_name,busi_area.name busi_area_name')
 			->alias('hs')
 			->join('__DISTRICT__ area on area.id=hs.area', 'LEFT')
 			->join('__DISTRICT__ busi_area on busi_area.id=hs.busi_area', 'LEFT')
-			->where($condition)->limit($Page->firstRow, $Page->listRows)->select();
+			->where($condition);
+		$sortInfo = get_sort_info();
+		if(!empty($sortInfo)){
+			$HouseSale->order($sortInfo);
+		}
+		$dataList = $HouseSale->limit($Page->firstRow, $Page->listRows)->select();
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 

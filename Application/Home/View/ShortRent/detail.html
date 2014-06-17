@@ -21,6 +21,7 @@ $(function(){
 <block name="content">
 	<div class="mapbreak"><span>房屋短租&nbsp;&gt;&nbsp;</span>{$city.name}短租&nbsp;&gt;&nbsp;{$data.area_name}短租</div>
 	<div class="left_hotlp">
+        <div class="left_hotlp_tt">{$data.title}</div>
 		<div class="home_pic">
             <div class="ad-gallery">
     			<div class="ad-image-wrapper"></div>
@@ -36,24 +37,25 @@ $(function(){
             </div>
 		</div>
 		<div class="fcxq">
-		{$data.title}
-		<br />	
+        租金：<span class="redtext">{$data.price}</span>元/天,最短租期{$data.min_limit}天
+        <br />
 		区域：{$data.area_name},{$data.busi_area_name}
 		<br />
-		租金：<span class="redtext">{$data.price}</span>元/天,最短租期{$data.min_limit}天
-		<br />
-        地段：<em>{$data.loc_txt},{$data.area_sector}附近的{$data.loc_nearby}</em>
+        地段：
         <br />
-        经纪人：<em>{$data.contact}</em>
+        <em>{$data.loc_txt},{$data.area_sector}附近的{$data.loc_nearby}</em>
         <br />
-        <div class="tel_bp">{$data.contact_tel}</div>
+        <div class="line_grey" ></div>
         概要：<em>{$data.description}</em>
         <br />
         类型：{$data.type|get_lookup_value='SHORT_RENT_TYPE',###}
+        <br/>
+        经纪人：<em>{$data.contact}</em>
+        <br />
+        <div class="tel_bp">{$data.contact_tel}</div>
         </div>
         <div class="clear"></div>
         <div class="index_left_tt">房源描述</div>
-    	
         <div>
         	{$data.desc_txt|htmlspecialchars_decode}
         </div>
