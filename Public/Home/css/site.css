@@ -1171,3 +1171,26 @@ ul.busi-area{
 	color: #d62a38;
 	
 }
+.input_info_box {
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #dfdede;
+	border-bottom-color: #dfdede;
+	font-size: 14px;
+	color: #666;
+	line-height: 35px;
+	background-color: #fbfbfb;
+}
+.input_text_info {
+	border: 1px solid #3A5187;
+	line-height: 25px;
+	text-align: left;
+	height: 25px;
+	padding-left: 3px;
+
+}

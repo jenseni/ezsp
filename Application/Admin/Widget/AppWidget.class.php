@@ -131,13 +131,17 @@ class AppWidget extends Controller{
 			}else{
 				$nextDir = 'desc';
 			}
+		}else{
+			$dir = '';
 		}
 
-		$_GET['sort'] = "{$name}-{$nextDir}";
-		//重置分页
-		$_GET[C('VAR_PAGE') ? C('VAR_PAGE') : 'p'] = 1;
+		$get = $_GET;
 
-		$href = U(ACTION_NAME, $_GET);
+		$get['sort'] = "{$name}-{$nextDir}";
+		//重置分页
+		$get[C('VAR_PAGE') ? C('VAR_PAGE') : 'p'] = 1;
+
+		$href = U(ACTION_NAME, $get);
 		$html = "<th class=\"sortable\" href=\"{$href}\">{$label}";
 		if($dir == 'asc'){
 			$html .= ' <i class="icon-sort-up"></i>';

@@ -1,33 +1,31 @@
 <extend name="Public/base"/>
 
 <block name="content">
-	<div style="text-align:left;">
-
-	<form action="{:U('User/infosubmit')}" method="post" class="form-horizontal">
-
-		<div class="form-group">
-			<label>联系人</label>
-			<input type="text" name="contact" value=""/>
-		</div>
-
-		<div class="form-group">
-			<label>联系电话</label>
-			<input type="text" name="contact_tel" value=""/>
-		</div>
-
-		<div class="form-group">
-			<label>描述</label>
-		</div>
-		<div class="form-group">
-			<textarea name="content"></textarea>
-		</div>
-
-		<div class="form-group">
-			<input type="submit" value="提交"/>
-		</div>
-
-	</form>
-
+<div class="left_hotlp_tt">请输入相关信息</div>
+	<div class="input_info_box">
+	<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+	  <tr>
+	    <td width="27%" align="right">联系人</td>
+	    <td width="1%">&nbsp;</td>
+	    <td width="72%" align="left"><input type="text" class="input_text_info" size="40" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">联系方式</td>
+	    <td>&nbsp;</td>
+	    <td align="left"><input type="text" class="input_text_info" size="40" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">描述</td>
+	    <td>&nbsp;</td>
+	    <td align="left"><textarea cols="40" class="input_text_info"></textarea></td>
+	  </tr>
+	  <tr>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	    <td align="left"><a href="#" class="login_btn">确认</a></td>
+	  </tr>
+	</table>
 	</div>
+</div>
 
 </block>

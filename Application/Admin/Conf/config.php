@@ -155,10 +155,22 @@ return array(
 			'action'	=>	'#',
 			'icon'	=> 'glyphicon glyphicon-home',
 			'children'	=>	array(
+				// array(
+				// 	'id'	=>	111,
+				// 	'name'	=>	'代理楼盘编辑',
+				// 	'action'	=>	'AgentMarket/edit',
+				// 	'icon'	=>	'glyphicon glyphicon-edit'
+				// ),
 				array(
-					'id'	=>	111,
-					'name'	=>	'代理楼盘编辑',
-					'action'	=>	'AgentMarket/edit',
+					'id'	=>	121,
+					'name'	=>	'代理楼盘管理',
+					'action'	=>	'AgentMarket/lists',
+					'icon'	=>	'glyphicon glyphicon-wrench'
+				),
+				array(
+					'id'	=>	122,
+					'name'	=>	'代理楼盘发布',
+					'action'	=>	'AgentMarket/index',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
