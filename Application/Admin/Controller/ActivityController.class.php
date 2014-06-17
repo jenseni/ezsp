@@ -127,4 +127,13 @@ class ActivityController extends AdminController{
 
 		$this->successMessage('删除成功', get_return_url(U('Activity/lists')));
 	}
+
+	public function changeStatus($id, $status){
+		$this->authView(116);
+		$HouseSale = D('Article');
+
+		$HouseSale->where(array('id'=>(int)$id))->setField('status', $status);
+
+		$this->successMessage('操作成功', get_return_url(U('Activity/lists')));
+	}
 }

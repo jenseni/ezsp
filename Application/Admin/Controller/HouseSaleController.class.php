@@ -13,7 +13,7 @@ class HouseSaleController extends AdminController{
 		if(!empty($community)){
 			$condition['hs.community'] = array('LIKE', "%{$community}%");
 		}
-		if(!empty($status)){
+		if($status != ''){
 			$condition['hs.status'] = (int)$status;
 		}
 
