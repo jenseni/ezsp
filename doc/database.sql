@@ -238,3 +238,38 @@ CREATE TABLE `t_statistics`(
    `article` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '新闻数',
    PRIMARY KEY(`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `t_agentmarket`;
+
+CREATE TABLE `t_agentmarket` (
+  `id` int(10) unsigned NOT NULL,
+  `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
+  `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
+  `feature` varchar(255) DEFAULT NULL COMMENT '特色',
+  `price_avg` int(10) unsigned NOT NULL COMMENT '均价',
+  `price_avg2` int(10) unsigned NOT NULL COMMENT '公建均价',
+  `pref_txt` varchar(128) DEFAULT NULL COMMENT '优惠信息',
+  `down_payment` int(10) unsigned NOT NULL COMMENT '首付',
+  `down_payment_max` int(10) unsigned DEFAULT NULL COMMENT '首付上限',
+  `monthly` int(10) unsigned NOT NULL COMMENT '月供',
+  `monthly_max` int(10) unsigned DEFAULT NULL COMMENT '月供上限',
+  `contact_tel` varchar(11) NOT NULL COMMENT '联系电话',
+  `city` int(10) unsigned NOT NULL COMMENT '城市',
+  `area` int(10) unsigned NOT NULL COMMENT '区域',
+  `busi_area` int(10) unsigned NOT NULL COMMENT '商圈',
+  `loc_txt` varchar(32) DEFAULT NULL COMMENT '位置备注',
+  `traffic` varchar(255) DEFAULT NULL COMMENT '交通状况',
+  `open_time` date DEFAULT NULL COMMENT '开盘时间',
+  `in_time` date DEFAULT NULL COMMENT '入住时间',
+  `decorate` tinyint(4) DEFAULT NULL COMMENT '装修情况',
+  `property_right` tinyint(4) DEFAULT NULL COMMENT '产权',
+  `room_square_txt` varchar(255) DEFAULT NULL COMMENT '户型面积',
+  `room_count` int(10) unsigned DEFAULT NULL COMMENT '户数',
+  `thumbnail` varchar(255) DEFAULT NULL COMMENT '缩略图',
+  `longitude` double NOT NULL DEFAULT '0' COMMENT '经度',
+  `latitude` double NOT NULL DEFAULT '0' COMMENT '纬度',
+  PRIMARY KEY (`id`)
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;

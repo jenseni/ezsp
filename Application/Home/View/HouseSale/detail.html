@@ -13,7 +13,7 @@
 <script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
 <script type="text/javascript">
 $(function(){
-    $('.ad-gallery').adGallery();
+	$('.ad-gallery').adGallery();
 });
 </script>
 </block>
@@ -23,66 +23,68 @@ $(function(){
 	<div class="left_hotlp">
 		<div class="left_hotlp_tt">{$data.title} {:W('Tag/showTag', array($data['feature'], 'fortab'))}</div>
 		<div class="home_pic">
-            <div class="ad-gallery">
-    			<div class="ad-image-wrapper"></div>
-                <div class="ad-nav">
-                    <div class="ad-thumbs">
-                        <ul class="ad-thumb-list">
-                            <volist id='housePic' name='data.picList'>
-                            <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
-                            </volist>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+			<div class="ad-gallery">
+				<div class="ad-image-wrapper"></div>
+				<div class="ad-nav">
+					<div class="ad-thumbs">
+						<ul class="ad-thumb-list">
+							<volist id='housePic' name='data.picList'>
+							<li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="fcxq">
-		售价：<span class="redtext">{$data.price}</span>万
+			售价：<span class="redtext">{$data.price}</span>万
+			<br />
+			单价：<em><php> echo round($data['price'] * 10000 / $data['square'], 2)</php>元/平米</em>&nbsp;&nbsp;&nbsp;&nbsp;首付：<em>{$data.down_payment}万</em>
+			<br/>月供：<em>{$data.monthly}元</em>
+			<br />
+			<div class="line_grey" ></div>
+			房型：<em>{$data.bed_room}室{$data.live_room}厅</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建筑面积：<em>{$data.square}平米</em>
+			<br />
+			朝向：<em>{$data.face|get_lookup_value='HOUSE_FACE_TYPE', ###}</em>
+			<br />
+			楼层：<em>{$data.floor}层({$data.floor_max}层)</em>
+			<br />
+			联系人：{$data.contact}
+			<br />
+			年代：<em>{$data.build_year}年</em> &nbsp;&nbsp;&nbsp;&nbsp;结构：<em>{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}</em>
+			<br />
+			<div class="line_grey" ></div>
+			装修：<em>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</em>&nbsp;&nbsp;&nbsp;&nbsp;  住宅类别：<em>{$data.build_type|get_lookup_value='HOUSE_BUILD_TYPE',###}</em><br />
+			产权性质：<em>{$data.property_type|get_lookup_value='HOUSE_PROPERTY_TYPE',###}</em><br/>
+			<div class="tel_bp">{$data.contact_tel}</div>
+		</div>
+		<div class="clear"></div>
+		<div class="index_left_tt">房源描述</div>
+		<div class="add-on-tag">
+			<strong>配套设施：</strong>{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
+		</div>
+		<div>
+		{$data.desc_txt|htmlspecialchars_decode}
+		</div>
+		<volist id='housePic' name='data.picList'>
+		<img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
+		</volist>
+		<div class="index_left_tt">地理位置</div>
+		<div id="baidumap_forpick" style="height:300px;max-width:726px"></div>
+		{:W('House/houseSaleNearby', array($data['id'], array('busi_area'=>$data['busi_area'])))}
+	</div>
+	<!--left end-->
+	<!--rigth start-->
+	<div class="right_hotlp">
+		<div class="guanzhu">
+		</div>
 		<br />
-		单价：<em><php> echo round($data['price'] * 10000 / $data['square'], 2)</php>元/平米</em>&nbsp;&nbsp;&nbsp;&nbsp;首付：<em>{$data.down_payment}万</em>&nbsp;&nbsp;&nbsp;&nbsp;月供：<em>{$data.monthly}元</em>
 		<br />
-        房型：<em>{$data.bed_room}室{$data.live_room}厅</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建筑面积：<em>{$data.square}平米</em>
-        <br />
-        朝向：<em>{$data.face|get_lookup_value='HOUSE_FACE_TYPE', ###}</em>
-        <br />
-        楼层：<em>{$data.floor}层({$data.floor_max}层)</em>
-        <br />
-        联系人：{$data.contact}
-        <br />
-        <div class="tel_bp">{$data.contact_tel}</div>
-        年代：<em>{$data.build_year}年</em> &nbsp;&nbsp;&nbsp;&nbsp;结构：<em>{$data.structure|get_lookup_value='HOUSE_STRUCTURE_TYPE',###}</em>
-        <br /> 
-        装修：<em>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</em>&nbsp;&nbsp;&nbsp;&nbsp;  住宅类别：<em>{$data.build_type|get_lookup_value='HOUSE_BUILD_TYPE',###}</em><br />
-        产权性质：<em>{$data.property_type|get_lookup_value='HOUSE_PROPERTY_TYPE',###}</em><br/>
-    </div>
-    <div class="clear"></div>
-    <div class="index_left_tt">房源描述</div>
-    <div>
-        <strong>配套设施：</strong>{:W('Tag/showTag', array($data['add_on'], 'fortab'))}
-    </div>
-    <div>
-    {$data.desc_txt|htmlspecialchars_decode}
-    </div>
-    <volist id='housePic' name='data.picList'>
-    <img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
-    </volist>
-     <div class="index_left_tt">地理位置</div>
-    <div id="baidumap_forpick" style="height:300px;max-width:726px"></div>
-    {:W('House/houseSaleNearby', array($data['id'], array('busi_area'=>$data['busi_area'])))}
-    </div>
-    <!--left end-->
-    <!--rigth start-->
-    <div class="right_hotlp">
-   
-    	<div class="guanzhu">
-        
-        </div>
-   	  <br /><BR />
-    {:W('House/houseSaleSuggest')}
-    </div>
-    <!--rigth end-->
-    
-    <div class="clear"></div>
+		{:W('House/houseSaleSuggest')}
+	</div>
+	<!--rigth end-->
+
+	<div class="clear"></div>
 </block>
 
 <block name="footscript">

@@ -21,13 +21,14 @@ $(function(){
 <block name="content">
 	<div class="mapbreak"><span>写字楼商铺&nbsp;&gt;&nbsp;{$city.name}旺铺&nbsp;&gt;&nbsp;{$data.area_name}</span></div>
 	<div class="left_hotlp">
+        <div class="left_hotlp_tt">{$data.title} {:W('Tag/showTag', array($data['feature'], 'fortab'))}</div>
 		<div class="home_pic">
             <div class="ad-gallery">
     			<div class="ad-image-wrapper"></div>
                 <div class="ad-nav">
                     <div class="ad-thumbs">
                         <ul class="ad-thumb-list">
-                            <volist id='housePic' name='info.picList'>
+                            <volist id='housePic' name='data.picList'>
                             <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
                             </volist>
                         </ul>
@@ -36,18 +37,13 @@ $(function(){
             </div>
 		</div>
 		<div class="fcxq">
-		{$data.title}
-		<br />	
 		价钱：<span class="redtext">{$data.price}</span>{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT',###}
 		<br />
 		面积：<em>{$data.square}&nbsp;平米</em>&nbsp;&nbsp;&nbsp;&nbsp;类型：<em>{$data.bd_type|get_lookup_value='OFFICE_MARKET_BD_TYPE',###}</em>&nbsp;&nbsp;&nbsp;&nbsp;
 		<br />
-        
+        <div class="line_grey" ></div>
         位置：<em>{$data.busi_area_name},{$data.area_sector}附近的{$data.area_sector_nearby}</em>
         <br />
-        经纪人：<em>{$data.contact}</em>
-        <br />
-        <div class="tel_bp">{$data.contact_tel}</div>
         概要：<em>{$data.description}</em>
         <br />
         楼盘：<em>{$data.real_estate}</em>
@@ -57,8 +53,10 @@ $(function(){
         <else />
         	不可注册公司
         </if>
-        
-        
+        <br/>
+        经纪人：<em>{$data.contact}</em>
+        <br />
+        <div class="tel_bp">{$data.contact_tel}</div>
     </div>
     <div class="clear"></div>
     <div class="index_left_tt">房源描述</div>
@@ -66,10 +64,10 @@ $(function(){
     <div>
     	{$data.desc_txt|htmlspecialchars_decode}
     </div>
-    <volist id='housePic' name='info.picList'>
+    <volist id='housePic' name='data.picList'>
     <img src="__ROOT__{$housePic.path}" style="max-width:726px"/>
     </volist>
-     <div class="index_left_tt">地理位置</div>
+    <div class="index_left_tt">地理位置</div>
     <div id="baidumap_forpick" style="height:300px;max-width:726px"></div>
     {:W('House/officeMarketNearby', array($data['id'], array('busi_area'=>$data['busi_area'])))}
     </div>
@@ -86,23 +84,4 @@ $(function(){
     <!--rigth end-->
     
     <div class="clear"></div>
-</block>
-
-<block name="footscript">
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
-<script type="text/javascript">
-(function(){
-    var lng = {$data.longitude|default=0};
-    var lat = {$data.latitude|default=0};
-    if(lng == 0 || lat == 0){
-        return ;
-    }
-    var map = new BMap.Map("baidumap_forpick");
-
-    var marker = new BMap.Marker(new BMap.Point(lng, lat));
-    map.centerAndZoom(marker.getPosition(),15);
-    map.enableScrollWheelZoom();
-    map.addOverlay(marker);
-})();
-</script>
 </block>
