@@ -1,31 +1,40 @@
 <extend name="Public/base"/>
 
 <block name="content">
+<form action="{:U('User/infosubmit')}" method="post">
 <div class="left_hotlp_tt">请输入相关信息</div>
 	<div class="input_info_box">
+	<div><p style="color:red;">{$message}</p></div>
 	<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
 	  <tr>
 	    <td width="27%" align="right">联系人</td>
 	    <td width="1%">&nbsp;</td>
-	    <td width="72%" align="left"><input type="text" class="input_text_info" size="40" /></td>
+	    <td width="72%" align="left"><input type="text" name="contact" class="input_text_info" size="40" /></td>
 	  </tr>
 	  <tr>
 	    <td align="right">联系方式</td>
 	    <td>&nbsp;</td>
-	    <td align="left"><input type="text" class="input_text_info" size="40" /></td>
+	    <td align="left"><input type="text" class="input_text_info" name="contact_tel" size="40" /></td>
 	  </tr>
 	  <tr>
 	    <td align="right">描述</td>
 	    <td>&nbsp;</td>
-	    <td align="left"><textarea cols="40" class="input_text_info"></textarea></td>
+	    <td align="left"><textarea cols="40" rows="10" name="content"></textarea></td>
+	  </tr>
+	  <tr>
+	  	<td align="right">验证码</td>
+	  	<td>&nbsp;</td>
+	  	<td align="left"><input type="text" class="input_text_info" name="verify" size="20" /></td>
+	  	<td align="left"><img src='/User/verify/' ></td>
 	  </tr>
 	  <tr>
 	    <td>&nbsp;</td>
 	    <td>&nbsp;</td>
-	    <td align="left"><a href="#" class="login_btn">确认</a></td>
+	    <td align="left"><input type="submit" class="login_btn" value="提交"/></td>
 	  </tr>
 	</table>
 	</div>
 </div>
+</form>
 
 </block>

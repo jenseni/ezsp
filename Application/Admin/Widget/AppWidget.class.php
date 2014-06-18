@@ -34,8 +34,12 @@ class AppWidget extends Controller{
 				$html .= ' active';
 			}
 			$html .= "\"><span class=\"{$menu['icon']}\"></span>&nbsp;&nbsp;{$menu['name']}";
+			
 			if($active){
 				$html .= '<span class="selected"></span>';
+			}
+			if($view['id'] == '119'){
+				$html .= "<span class=\"badge\" style=\"margin-right:20px; margin-top:3px;\"></span>";
 			}
 			$html .= "</a>";
 		}

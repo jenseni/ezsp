@@ -221,6 +221,7 @@ CREATE TABLE `t_info_submit`(
    `contact` VARCHAR(32) NOT NULL COMMENT '联系人',
    `contact_tel` VARCHAR(32) NOT NULL COMMENT '联系电话',
    `content` TEXT NOT NULL COMMENT '内容',
+   `create_time` int(11) NOT NULL COMMENT '创建时间',
    PRIMARY KEY (`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
