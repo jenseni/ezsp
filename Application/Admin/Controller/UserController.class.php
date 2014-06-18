@@ -170,4 +170,5 @@ class UserController extends AdminController{
 			return $this->display();
 		}
 	}
+
 }

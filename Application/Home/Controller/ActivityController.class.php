@@ -10,11 +10,13 @@ class ActivityController extends HomeController{
 
 	public function index($category_id = 5){
 		$Document = D('Article');
+		$condition['category_id'] = array('eq',$category_id);
+		$condition['status'] = array('eq','1');
 		
-		$count = $Document->where('category_id = '.$category_id)->count();
+		$count = $Document->where($condition)->count();
 		$Page = new \Think\Page($count,25);
 		$lists = $Document
-			     ->where('category_id = '.$category_id)
+			     ->where($condition)
 				 ->order('create_time desc')
 				 ->limit($Page->firstRow.','.$Page->listRows)
 				 ->select();

@@ -266,7 +266,7 @@ return array(
 				array(
 					'id'	=>	119,
 					'name'	=>	'咨询留言管理',
-					'action'	=>	'Index/test?auth=119',
+					'action'	=>	'Message/index',
 					'icon'	=>	'glyphicon glyphicon-wrench'
 				)
 			)

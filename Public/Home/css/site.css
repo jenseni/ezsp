@@ -1197,6 +1197,21 @@ ul.busi-area{
 	padding-left: 3px;
 
 }
-.add-on-tag{
-	margin-top: 10px;
+
+.content_yhgd {
+	width: 700px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(../images/yhgd_bp.jpg);
+	background-repeat: no-repeat;
+	height: 500px;
+	padding-top: 150px;
+	padding-right: 150px;
+	padding-bottom: 350px;
+	padding-left: 150px;
+	background-position: center center;
+}
+.yhgd_left {
+	float: left;
+	width: 440px;
 }
