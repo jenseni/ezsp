@@ -207,4 +207,5 @@ class HouseWidget extends Controller{
 			$this->display('Widget/houseNewsImages');
 		}
 	}
+
 }

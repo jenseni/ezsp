@@ -212,6 +212,8 @@ CREATE TABLE `t_member` (
    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
    `username` VARCHAR(32) NOT NULL COMMENT '用户名',
    `password` CHAR(32) NOT NULL COMMENT '密码',
+   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+   `last_login` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后登录时间',
    PRIMARY KEY (`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
@@ -242,7 +244,7 @@ CREATE TABLE `t_statistics`(
 DROP TABLE IF EXISTS `t_agentmarket`;
 
 CREATE TABLE `t_agentmarket` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -271,4 +273,12 @@ CREATE TABLE `t_agentmarket` (
   `longitude` double NOT NULL DEFAULT '0' COMMENT '经度',
   `latitude` double NOT NULL DEFAULT '0' COMMENT '纬度',
   PRIMARY KEY (`id`)
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_agentmarket_pic`;
+CREATE TABLE `t_agentmarket_pic` (
+  `id` int(10) unsigned not null,
+  `type` tinyint not null,
+  `desc_txt` varchar(128) null,
+  PRIMARY key (`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;

@@ -3,7 +3,7 @@ namespace Admin\Controller;
 
 class AgentMarketController extends AdminController{
 
-	public function edit(){
+	/*public function edit(){
 		$this->authView(111);
 
 		$pagePath = C('STATIC_PAGE_PATH') . '/agentmarket.html';
@@ -28,7 +28,7 @@ class AgentMarketController extends AdminController{
 
 			$this->display();
 		}
-	}
+	}*/
 
 	public function lists(){
 		$this->authView(121);
@@ -93,6 +93,46 @@ class AgentMarketController extends AdminController{
 		$this->assign('dataList', $dataList);
 		$this->assign('page', $Page->show());
 
-		$this->display();
+		$this->display('index');
+	}
+
+	public function add(){
+		$this->authView(122);
+
+		if(IS_POST){
+			$AgentMarket = D('AgentMarket');
+			$data = $AgentMarket->saveOrUpdate();
+
+			if(!$data){
+				$this->errorInput($AgentMarket->getError(), 'AgentMarket/edit');
+			}
+			$this->successMessage('基本信息保存成功', 'AgentMarket/index');
+		}else{
+			$this->display('edit');
+		}
+	}
+
+	public function edit($id = 1){
+		$this->authView(121);
+
+		$AgentMarket = D('AgentMarket');
+		$data = $AgentMarket->field(true)->find($id);
+
+		if(empty($data)){
+			$this->errorMessage('数据不存在或已删除', get_return_url(U('AgentMarket/lists')));
+		}
+
+		$Picture = M('Picture');
+		$picList = $Picture->field('id,path')->where(array('pid'=>$data['id'], 'type'=>5))->select();
+
+		if(empty($picList)){
+			$data['house_pic'] = '[]';
+		}else{
+			$data['house_pic'] = json_encode($picList);
+		}
+
+		$this->assign('data', $data);
+
+		$this->display('edit');
 	}
 }
