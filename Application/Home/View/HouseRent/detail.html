@@ -85,18 +85,18 @@ $(function(){
 <block name="footscript">
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
 <script type="text/javascript">
-(function(){
-    var lng = {$data.longitude|default=0};
-    var lat = {$data.latitude|default=0};
+var lng = {$data.longitude|default=0};
+var lat = {$data.latitude|default=0};
+(function(lng, lat, container){
     if(lng == 0 || lat == 0){
         return ;
     }
-    var map = new BMap.Map("baidumap_forpick");
+    var map = new BMap.Map(container);
 
     var marker = new BMap.Marker(new BMap.Point(lng, lat));
     map.centerAndZoom(marker.getPosition(),15);
     map.enableScrollWheelZoom();
     map.addOverlay(marker);
-})();
+})(lng, lat, "baidumap_forpick");
 </script>
 </block>

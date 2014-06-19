@@ -25,7 +25,7 @@ class HouseRentModel extends HouseModel{
 		array('decorate', 'require', '请选择装修类型', self::MUST_VALIDATE),
 		array('face', 'require', '请选择朝向', self::MUST_VALIDATE),
 		array('deposit_type', 'require', '请选押金类型', self::MUST_VALIDATE),
-		array('desc_txt', 'require', '请选押金类型', self::MUST_VALIDATE)
+		array('desc_txt', 'require', '请填写描述信息', self::MUST_VALIDATE)
 	);
 
 	protected $_auto = array(
