@@ -15,3 +15,14 @@ function is_login(){
 function get_current_city(){
 	return array('id'=>517, 'name'=>'大连');
 }
+
+
+function auto_ip_log(){
+    $Case = M('Iplog');
+    $data['ip_address'] = $_SERVER['REMOTE_ADDR'];
+    $data['request_time'] = $_SERVER['REQUEST_TIME'];
+    $data['url_self'] = $_SERVER['PHP_SELF'];
+    $data['url'] = $_SERVER['HTTP_REFERER'];
+    $Case->create($data);
+    $Case->add();
+}

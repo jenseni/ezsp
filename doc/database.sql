@@ -283,3 +283,14 @@ CREATE TABLE `t_agentmarket_pic` (
   `desc_txt` varchar(128) null,
   PRIMARY key (`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_iplog`;
+CREATE TABLE `t_iplog` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `ip_address` char(30) DEFAULT NULL COMMENT 'ip地址',
+   `url` char(100) DEFAULT NULL COMMENT '来访链接',
+   `url_self` char(100) DEFAULT NULL COMMENT '受访页面',
+   `request_time` int(11) DEFAULT NULL COMMENT '访问时间',
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;

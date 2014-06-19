@@ -11,9 +11,11 @@ class MessageController extends AdminController{
 		if($contact){
 			$condition['contact'] = array('LIKE', "%{$contact}%");
 		}
-		$Page = new \Think\Page($count,25);
+		
 		$Case = M('InfoSubmit');
-		$countNum = $Case -> where('status = 0') ->count();
+		$count = $Case->where($condition)->count();
+
+		$Page = new \Think\Page($count,25);
 		$dataList = $Case ->where($condition)
 		->order('status , create_time desc')
 		->limit($Page->firstRow.','.$Page->listRows)
@@ -23,7 +25,7 @@ class MessageController extends AdminController{
 
 		$show = $Page->show();
 		$this->assign('page',$show);
-		$this->assign('messageNum',$countNum);
+		
 		$this->assign('dataList',$dataList);
 		$this->display();
 	}
@@ -57,6 +59,7 @@ class MessageController extends AdminController{
 
 	//详细页面
 	public function detail($id){
+		$this->authView(119);
 		$Document = D('InfoSubmit');
 		$info = $Document->find($id);
 		$this->assign('data',$info);

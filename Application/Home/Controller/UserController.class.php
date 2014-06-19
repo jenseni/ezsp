@@ -6,7 +6,6 @@ use \Think\Controller;
 class UserController extends HomeController{
 	
 	public function infosubmit(){
-
 		if(IS_POST){
 			
 			if($this->check_verify($_POST['verify'])){
@@ -19,6 +18,7 @@ class UserController extends HomeController{
 				}
 
 				$data['create_time'] = time();
+				$data['status'] = 0;
 
 				//echo json_encode($data); exit();
 
