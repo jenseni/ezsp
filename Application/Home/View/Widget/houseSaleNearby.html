@@ -3,7 +3,7 @@
     <volist name="dataList" id="data">
 	    <li>
         <div class="hotlp_box_line">
-        <a href="{:U('HouseSale/detail', array('id'=>$data['id']))}"><img src="__ROOT__{$data.thumbnail}" /></a>
+        <a href="{:U('HouseSale/detail', array('id'=>$data['id']))}"><img src="{$data.thumbnail|get_img=219,172}" /></a>
         <a href="{:U('HouseSale/detail', array('id'=>$data['id']))}" class="hotlp_lpname">{$data.title}</a>
         <div class="clear"></div>
         价格：{$data.price}万<br />

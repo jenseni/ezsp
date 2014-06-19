@@ -23,6 +23,7 @@ class HouseNewsController extends AdminController{
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 
 		$this->assign('dataList', $houseNews);
+		$this->assign('page', $Page->show());
 		$this->display();
 	}
 
