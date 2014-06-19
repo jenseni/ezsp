@@ -23,6 +23,8 @@ class HomeController extends Controller {
         $this->site_menus = C('SYS_MENU');
 
         $this->city = get_current_city();
+
+        auto_ip_log(); // 调用ip自动保存函数；
     }
 
     /* 用户登录检测 */
