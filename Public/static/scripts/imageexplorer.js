@@ -143,7 +143,8 @@ ImageExplorer.prototype.addItem = function(pic){
 
 	this.getPicsHolder().val(this.picsToJSON(pics));
 
-	this.renderItem(pic);
+	//this.renderItem(pic);
+	this.render();
 
 	return true;
 };

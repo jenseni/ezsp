@@ -11,14 +11,35 @@
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript">
+function removePic(picId){
+	$('tr[data-id="' + picId + '"]').remove();
+}
 $(function(){
 	var chainOptions = {url:"<?php echo U('District/getchildren'); ?>",clear:true,loading:"加载中..."};
 	$('#area').remoteChained($.extend({parents: '#city'},chainOptions));
 	$('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
 
-	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', countLimit: 6});
+	var picItemTpl = "<tr data-id=\"{picId}\">\
+<td><img style=\"width:150px\" src=\"{picPath}\"/></td>\
+<td>\
+<input type=\"hidden\" name=\"picId[]\" value=\"{picId}\"/>\
+<textarea name=\"picDesc[]\" class=\"form-control\"></textarea>\
+</td>\
+<td><a href=\"javascript:removePic('{picId}')\">删除</a></td>\
+</tr>";
+	function addRoomTypePic(pic){
+		if(!pic || !pic.id){
+			return;
+		}
+		var itemDomStr = picItemTpl.replace(/\{picPath\}/g, "__ROOT__" + pic.path);
+		itemDomStr = itemDomStr.replace(/\{picId\}/g, pic.id);
 
-	$("#file_upload").uploadify({
+		$(itemDomStr).appendTo($('#room_type_pic_container'));
+	}
+
+	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', countLimit: 1});
+
+	$("#file_upload1").uploadify({
 		'height': 34,
 		'swf': '__STATIC__/uploadify/uploadify.swf',
 		'uploader': '<?php echo U("File/uploadhousepic");?>',
@@ -30,7 +51,7 @@ $(function(){
 		//'uploadLimit': 5,
 		//'queueSizeLimit': 5,
 		'fileSizeLimit': '2MB',
-		'buttonText': '上传图片',
+		'buttonText': '上传封面',
 		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
 		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
 		'removeTimeout': 1,
@@ -38,8 +59,72 @@ $(function(){
 			var info = $.parseJSON(data);
 			if(info.status == 0){
 				if(!imgExplorer.addItem(info)){
-					$('#file_upload').uploadify('cancel', '*');
+					$('#file_upload1').uploadify('cancel', '*');
 				}
+			}else{
+				alert(info.info);
+			}
+		},
+		'onUploadError': function(file, errorCode, errorMsg, errorString){
+			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+		},
+		'onFallback': function(){
+			alert('请先安装Flash插件');
+		}
+	});
+
+	$("#file_upload2").uploadify({
+		'height': 34,
+		'swf': '__STATIC__/uploadify/uploadify.swf',
+		'uploader': '<?php echo U("File/uploadhousepic");?>',
+		'fileObjName': 'fileUpload',
+		'buttonClass': 'btn btn-primary',
+		'multi': true,
+		'queueID': 'queue_container2',
+		'formData': {'busi_type': 5},
+		//'uploadLimit': 5,
+		//'queueSizeLimit': 5,
+		'fileSizeLimit': '2MB',
+		'buttonText': '上传户型图',
+		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+		'removeTimeout': 1,
+		'onUploadSuccess': function(file, data, response){
+			var info = $.parseJSON(data);
+			if(info.status == 0){
+				addRoomTypePic(info);
+			}else{
+				alert(info.info);
+			}
+		},
+		'onUploadError': function(file, errorCode, errorMsg, errorString){
+			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+		},
+		'onFallback': function(){
+			alert('请先安装Flash插件');
+		}
+	});
+
+	$("#file_upload").uploadify({
+		'height': 34,
+		'swf': '__STATIC__/uploadify/uploadify.swf',
+		'uploader': '<?php echo U("File/uploadhousepic");?>',
+		'fileObjName': 'fileUpload',
+		'buttonClass': 'btn btn-primary',
+		'multi': true,
+		'queueID': 'queue_container',
+		'formData': {'busi_type': 5},
+		//'uploadLimit': 5,
+		//'queueSizeLimit': 5,
+		'fileSizeLimit': '2MB',
+		'buttonText': '上传户型图',
+		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+		'removeTimeout': 1,
+		'onUploadSuccess': function(file, data, response){
+			var info = $.parseJSON(data);
+			if(info.status == 0){
+				addRoomTypePic(info);
 			}else{
 				alert(info.info);
 			}
@@ -88,7 +173,7 @@ $(function(){
 			</label>
 
 			<label<bs:haserrorclass field='price_avg2'/>>公建均价
-				<input type="text" name="price_avg2" value="{$data.price_avg2}" class="form-control control-len-2"/> 元/平米
+				<input type="text" name="price_avg" value="{$data.price_avg2}" class="form-control control-len-2"/> 元/平米
 			</label>
 
 		</bs:formgroup>
@@ -144,7 +229,7 @@ $(function(){
 
 		<div class="form-group" style="position:relative">
 			<div class="col-sm-offset-1 col-sm-2">
-				<input type="file" name="fileUpload" id="file_upload"/>
+				<input type="file" name="fileUpload" id="file_upload1"/>
 				<input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
 			</div>
 			<div id="queue_container1" style="position:absolute;right:0;top:0;z-index:999;"></div>
@@ -152,6 +237,29 @@ $(function(){
 		<div class="form-group">
 			<div id="item_container" class="col-sm-offset-1 col-sm-10">
 			
+			</div>
+		</div>
+
+		<div class="form-group" style="position:relative">
+			<div class="col-sm-offset-1 col-sm-2">
+				<input type="file" name="fileUpload" id="file_upload2"/>
+			</div>
+			<div id="queue_container2" style="position:absolute;right:0;top:0;z-index:999;"></div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-1 col-sm-10">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="width:150px !important;">图片</th>
+							<th>描述</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="room_type_pic_container">
+						
+					</tbody>
+				</table>
 			</div>
 		</div>
 

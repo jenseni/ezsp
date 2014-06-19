@@ -1,0 +1,100 @@
+<extend name="Public/base"/>
+
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/adgallery/jquery.ad-gallery.css">
+<style type="text/css">
+.mapbreak{
+    margin-bottom: 10px;
+}
+</style>
+</block>
+
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.ad-gallery').adGallery();
+});
+</script>
+</block>
+
+<block name="content">
+    <div class="mapbreak"><span>代理楼盘&nbsp;&gt;&nbsp;</span> {$data.title} </div>
+    <div class="left_hotlp">
+        <div class="daili_pic">
+            <div class="ad-gallery">
+                <div class="ad-image-wrapper"></div>
+                <div class="ad-nav">
+                    <div class="ad-thumbs">
+                        <ul class="ad-thumb-list">
+                            <volist id='housePic' name='data.picList'>
+                            <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="google" id="baidumap_forpick"></div>
+        </div>
+        <div class="fcxq">
+            <div class="daili_del_tt">{$data.title}<span>{:W('Tag/showTag', array($info['feature']))}</span></div>
+            <em>价格：</em> 均价{$data.price_avg}元/平米 <br />
+            <em>价格详情：</em>均价{$data.price_avg}元/平米,公建均价{$data.price_avg2}元/平米<br />
+            <em>恒润特惠：</em> {$data.pref_txt}
+            <em>购房费用：</em> 首付 {$data.down_payment}-{$data.down_payment_max}万  月供 {$data.monthly}-{$data.monthly_max}元 
+            <div class="tel_bp">{$data.contact_tel}</div>
+            <em>楼盘位置：</em>{$data.area_name}{$data.busi_area_name}({$data.loc_txt}) 楼盘地图<br />
+            <em>交通状况：</em>{$data.traffic}[ + 展开 ]<br />
+            <em>开盘时间：</em> {$data.open_time}&nbsp;&nbsp;&nbsp;&nbsp;  <em> 入住时间：</em> {$data.in_time}<br />
+            <em>装修情况：</em> {$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}<br />
+            <em>产　　权：</em> {$data.property_right|get_lookup_value='HOUSE_PROPERTY_RIGHT',###}<br />
+            <em>户型面积：</em> {$data.room_square_txt} 户型图<br />
+            <em>户　　数：</em> 总共 {$data.room_count} 户<br />
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="right_hotlp">
+        <div class="guanzhu">
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="daili_del_btbox">
+        <div class="daili_del_btbox_tt">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+            <td width="93%">户型面积<span>{$data.title}户型图</span></td>
+            <td width="7%"><a href="#">更多&gt;&gt;</a></td>
+            </tr>
+            </table>
+        </div>
+        <volist name="data.hxPicList" id="hxPic">
+        <a href="#" class="hxt">
+            <img src="__ROOT__{$hxPic.path}"/>
+            <span>{$hxPic.desc_txt}</span>
+        </a>
+        </volist>
+        <div class="clear"></div>
+    </div>
+	
+</block>
+
+<block name="footscript">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
+<script type="text/javascript">
+var lng = {$data.longitude};
+var lat = {$data.latitude};
+if(lng == 0 || lat == 0){
+    return ;
+}
+var map = new BMap.Map("baidumap_forpick");
+
+var marker = new BMap.Marker(new BMap.Point(lng, lat));
+map.centerAndZoom(marker.getPosition(),15);
+map.enableScrollWheelZoom();
+map.addOverlay(marker);
+
+</script>
+</block>
