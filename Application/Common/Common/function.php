@@ -36,13 +36,9 @@ function get_string_diy($str,$len){
 	return $str; 
 }
 
-function get_img($src, $width = 0, $height = 0, $warter = false, $defaultImg = ''){
+function get_img($src, $width = 0, $height = 0, $water = false, $defaultImg = '/Public/images/noimg.png'){
 	if(strpos($src, 'http://') === 0 || !preg_match('/\.(jpeg|jpg|gif|png)$/i', $src)){
 		return $src;
-	}
-
-	if(empty($defaultImg)){
-		$defaultImg = '/Public/images/noimg.png';
 	}
 
 	$path = $src;
@@ -67,7 +63,7 @@ function get_img($src, $width = 0, $height = 0, $warter = false, $defaultImg = '
 	}
 
 	$pathInfo = pathinfo($path);
-	if(preg_match('/_\d+_\d+$/', $pathInfo['filename'])){
+	if(preg_match('/_\d+_\d+$/', $pathInfo['filename']) || $width == 0 || $height == 0){
 		$resultPath = $pathInfo['dirname'] . '/runtime/' . $pathInfo['basename'];
 	}else{
 		$resultPath = $pathInfo['dirname'] . '/runtime/' . $pathInfo['filename'] . "_{$width}_{$height}." . $pathInfo['extension'];
@@ -81,14 +77,14 @@ function get_img($src, $width = 0, $height = 0, $warter = false, $defaultImg = '
 		return __ROOT__ . $defaultImg;
 	}
 
-	if(($width != 0 && $height != 0) || $warter != false){
+	if(($width != 0 && $height != 0) || $water != false){
 		$image = new \Think\Image();
 		$image->open($path);
-		if($warter){
-			if(is_string($warter)){
-				$image->warter($warter);
+		if($water){
+			if(is_string($water)){
+				$image->water($water);
 			}else{
-				$image->warter(C('HOUSE_PIC_CONFIG.WARTER_PIC', \Think\Image::IMAGE_WATER_NORTHWEST));
+				$image->water('./Public/images/house_warter.png', \Think\Image::IMAGE_WATER_NORTHWEST);
 			}
 		}
 		if($width != 0 && $height != 0){

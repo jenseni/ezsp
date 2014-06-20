@@ -32,12 +32,7 @@ return array(
 
 	'HOUSE_PIC_CONFIG'=> array(
 		'MAX_WIDTH' => 640,
-		'MAX_HEIGHT' => 640,
-		'THUMB_WIDTH' => 240,
-		'THUMB_HEIGHT' => 170,
-		'WARTER_PIC' => './Public/images/house_warter.png',
-		'POSITION'  => 1,
-		'ALPHA'     => 100
+		'MAX_HEIGHT' => 640
 	),
 
 	'SYS_MENU'	=> array(
