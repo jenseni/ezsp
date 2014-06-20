@@ -81,11 +81,10 @@ function get_img($src, $width = 0, $height = 0, $water = false, $defaultImg = '/
 		$image = new \Think\Image();
 		$image->open($path);
 		if($water){
-			if(is_string($water)){
-				$image->water($water);
-			}else{
-				$image->water('./Public/images/house_warter.png', \Think\Image::IMAGE_WATER_NORTHWEST);
+			if(!is_string($water)){
+				$water = './Public/images/house_warter.png';
 			}
+			$image->water($water, \Think\Image::IMAGE_WATER_NORTHWEST);
 		}
 		if($width != 0 && $height != 0){
 			$image->thumb($width, $height, \Think\Image::IMAGE_THUMB_CENTER);

@@ -1,9 +1,5 @@
 <extend name="Public/base"/>
 
-<block name="script">
-
-</block>
-
 <block name="content">
 <div class="data-table">
 	<div class="btn-group btn-group-sm pull-right">
@@ -28,7 +24,7 @@
 				<th>联系人</th>
 				<th>联系电话</th>
 				<th>详细内容</th>
-				{:W('App/sortColumn', array('create_time', '创建时间'))}
+				<th>创建时间</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -38,7 +34,12 @@
 				<td>
 					<input type="checkbox" name="id[]" value="{$data.id}"/>
 				</td>
-				<td><eq name="data.status" value="0"><span class="glyphicon glyphicon-flag"></span></eq>
+				<td >
+					<eq name="data.status" value="0">
+					<span class="glyphicon glyphicon-flag"></span>
+					<else/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					</eq>
 					<a href="{:U('Message/detail', array('id'=>$data['id']))}">{$data.contact}</a>
 				</td>
 				<td>{$data.contact_tel}</td>
