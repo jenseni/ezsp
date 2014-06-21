@@ -6,6 +6,7 @@ use \Think\Controller;
 class UserController extends HomeController{
 	
 	public function infosubmit(){
+
 		if(IS_POST){
 			
 			if($this->check_verify($_POST['verify'])){
