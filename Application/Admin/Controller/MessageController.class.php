@@ -13,13 +13,13 @@ class MessageController extends AdminController{
 		}
 		
 		$Case = M('InfoSubmit');
-		$count = $Case->where($condition)->count();
+		$count = $Case->where($condition)->count(1);
 
 		$Page = new \Think\Page($count,25);
 		$dataList = $Case ->where($condition)
-		->order('status , create_time desc')
-		->limit($Page->firstRow.','.$Page->listRows)
-		->select();
+			->order('status , create_time desc')
+			->limit($Page->firstRow.','.$Page->listRows)
+			->select();
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 

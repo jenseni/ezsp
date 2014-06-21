@@ -21,7 +21,7 @@ return array(
 		'savePath' => '', //保存路径
 		'saveName' => array('uniqid', ''), //上传文件命名规则，[0]-函数名，[1]-参数，多个参数使用数组
 		'saveExt'  => '', //文件保存后缀，空则使用原后缀
-		'replace'  => false, //存在同名是否覆盖
+		'replace'  => true, //存在同名是否覆盖
 		'hash'     => true, //是否生成hash编码
 		'callback' => false, //检测文件是否存在回调函数，如果存在返回文件信息数组
 	), //图片上传相关配置（文件上传类配置）
@@ -32,12 +32,7 @@ return array(
 
 	'HOUSE_PIC_CONFIG'=> array(
 		'MAX_WIDTH' => 640,
-		'MAX_HEIGHT' => 640,
-		'THUMB_WIDTH' => 240,
-		'THUMB_HEIGHT' => 170,
-		'WARTER_PIC' => './Public/images/house_warter.png',
-		'POSITION'  => 1,
-		'ALPHA'     => 100
+		'MAX_HEIGHT' => 640
 	),
 
 	'SYS_MENU'	=> array(

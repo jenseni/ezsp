@@ -19,9 +19,6 @@ abstract class AdminController extends Controller{
 			//$this->error('请先登录', U('User/login'));
 			$this->redirect(U('User/login'));
 		}
-		$Message = M('InfoSubmit');
-		$countNum = $Message -> where('status = 0') ->count();
-		$this->assign('messageNum',$countNum);
 		
 		$this->assign('loginUser', $user);
 	}

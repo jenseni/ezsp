@@ -5,7 +5,7 @@
 	<ul>
 		<volist name="dataList" id="data" offset="0" length="2">
 			<li class="top"><a href="{:U('OfficeMarket/detail', array('id'=>$data['id']))}" style="">
-				<img src="{$data.thumbnail}" />
+				<img src="{$data.thumbnail|get_img=172,126}" />
 				{$data.title} <span>{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT', ###}</span>
 				楼盘：<em>{$data.real_estate}</em></a>
 			</li>

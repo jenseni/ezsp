@@ -11,7 +11,7 @@ class HouseWidget extends Controller{
 		$Article = M('Article');
 		$dataList = $Article->cache(true, 60)->field('content', true)
 			->where(array('status'=>array('NEQ', 0),'category_id'=>array('NEQ',5)))
-			->order('level desc,update_time desc')
+			->order('level desc,create_time desc')
 			->limit($count)
 			->select();
 

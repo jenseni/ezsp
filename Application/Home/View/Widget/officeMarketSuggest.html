@@ -8,7 +8,7 @@
 	<volist name="dataList" id="data">
 	<li>
 		<div class="hotlp_box_line">
-			<a href="{:U('OfficeMarket/detail', array('id'=>$data['id']))}"><img src="{$data.thumbnail}" /></a>
+			<a href="{:U('OfficeMarket/detail', array('id'=>$data['id']))}"><img src="{$data.thumbnail|get_img=219,172}" /></a>
 			<div class="clear"></div>
 			{$data.title}<br />
 			位置：{$data.busi_area_name},{$data.area_sector}附近的{$data.area_sector_nearby}<br />

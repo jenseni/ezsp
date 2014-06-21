@@ -34,13 +34,19 @@ class AppWidget extends Controller{
 				$html .= ' active';
 			}
 			$html .= "\"><span class=\"{$menu['icon']}\"></span>&nbsp;&nbsp;{$menu['name']}";
-			
+
 			if($active){
 				$html .= '<span class="selected"></span>';
 			}
-			if($view['id'] == '119'){
-				$html .= "<span class=\"badge\" style=\"margin-right:20px; margin-top:3px;\"></span>";
+
+			if($view['id'] == 119){
+				$Message = M('InfoSubmit');
+				$messageCount = $Message -> where('status = 0') ->count(1);
+				if($messageCount > 0){
+					$html .= "<span class=\"badge\">{$messageCount}</span>";
+				}
 			}
+
 			$html .= "</a>";
 		}
 

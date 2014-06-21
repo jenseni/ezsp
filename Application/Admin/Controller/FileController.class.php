@@ -30,9 +30,9 @@ class FileController extends Controller{
 				->save($picPath);
 
 			//图片水印
-			$image->open($picPath)
-				->water(C('HOUSE_PIC_CONFIG.WARTER_PIC'), C('HOUSE_PIC_CONFIG.POSITION'), C('HOUSE_PIC_CONFIG.ALPHA'))
-				->save($picPath);
+			// $image->open($picPath)
+			// 	->water(C('HOUSE_PIC_CONFIG.WARTER_PIC'), C('HOUSE_PIC_CONFIG.POSITION'), C('HOUSE_PIC_CONFIG.ALPHA'))
+			// 	->save($picPath);
 
 			$return['status'] = 0;
 			$return = array_merge($info['fileUpload'], $return);
