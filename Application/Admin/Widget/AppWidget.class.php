@@ -352,6 +352,39 @@ class AppWidget extends Controller{
 		return $html;
 	}
 
+	public function showAgentMarketImageUpload($label, $type, $picList){
+		$picIds = array();
+		$picDescs = array();
+		$picPaths = array();
+
+		if(isset($picList) && !empty($picList)){
+			foreach ($picList as $pic) {
+				if($pic['type'] == $type){
+					$picIds[] = $pic['id'];
+					$picDescs[] = $pic['desc_txt'];
+					$picPaths[] = $pic['path'];
+				}
+			}
+		}elseif(isset($_POST['pic_id']) && is_array($_POST['pic_id'])){
+			for($i = 0, $count = count($_POST['pic_id']); $i < $count; $i++){
+				if($_POST['pic_type'][$i] == $type){
+					$picIds[] = $_POST['pic_id'][$i];
+					$picDescs[] = $_POST['pic_desc'][$i];
+					$picPaths[] = $_POST['pic_path'][$i];
+				}
+			}
+		}
+
+		$this->assign('name', $name);
+		$this->assign('type', $type);
+		$this->assign('label', $label);
+		$this->assign('picIds', $picIds);
+		$this->assign('picDescs', $picDescs);
+		$this->assign('picPaths', $picPaths);
+
+		$this->display('Widget/agentMarketImageUpload');
+	}
+
 
 	/**
 	 * 获得token

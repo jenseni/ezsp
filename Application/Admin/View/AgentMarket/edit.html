@@ -16,41 +16,43 @@ $(function(){
 	$('#area').remoteChained($.extend({parents: '#city'},chainOptions));
 	$('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
 
-	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', countLimit: 6});
+	(function($){
+		var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', countLimit: 4});
 
-	$("#file_upload").uploadify({
-		'height': 34,
-		'swf': '__STATIC__/uploadify/uploadify.swf',
-		'uploader': '<?php echo U("File/uploadhousepic");?>',
-		'fileObjName': 'fileUpload',
-		'buttonClass': 'btn btn-primary',
-		'multi': true,
-		'queueID': 'queue_container1',
-		'formData': {'busi_type': 5},
-		//'uploadLimit': 5,
-		//'queueSizeLimit': 5,
-		'fileSizeLimit': '2MB',
-		'buttonText': '上传图片',
-		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
-		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
-		'removeTimeout': 1,
-		'onUploadSuccess': function(file, data, response){
-			var info = $.parseJSON(data);
-			if(info.status == 0){
-				if(!imgExplorer.addItem(info)){
-					$('#file_upload').uploadify('cancel', '*');
+		$("#file_upload").uploadify({
+			'height': 34,
+			'swf': '__STATIC__/uploadify/uploadify.swf',
+			'uploader': '<?php echo U("File/uploadhousepic");?>',
+			'fileObjName': 'fileUpload',
+			'buttonClass': 'btn btn-primary',
+			'multi': true,
+			'queueID': 'queue_container',
+			'formData': {'busi_type': 5},
+			//'uploadLimit': 5,
+			//'queueSizeLimit': 5,
+			'fileSizeLimit': '2MB',
+			'buttonText': '上传封面',
+			'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+			'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+			'removeTimeout': 1,
+			'onUploadSuccess': function(file, data, response){
+				var info = $.parseJSON(data);
+				if(info.status == 0){
+					if(!imgExplorer.addItem(info)){
+						$('#file_upload').uploadify('cancel', '*');
+					}
+				}else{
+					alert(info.info);
 				}
-			}else{
-				alert(info.info);
+			},
+			'onUploadError': function(file, errorCode, errorMsg, errorString){
+				//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+			},
+			'onFallback': function(){
+				alert('请先安装Flash插件');
 			}
-		},
-		'onUploadError': function(file, errorCode, errorMsg, errorString){
-			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
-		},
-		'onFallback': function(){
-			alert('请先安装Flash插件');
-		}
-	});
+		});
+	})(jQuery);
 
 	$('#open_time').datetimepicker({
 		language:  'zh-CN',
@@ -147,7 +149,7 @@ $(function(){
 				<input type="file" name="fileUpload" id="file_upload"/>
 				<input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
 			</div>
-			<div id="queue_container1" style="position:absolute;right:0;top:0;z-index:999;"></div>
+			<div id="queue_container" style="position:absolute;right:0;top:0;z-index:999;"></div>
 		</div>
 		<div class="form-group">
 			<div id="item_container" class="col-sm-offset-1 col-sm-10">
@@ -155,10 +157,17 @@ $(function(){
 			</div>
 		</div>
 
+		{:W('App/showAgentMarketImageUpload', array('户型图', 1, $data['roomTypePicList']))}
+
 		<div class="form-group">
 			<div class="col-sm-offset-1 col-sm-3">
 				<input type="submit" class="btn btn-primary form-control" value="保&nbsp;&nbsp;存"/>
 			</div>
+			<notempty name="data.id">
+			<div class="col-sm-3">
+				<a class="btn btn-primary form-control" href="{:get_return_url(U('AgentMarket/lists'))}">返&nbsp;&nbsp;回</a>
+			</div>
+			</notempty>
 		</div>
 	</form>
 </block>

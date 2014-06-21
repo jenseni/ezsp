@@ -165,7 +165,7 @@ return array(
 				array(
 					'id'	=>	122,
 					'name'	=>	'代理楼盘发布',
-					'action'	=>	'AgentMarket/index',
+					'action'	=>	'AgentMarket/add',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)

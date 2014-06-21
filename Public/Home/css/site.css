@@ -1215,3 +1215,60 @@ ul.busi-area{
 	float: left;
 	width: 440px;
 }
+.hotlp_img_box {
+	height: 500px;
+	position: relative;
+}
+img.bigimg {
+	height: 500px;
+	width: 715px;
+}
+.imgtext {
+	background-color: #000;
+	filter:Alpha(Opacity=70);
+	-moz-opacity:0.3;
+
+	height: 60px;
+	width: 705px;
+	position: absolute;
+	z-index: 99;
+	left: 1px;
+	top: 450px;
+	color: #FFF;
+	padding-left: 10px;
+	padding-top: 3px;
+	font-size:14px;
+}
+.tbl_dl {
+	background-color: #525252;
+	height: 120px;
+	width: 715px;
+}
+
+img.bigimg2 {
+	height: 500px;
+	width: 675px;
+}
+.imgtext2 {
+	background-color: #000;
+	filter:Alpha(Opacity=70);
+	-moz-opacity:0.3;
+	height: 60px;
+	width: 665px;
+	position: absolute;
+	z-index: 99;
+	left: 1px;
+	top: 440px;
+	color: #FFF;
+	padding-left: 10px;
+	padding-top: 3px;
+	font-size:14px;
+}
+.tbl_dl2 {
+	background-color: #525252;
+	height: 120px;
+	width: 675px;
+}
+.imgtext2 {
+	text-align:left;
+}

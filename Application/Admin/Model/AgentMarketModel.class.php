@@ -53,7 +53,36 @@ class AgentMarketModel extends HouseModel{
 		}
 
 		if($data['id']){
+			//楼盘图：户型、实景...
+			$Picture = M('Picture');
+			$AgentMarketPic = M('AgentmarketPic');
+			$picIdList = $Picture->field('id')->where(array('pid'=>$data['id'], 'type'=>5))->select();
+			//删掉之前的
+			if(!empty($picIdList)){
+				$picIds = array();
+				foreach ($picIdList as $pic) {
+					$picIds[] = (int)$pic['id'];
+				}
+				if(!empty($picIds)){
+					$AgentMarketPic->where(array('id'=>array('IN', $picIds)))->delete();
+				}
+			}
+			
+			//封面图
 			$this->updateHousePic($data['id'], 5, empty($_POST['house_pic']) ? '[]' : $_POST['house_pic']);
+			
+			//设置现在的
+			if(isset($_POST['pic_id'])){
+				for($i = 0, $count = count($_POST['pic_id']); $i < $count; $i++){
+					$pic = array();
+					$pic['id'] = $_POST['pic_id'][$i];
+					$pic['desc_txt'] = $_POST['pic_desc'][$i];
+					$pic['type'] = $_POST['pic_type'][$i];
+					$AgentMarketPic->data($pic)->add();
+				}
+				$Picture->where(array('id'=>array('IN', $_POST['pic_id'])))->setField('pid', $data['id']);
+			}
+
 		}
 
 		return $data;
