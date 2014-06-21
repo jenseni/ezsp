@@ -224,6 +224,7 @@ CREATE TABLE `t_info_submit`(
    `contact_tel` VARCHAR(32) NOT NULL COMMENT '联系电话',
    `content` TEXT NOT NULL COMMENT '内容',
    `create_time` int(11) NOT NULL COMMENT '创建时间',
+   `status` tinyint(4) DEFAULT NULL COMMENT '状态',
    PRIMARY KEY (`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
@@ -238,6 +239,8 @@ CREATE TABLE `t_statistics`(
    `office_market` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '房屋信息数',
    `short_rent` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '房屋信息数',
    `article` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '新闻数',
+   `ip` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ip数',
+   `pv` int(10) unsigned NOT NULL DEFAULT '0',
    PRIMARY KEY(`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
