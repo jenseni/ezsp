@@ -48,4 +48,12 @@ class UserController extends HomeController{
 	    $verify = new \Think\Verify();
 	    return $verify->check($code, $id);
 	}
+
+	public function login(){
+		$this->display();
+	}
+
+	public function register(){
+		$this->display();
+	}
 }
