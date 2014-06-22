@@ -139,7 +139,8 @@ return array(
 				array(
 					'id'	=>	109,
 					'name'	=>	'写字楼商铺发布',
-					'action'	=>	'OfficeMarket/index',
+					//'action'	=>	'OfficeMarket/index',
+					'action'	=>	'OfficeMarket/add',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)

@@ -10,7 +10,7 @@ $(function(){
 	$('#area').remoteChained($.extend({parents: '#city'},chainOptions));
 	$('#busi_area').remoteChained($.extend({parents: '#area'},chainOptions));
 
-	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', column: 8});
+	var imgExplorer = new ImageExplorer({container: '#item_container', picsHolder: '#house_pic', countLimit: 6});
 
 	$("#file_upload").uploadify({
 		'height': 34,
@@ -125,11 +125,30 @@ KindEditor.ready(function(K) {
 		</label>
 	</bs:formgroup>
 
+	<div class="form-group">
+		<label class="col-sm-1 control-label">位置</label>
+		<div class="col-sm-11 control-inline">
+			<label>
+				经度 <input type="text" id="longitude" name="longitude" value="{$data.longitude|default=121.593478}" class="form-control" readOnly/>
+			</label>
+			<label>
+				纬度 <input type="text" id="latitude" name="latitude" value="{$data.latitude|default=38.94871}" class="form-control" readOnly/>
+			</label>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-1 col-sm-8">
+			<div id="baidu_map" style="height:300px"></div>
+		</div>
+	</div>
+
 
   	<div class="form-group" style="position:relative">
 		<div class="col-sm-offset-1 col-sm-2">
 			<input type="file" name="fileUpload" id="file_upload"/>
 			<input type="hidden" id="house_pic" name="house_pic" value='{$data.house_pic|default="[]"}' />
+			<span class="help-block small">支持多张上传，最多6张</span>
 		</div>
 		<div id="queue_container" style="position:absolute;right:0;top:0"></div>
 	</div>
@@ -153,4 +172,33 @@ KindEditor.ready(function(K) {
 
 </form>
 	
+</block>
+
+<block name="footscript">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
+<script type="text/javascript">
+var lng = $('#longitude').val();
+var lat = $('#latitude').val();
+
+(function(lng, lat, container){
+	var marker = new BMap.Marker(new BMap.Point(lng, lat));
+	marker.enableDragging();
+	marker.addEventListener('dragend', function(e){
+		$('#longitude').val(marker.getPosition().lng);
+		$('#latitude').val(marker.getPosition().lat);
+	});
+
+	var map = new BMap.Map(container);
+	map.centerAndZoom(marker.getPosition(), 12);
+	map.enableScrollWheelZoom();
+
+	map.addEventListener("click", function(e){
+		$('#longitude').val(e.point.lng);
+		$('#latitude').val(e.point.lat);
+		marker.setPosition(e.point);
+	});
+
+	map.addOverlay(marker);
+})(lng, lat, 'baidu_map');
+</script>
 </block>

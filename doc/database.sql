@@ -163,6 +163,8 @@ CREATE TABLE `t_officemarket` (
    `busi_area` INT(11) NOT NULL,
    `area_sector` VARCHAR(32) NOT NULL,
    `area_sector_nearby` VARCHAR(32) NOT NULL,
+   `longitude` double DEFAULT NULL COMMENT '纬度',
+   `latitude` double DEFAULT NULL COMMENT '经度',
    `bd_type` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '类型',
    `comp_register` CHAR(1) NOT NULL DEFAULT 'N',
    `square` INT(10) UNSIGNED NOT NULL COMMENT '面积',
@@ -296,3 +298,6 @@ CREATE TABLE `t_iplog` (
    `request_time` int(11) DEFAULT NULL COMMENT '访问时间',
    PRIMARY KEY (`id`)
  ) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_iplog_01`;
+CREATE TABLE `t_iplog_01` AS select * from `t_iplog` where 1=2;

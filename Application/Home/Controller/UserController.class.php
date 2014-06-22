@@ -50,10 +50,50 @@ class UserController extends HomeController{
 	}
 
 	public function login(){
-		$this->display();
+		if(IS_POST){
+			$username = I('username');
+			$password = I('password');
+			if(empty($username) || empty($password)){
+				$this->error('请输入用户名密码');
+			}
+			$User = D('User');
+			$user = $User->where(array('username'=>$username))->find();
+			if(empty($user)){
+				$this->error('用户不存在');
+			}
+
+			if(md5($password) != $user['password']){
+				$this->error('密码不正确');
+			}
+
+			$uid = \Think\Crypt::encrypt($user['id'], C('CRYPT_KEY'));
+			cookie('uid', $uid);
+			$this->redirect('Index/index');
+		}else{
+			$this->display();
+		}
 	}
 
 	public function register(){
-		$this->display();
+		if(IS_POST){
+			$User = D('User');
+			$data = $User->create();
+			if($data){
+				$data['password'] = md5($data['password']);
+				$id = $User->data($data)->add();
+				$uid = \Think\Crypt::encrypt($id, C('CRYPT_KEY'));
+				cookie('uid', $uid);
+				$this->success('注册成功', U('Index/index'));
+			}else{
+				$this->error($User->getError());
+			}
+		}else{
+			$this->display();
+		}
+	}
+
+	public function logout(){
+		cookie('uid', null);
+		$this->redirect('Index/index');
 	}
 }

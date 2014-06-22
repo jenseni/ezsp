@@ -61,7 +61,7 @@ $(function(){
 					<i class="glyphicon glyphicon-user"></i>
 				</div>
 				<div class="details">
-					<div class="number">{$statistic.web_user}</div>
+					<div class="number">{$statistic.web_user} 个</div>
 					<div class="desc">网站用户数</div>
 				</div>
 				<a class="more" href="#">
@@ -76,7 +76,7 @@ $(function(){
 					<i class="icon-comments"></i>
 				</div>
 				<div class="details">
-					<div class="number">{$statistic.wx_user}</div>
+					<div class="number">{$statistic.wx_user} 个</div>
 					<div class="desc">微信用户数</div>
 				</div>
 				<a class="more" href="#">
@@ -91,7 +91,7 @@ $(function(){
 					<i class="glyphicon glyphicon-home"></i>
 				</div>
 				<div class="details">
-					<div class="number">{$statistic.house}</div>
+					<div class="number">{$statistic.house} 条</div>
 					<div class="desc">房屋信息</div>
 				</div>
 				<a class="more" href="#">
@@ -106,8 +106,8 @@ $(function(){
 					<i class="glyphicon glyphicon-bookmark"></i>
 				</div>
 				<div class="details">
-					<div class="number">{$statistic.article}</div>
-					<div class="desc">房产动态</div>
+					<div class="number">{$statistic.article} 条</div>
+					<div class="desc">房产动态（新闻）</div>
 				</div>
 				<a class="more" href="#">
 					查看 <i class="glyphicon glyphicon-circle-arrow-right"></i>
@@ -115,23 +115,27 @@ $(function(){
 			</div>
 		</div>
 
-		<div class="col-sm-3">
-			<div class="dashboard-stat coffee">
-				<div class="visual">
-					<i class="glyphicon glyphicon-file"></i>
-				</div>
-				<div class="details">
-					
-					<div class="number">
-						{$statistic.ip}，{$statistic.pv}
-					</div>
-					<div class="desc">
-						网站IP，PV
-					</div>
-				</div>
-				<a class="more" href="#">
-					更多 <i class="glyphicon glyphicon-circle-arrow-right"></i>
-				</a>
+		<div class="col-sm-4">
+			<div class="alert alert-info">
+				<label class="label label-primary">昨天</label>
+				访问量：<strong>{$statistic.pv}</strong>，
+				IP数：<strong>{$statistic.ip}</strong>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="alert alert-info">
+				<label class="label label-primary">最近一个星期</label>
+				访问量：<strong>{$weekData.pv_count}</strong>，
+				IP数：<strong>{$weekData.ip_count}</strong>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="alert alert-info">
+				<label class="label label-primary">最近一个月</label>
+				访问量：<strong>{$monthData.pv_count}</strong>，
+				IP数：<strong>{$monthData.ip_count}</strong>
 			</div>
 		</div>
 	</div>

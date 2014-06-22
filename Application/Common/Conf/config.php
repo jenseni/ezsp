@@ -16,5 +16,7 @@ return array(
 		'persist'	=>	true
 	),
 
-	'STATIC_PAGE_PATH'	=>	'./Uploads/static'
+	'STATIC_PAGE_PATH'	=>	'./Uploads/static',
+	'CRYPT_KEY'	=> 'c58e9b858d85030ed2b5215255019f1f'
 );
+
