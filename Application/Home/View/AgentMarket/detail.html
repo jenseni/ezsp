@@ -1,6 +1,7 @@
 <extend name="Public/base"/>
 
 <block name="style">
+<link type="text/css" rel="stylesheet" href="__STATIC__/photoswipe/photoswipe.css"/>
 <link rel="stylesheet" type="text/css" href="__STATIC__/adgallery/jquery.ad-gallery.css">
 <style type="text/css">
 .mapbreak{
@@ -10,10 +11,20 @@
 </block>
 
 <block name="headscript">
+<script type="text/javascript" src="__STATIC__/photoswipe/klass.min.js"></script>
+<script type="text/javascript" src="__STATIC__/photoswipe/code.photoswipe.jquery-3.0.5.min.js"></script>
 <script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
 <script type="text/javascript">
 $(function(){
     $('.ad-gallery').adGallery();
+
+    $("a.hxt").photoSwipe({
+        captionAndToolbarAutoHideDelay: 0,
+        captionAndToolbarFlipPosition: true,
+        getImageCaption: function(obj){
+            return $(obj).find('span').html();
+        }
+    });
 });
 </script>
 </block>
@@ -27,8 +38,8 @@ $(function(){
                 <div class="ad-nav">
                     <div class="ad-thumbs">
                         <ul class="ad-thumb-list">
-                            <volist id='housePic' name='data.picList'>
-                            <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path}"/></a></li>
+                            <volist id='housePic' name='data.house_pic'>
+                            <li><a href="__ROOT__{$housePic.path}"><img style="height:60px;" src="__ROOT__{$housePic.path|get_img=172,126}"/></a></li>
                             </volist>
                         </ul>
                     </div>
@@ -36,11 +47,11 @@ $(function(){
             </div>
             <div class="google" id="baidumap_forpick"></div>
         </div>
-        <div class="fcxq">
-            <div class="daili_del_tt">{$data.title}<span>{:W('Tag/showTag', array($info['feature']))}</span></div>
+        <div class="fcxq" style="font-size:12px;width:360px;">
+            <div class="daili_del_tt">{$data.title}<span>{$data.feature}</span></div>
             <em>价格：</em> 均价{$data.price_avg}元/平米 <br />
             <em>价格详情：</em>均价{$data.price_avg}元/平米,公建均价{$data.price_avg2}元/平米<br />
-            <em>恒润特惠：</em> {$data.pref_txt}
+            <em>恒润特惠：</em> {$data.pref_txt}<br/>
             <em>购房费用：</em> 首付 {$data.down_payment}-{$data.down_payment_max}万  月供 {$data.monthly}-{$data.monthly_max}元 
             <div class="tel_bp">{$data.contact_tel}</div>
             <em>楼盘位置：</em>{$data.area_name}{$data.busi_area_name}({$data.loc_txt}) 楼盘地图<br />
@@ -70,10 +81,10 @@ $(function(){
             </tr>
             </table>
         </div>
-        <volist name="data.hxPicList" id="hxPic">
-        <a href="#" class="hxt">
-            <img src="__ROOT__{$hxPic.path}"/>
-            <span>{$hxPic.desc_txt}</span>
+        <volist name="data.roomTypePicList" id="roomTypePic">
+        <a href="__ROOT__{$roomTypePic.path|get_img=0,0,true}" class="hxt">
+            <img src="{$roomTypePic.path|get_img=218,218}"/>
+            <span>{$roomTypePic.desc_txt}</span>
         </a>
         </volist>
         <div class="clear"></div>
@@ -84,17 +95,18 @@ $(function(){
 <block name="footscript">
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5d659c6eae4dd6ee412466047f735196"></script>
 <script type="text/javascript">
-var lng = {$data.longitude};
-var lat = {$data.latitude};
-if(lng == 0 || lat == 0){
-    return ;
-}
-var map = new BMap.Map("baidumap_forpick");
+var lng = {$data.longitude|default=0};
+var lat = {$data.latitude|default=0};
+(function(lng, lat, container){
+    if(lng == 0 || lat == 0){
+        return ;
+    }
+    var map = new BMap.Map("baidumap_forpick");
 
-var marker = new BMap.Marker(new BMap.Point(lng, lat));
-map.centerAndZoom(marker.getPosition(),15);
-map.enableScrollWheelZoom();
-map.addOverlay(marker);
-
+    var marker = new BMap.Marker(new BMap.Point(lng, lat));
+    map.centerAndZoom(marker.getPosition(),15);
+    map.enableScrollWheelZoom();
+    map.addOverlay(marker);
+})(lng, lat, 'baidumap_forpick');
 </script>
 </block>

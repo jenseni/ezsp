@@ -1,0 +1,59 @@
+<extend name="Public/base"/>
+
+<block name="style">
+<style type="text/css">
+html,body{
+	height: 100%;
+}
+div.sub-container{
+	text-align: center;
+}
+.sub-content{
+	margin: 0 auto;
+	width: 70%;
+}
+.footer{
+	height: 48px;
+	line-height: 48px;
+}
+.footer a{
+	color: #FFF;
+	font-weight: bold;
+	font-size: 18px;
+	text-decoration: none;
+	height: 48px;
+	line-height: 48px;
+}
+.menu{
+	width: 45%;
+	margin-bottom: 10px;
+}
+</style>
+</block>
+
+<block name="content">
+<div class="sub-container blue">
+	<img class="sub-content" style="margin-top:10px;margin-bottom:10px;" src="__IMG__/logo_01.png"/>
+</div>
+<div class="sub-container" style="margin-top:20px;margin-bottom:10px;">
+	<div class="sub-content">
+		<a href="{:U('HouseSale/index')}">
+			<img class="menu pull-left" alt="房屋买卖" src="__IMG__/btn_hs.gif" />
+		</a>
+		<a href="{:U('HouseRent/index')}">
+			<img class="menu pull-right" alt="房屋租赁" src="__IMG__/btn_hr.gif" />
+		</a>
+		<div class="clearfix"></div>
+		<a href="{:U('OfficeMarket/index')}">
+			<img class="menu pull-left" alt="写字楼商铺" src="__IMG__/btn_om.gif" />
+		</a>
+		<a href="{:U('AgentMarket/index')}">
+			<img class="menu pull-right" alt="代理楼盘" src="__IMG__/btn_am.gif" />
+		</a>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="sub-container blue footer">
+	<a href="#" class="btn"><img src="__IMG__/icon_user.gif" style="height:42px;float:left;margin-right:10px;padding-top:5px;"/>用户登录</a>
+</div>
+</block>

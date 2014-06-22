@@ -1,12 +1,13 @@
 <extend name="Public/base"/>
 <block name="content">
-	<p>联系人：{$data.contact}</p>
-	<p>创建时间：{$data.create_time|format_timestamp}</p>
-	<p>联系电话：{$data.contact_tel}</p>
-	<p>详细内容：{$data.content}</p>
+	<div class="page-header">
+		<h3>{$data.contact} <small></span>{$data.create_time|format_timestamp}</small></h3>
+		<h4>{$data.contact_tel}</h4>
+		<p>详细内容：</p>
+		<pre>{$data.content}</pre>
+	</div>
 
-	
-	<div class="col-sm-1">
+	<div class="col-sm-3">
 		<a href="{:U('Message/index')}" class="btn btn-info form-control">返回</a>
 	</div>
 </block>

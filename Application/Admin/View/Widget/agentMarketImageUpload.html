@@ -1,0 +1,107 @@
+<div class="form-group">
+	<label class="col-sm-1 control-label">{$label}</label>
+	<div class="col-sm-10">
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="width:150px !important;">图片</th>
+					<th>描述</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="container_{$type}">
+				<?php for($i = 0, $count = count($picIds); $i < $count; $i++):?>
+				<tr data-id="{$type}_{$picIds.$i}">
+					<td>
+						<img style="width:150px" src="__ROOT__{$picPaths.$i}"/>
+						<input type="hidden" name="pic_path[]" value="{$picPaths.$i}"/>
+					</td>
+					<td>
+						<input type="hidden" name="pic_type[]" value="{$type}"/>
+						<input type="hidden" name="pic_id[]" value="{$picIds.$i}"/>
+						<textarea name="pic_desc[]" class="form-control" style="height:100%;">{$picDescs.$i}</textarea>
+					</td>
+					<td><a href="javascript:;" class="pic-delete" data-id="{$picIds.$i}">删除</a></td>
+				</tr>
+				<?php endfor;?> 
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="form-group" style="position:relative">
+	<div class="col-sm-offset-1 col-sm-2">
+		<input type="file" name="fileUpload" id="file_upload_{$type}"/>
+	</div>
+	<div id="queue_container_{$type}" style="position:absolute;right:0;top:0;z-index:999;"></div>
+</div>
+
+<script type="text/javascript">
+(function($){
+	var picItemTpl = "<tr data-id=\"{$type}_{picId}\">\
+<td><img style=\"width:150px\" src=\"{picPath}\"/>\
+<input type=\"hidden\" name=\"pic_path[]\" value=\"{picPath}\"/>\
+</td>\
+<td>\
+<input type=\"hidden\" name=\"pic_type[]\" value=\"{$type}\"/>\
+<input type=\"hidden\" name=\"pic_id[]\" value=\"{picId}\"/>\
+<textarea name=\"pic_desc[]\" class=\"form-control\" style=\"height:100%;\"></textarea>\
+</td>\
+<td><a class=\"pic-delete\" data-id=\"{picId}\" href=\"javascript:;\">删除</a></td>\
+</tr>";
+	
+	function addRoomTypePic(pic){
+		if(!pic || !pic.id){
+			return;
+		}
+		var itemDomStr = picItemTpl.replace(/\{picPath\}/g, "__ROOT__" + pic.path);
+		itemDomStr = itemDomStr.replace(/\{picId\}/g, pic.id);
+
+		var itemDom = $(itemDomStr);
+		itemDom.find('a.pic-delete').click(function(){
+			removePic({$type}, $(this).attr('data-id'));
+		});
+		itemDom.appendTo($('#container_{$type}'));
+	}
+
+	function removePic(type, picId){
+		$('tr[data-id="' + type + '_' + picId + '"]').remove();
+	}
+
+	$('#container_{$type}').find('a.pic-delete').click(function(){
+		removePic({$type}, $(this).attr('data-id'));
+	});
+
+	$("#file_upload_{$type}").uploadify({
+		'height': 34,
+		'swf': '__STATIC__/uploadify/uploadify.swf',
+		'uploader': '<?php echo U("File/uploadhousepic");?>',
+		'fileObjName': 'fileUpload',
+		'buttonClass': 'btn btn-primary',
+		'multi': true,
+		'queueID': 'queue_container_{$type}',
+		'formData': {'busi_type': 5},
+		//'uploadLimit': 5,
+		//'queueSizeLimit': 5,
+		'fileSizeLimit': '2MB',
+		'buttonText': '上传{$label}',
+		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+		'removeTimeout': 1,
+		'onUploadSuccess': function(file, data, response){
+			var info = $.parseJSON(data);
+			if(info.status == 0){
+				addRoomTypePic(info);
+			}else{
+				alert(info.info);
+			}
+		},
+		'onUploadError': function(file, errorCode, errorMsg, errorString){
+			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+		},
+		'onFallback': function(){
+			alert('请先安装Flash插件');
+		}
+	});
+})(jQuery);
+</script>
