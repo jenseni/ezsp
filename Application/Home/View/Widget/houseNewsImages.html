@@ -6,7 +6,7 @@ $colors="0xB4060F|0xFF9900|0xffffff|#ffff00|#ffff00";
 
 foreach ($dataList as $data) {
 	$pics .= (empty($pics) ? '' : '###') . get_img($data['cover_url'], 350, 200);
-	$links .= (empty($links) ? '' : '###') . U('HouseNews/detail', array('id'=>$data['id']));
+	$links .= (empty($links) ? '' : '###') . U('HouseNews/detail', array('document_id'=>$data['id']));
 	$titles .= (empty($titles) ? '' : '###') . $data['title'];
 }
 ?>

@@ -1,4 +1,9 @@
 <extend name="Public/base"/>
+
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/adgallery/jquery.ad-gallery.css">
+</block>
+
 <block name="content">
 <div class="content_box">
 	<img src="__IMG__/banner_ad.jpg" style="width:1000px;height:108px;margin:15px 0 5px;" />
@@ -45,28 +50,22 @@
 
 	<div class="left_hotlp2">
 		<div class="left_hotlp_tt">热门楼盘</div>
-		<ul class="hotlp_box_new">
-			<li>
-				<div class="hotlp_box_line">
-					<div class="clear"></div>
-					<div class="hotlp_img_box">
-						<a href="{:U('AgentMarket/detail', array('id'=>$agentMarket['id']))}" target="_blank">
-							<img class="bigimg2" src="__ROOT__{$agentMarket.picList.0.path}" width="700" height="420" />
-							<div class="imgtext2"> 均价：{$agentMarket.price_avg}元/平米 <br />
-							恒润特惠： <em>{$agentMarket.pref_txt}</em> <br />
-							</div>
-						</a>
-					</div>
-					<table border="0" cellpadding="0" cellspacing="0" class="tbl_dl2">
-						<tr>
-							<volist name="agentMarket.picList" id="ampic">
-							<td width="20%" align="center" valign="middle"><img src="{$ampic.path|get_img=172,126}" alt="" width="150" /></td>
-							</volist>
-						</tr>
-					</table>
+		<div id="gallery" class="ad-gallery">
+			<div class="ad-image-wrapper"></div>
+			<div class="ad-nav">
+				<div class="ad-thumbs">
+					<ul class="ad-thumb-list">
+						<volist name="agentMarket.picList" id="ap">
+						<li>
+							<a href="{$ap.path|get_img=685,500,true}">
+								<img title="{$agentMarket.title}" longdesc="{$agentMarket.pref_txt}" src="{$ap.path|get_img=172,126}">
+							</a>
+						</li>
+						</volist>
+					</ul>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 	</div>
 
 	<div class="index_right">
@@ -86,4 +85,20 @@
   </div>
 <div class="clear"></div>
 </div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#gallery').adGallery({
+		display_back_and_forward: false,
+		width: 685,
+		height: 500,
+		slideshow: {
+			autostart: true
+		}
+	});
+});
+</script>
 </block>

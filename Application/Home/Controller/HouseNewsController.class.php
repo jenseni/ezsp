@@ -32,7 +32,7 @@ class HouseNewsController extends HomeController{
 		$Categories['buyway'] = $CATEGORY_BUYWAY;
 		$Categories['newstoday'] = $CATEGORY_NEWSTODAY;
 		$Categories['interview'] = $CATEGORY_INTERVIEW;
-		$CATEGORY_NEWS_NUM = 7;
+		$CATEGORY_NEWS_NUM = 20;
 		$map['category_id'] = array('eq',$CATEGORY_RECOMMEND); 
 		//专题推荐
 		$recommend_topline = $Document->where($map)->order('level desc, update_time desc')->find();
@@ -76,9 +76,13 @@ class HouseNewsController extends HomeController{
 	}
 
 	//详细页面
-	public function detail($document_id,$category_title){
+	public function detail($document_id,$category_title = ''){
 		$Document = M('Article');
 		$news = $Document->find($document_id);
+		if(empty($category_title)){
+			$category = M('Category')->find($news['category_id']);
+			$category_title = $category['title'];
+		}
 		//echo json_encode($news);exit();
 		$this->assign('news',$news);
 		$this->assign('category_title',$category_title);
