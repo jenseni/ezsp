@@ -25,10 +25,26 @@ class IndexController extends AdminController{
 			}
 		}
 
+		//最近一星期PV IP
+		$weekData = $Statistics->field('sum(ip) ip_count, sum(pv) pv_count')
+			->where(array(
+				'create_time'=>array('BETWEEN', array(NOW_TIME - 7 * 24 * 60 * 60, NOW_TIME))
+			))
+			->find();
+
+		//最近一个月PV IP
+		$monthData = $Statistics->field('sum(ip) ip_count, sum(pv) pv_count')
+			->where(array(
+				'create_time'=>array('BETWEEN', array(NOW_TIME - 30 * 24 * 60 * 60, NOW_TIME))
+			))
+			->find();
+
 		$this->assign('timeList', $timeList);
 		$this->assign('webUserCountList', $webUserCountList);
 		$this->assign('wxUserCountList', $wxUserCountList);
 		$this->assign('statistic', $statistic);
+		$this->assign('weekData', $weekData);
+		$this->assign('monthData', $monthData);
 		$this->display();
 	}
 

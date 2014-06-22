@@ -10,6 +10,9 @@ class CommandController extends Controller{
 		}
 	}
 
+	/**
+	 * 粗糙的统计方法
+	 */
 	public function statistic($date = ''){
 		if(empty($date)){
 			$date = strtotime(date('Y-m-d', NOW_TIME));
@@ -45,12 +48,15 @@ class CommandController extends Controller{
 	}
 
 	public function ip_log_clean($date=''){
-		if(empty($date)){
-			$date = strtotime(date('Y-m-d', NOW_TIME));
-		}else{
-			$date = strtotime(date('Y-m-d', strtotime($date)));
-		}
-		$tomarrow = strtotime("+1 day", $date);
-		M('Iplog')->where(array('request_time'=>array('BETWEEN', array($date, $tomarrow))))->delete();
+		// if(empty($date)){
+		// 	$date = strtotime(date('Y-m-d', NOW_TIME));
+		// }else{
+		// 	$date = strtotime(date('Y-m-d', strtotime($date)));
+		// }
+		// $tomarrow = strtotime("+1 day", $date);
+		// M('Iplog')->where(array('request_time'=>array('BETWEEN', array($date, $tomarrow))))->delete();
+
+		M()->query('insert into t_iplog_01 select * from t_iplog');
+		M()->query('delete from t_iplog');
 	}
 }

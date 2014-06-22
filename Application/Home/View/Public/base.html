@@ -19,7 +19,7 @@
 	<div class="login_head">
 		<div class="login_text">
 			<if condition="is_login()">
-			<span class="loginimg">{:query_user('nickname')}</span> <a href="{:U('User/logout')}" >安全退出</a>
+			<span class="loginimg">{:get_login_user()['username']}</span> <a href="{:U('User/logout')}" >安全退出</a>
 			<else/>
 			<a href="{:U('User/login')}"class="loginimg">登录</a>&nbsp;/&nbsp;<a href="{:U('User/register')}">注册</a>
 			</if>

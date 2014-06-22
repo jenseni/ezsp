@@ -296,3 +296,6 @@ CREATE TABLE `t_iplog` (
    `request_time` int(11) DEFAULT NULL COMMENT '访问时间',
    PRIMARY KEY (`id`)
  ) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_iplog_01`;
+CREATE TABLE `t_iplog_01` AS select * from `t_iplog` where 1=2;
