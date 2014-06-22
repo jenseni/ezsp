@@ -98,7 +98,6 @@ class OfficemarketModel extends RelationModel{
         return true;
     }
 
-
     public function updateHousePic($houseId, $type, $picList){
         $picList = json_decode($picList);
 
@@ -122,12 +121,12 @@ class OfficemarketModel extends RelationModel{
             //取第一张为封面缩略图
             $picPath = '.'.$firstPic['path'];
             $pathInfo = pathinfo($picPath);
-            $thumbPath = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . $pathInfo['extension'];
+            $thumbPath = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . '.' . $pathInfo['extension'];
 
             // $Image = new \Think\Image();
             // $Image->open($picPath)
-            //     ->thumb(C('HOUSE_PIC_CONFIG.THUMB_WIDTH'), C('HOUSE_PIC_CONFIG.THUMB_HEIGHT'))
-            //     ->save($thumbPath);
+            //  ->thumb(C('HOUSE_PIC_CONFIG.THUMB_WIDTH'), C('HOUSE_PIC_CONFIG.THUMB_HEIGHT'), \Think\Image::IMAGE_THUMB_CENTER)
+            //  ->save($thumbPath);
 
             $thumbUri = substr($thumbPath, strpos($thumbPath, '/'));
         }

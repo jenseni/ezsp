@@ -32,7 +32,7 @@ class HouseNewsController extends HomeController{
 		$Categories['buyway'] = $CATEGORY_BUYWAY;
 		$Categories['newstoday'] = $CATEGORY_NEWSTODAY;
 		$Categories['interview'] = $CATEGORY_INTERVIEW;
-		$CATEGORY_NEWS_NUM = 20;
+		$CATEGORY_NEWS_NUM = 7;
 		$map['category_id'] = array('eq',$CATEGORY_RECOMMEND); 
 		//专题推荐
 		$recommend_topline = $Document->where($map)->order('level desc, update_time desc')->find();
