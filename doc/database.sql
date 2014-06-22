@@ -163,6 +163,8 @@ CREATE TABLE `t_officemarket` (
    `busi_area` INT(11) NOT NULL,
    `area_sector` VARCHAR(32) NOT NULL,
    `area_sector_nearby` VARCHAR(32) NOT NULL,
+   `longitude` double DEFAULT NULL COMMENT '纬度',
+   `latitude` double DEFAULT NULL COMMENT '经度',
    `bd_type` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '类型',
    `comp_register` CHAR(1) NOT NULL DEFAULT 'N',
    `square` INT(10) UNSIGNED NOT NULL COMMENT '面积',
