@@ -1,10 +1,27 @@
 <extend name="Public/base"/>
 
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__STATIC__/adgallery/jquery.ad-gallery.css">
+</block>
+
 <block name="content">
 	<div class="mapbreak"><span>代理楼盘&nbsp;&gt;&nbsp;</div>
 	<div class="news_left">
-		<div style="position:relative;text-align:left;font-size:14px;">
-			{$content}
+		<div id="gallery" class="ad-gallery">
+			<div class="ad-image-wrapper"></div>
+			<div class="ad-nav">
+				<div class="ad-thumbs">
+					<ul class="ad-thumb-list">
+						<volist name="dataList" id="data">
+						<li>
+							<a href="{$data.thumbnail|get_img=685,500,true}">
+								<img title="{$data.title}" longdesc="{$data.pref_txt}" src="{$data.thumbnail|get_img=172,126}">
+							</a>
+						</li>
+						</volist>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -13,32 +30,28 @@
 		<div class="clear"></div>
 		<table width="246" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td height="60"> <a href="#"><img src="__IMG__/maifang3.gif" width="245" height="52" /></a></td>
+				<td height="60"> <a href="{:U('User/infosubmit')}"><img src="__IMG__/maifang3.gif" width="245" height="52" /></a></td>
 			</tr>
 			<tr>
-				<td height="60"> <a href="#"><img src="__IMG__/maifang4.gif" width="245" height="52" /></a></td>
+				<td height="60"> <a href="{:U('User/infosubmit')}"><img src="__IMG__/maifang4.gif" width="245" height="52" /></a></td>
 			</tr>
 		</table>
-
-		<table width="240" border="0" cellspacing="0" cellpadding="0" class="news_tt">
-			<tr>
-				<td width="82" class="news_tt_left">代理楼盘</td>
-				<td width="158" align="right" class="news_tt_right"><a href="#">更多&gt;&gt;</a></td>
-			</tr>
-		</table>
-		<ul class="hotlp_box">
-			<li>
-				<div class="hotlp_box_line">
-					<a href="#"><img  /></a>
-					<a href="#" class="hotlp_lpname">城市印象在售</a><span>在售</span>
-					<div class="clear"></div>
-					均价：14000元/平米<br />
-					电话：400-606-6969 转 27829<br />
-					地址：甘井子区迎客路中段(机场附近)<br />
-					<a href="#">实景6张</a>&nbsp;&nbsp;<a href="#"> 户型4张</a>
-					<a href="#"></a>
-				</div>
-			</li>
-		</ul>
+		{:W('House/houseSaleSuggest', array(1))}
 	</div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#gallery').adGallery({
+		display_back_and_forward: false,
+		width: 740,
+		height: 500,
+		slideshow: {
+			autostart: true
+		}
+	});
+});
+</script>
 </block>

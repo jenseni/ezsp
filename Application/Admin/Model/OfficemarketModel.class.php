@@ -7,7 +7,7 @@ class OfficemarketModel extends RelationModel{
 	protected $patchValidate = true;
 
 	protected $_auto = array(
-		array('status','1'),
+		array('status', 0, self::MODEL_INSERT),
 		array('create_time','time',1,'function'),
 		array('update_time','time',2,'function'),
         array('uid', 'is_login', self::MODEL_INSERT, 'function'),

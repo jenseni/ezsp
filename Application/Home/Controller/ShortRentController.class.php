@@ -14,6 +14,7 @@ class ShortRentController extends HomeController{
 		$map = array();
 
 		$map['sr.city'] = (int)$this->city['id'];
+		$map['sr.status'] = array('NEQ', 0);
 
 		if($area != '0'){
 			$map['_string'] = "sr.area=$area OR sr.busi_area=$area";
