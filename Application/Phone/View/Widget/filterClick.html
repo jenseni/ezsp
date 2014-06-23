@@ -1,0 +1,27 @@
+<volist name="inputs" id="input">
+	<input type="hidden" name="{$input}" value="0"/>
+</volist> 
+<script type="text/javascript">
+$(function(){
+	(function($){
+		$('ul.filter-group li a').live('click', function(e){
+			e = e || window.event;
+			e.preventDefault();
+
+			$this = $(this);
+			$this.parent().parent().find('li').removeClass('active');
+			$this.parent().addClass('active');
+			var targetName = $this.attr('target-name');
+			if(targetName == 'busi_area'){
+				targetName = 'area' ;
+			}
+			var dataId = $this.attr('data-id');
+			if(!dataId){
+				dataId = $this.attr('area-id');
+			}
+
+			$('input[name="' + targetName + '"]').val(dataId);
+		});
+	})(Zepto);
+});
+</script>

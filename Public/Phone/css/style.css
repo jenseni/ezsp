@@ -71,7 +71,7 @@ html,body,div,ul,h1,h2,h3,h4,h5,h6,input{
 	height: 38px;
 	width: 78%;
 }
-.search .btn{
+.search .searchbtn{
 	width: 20%;
 	height: 40px;
 	background-color: #EABF10;
@@ -106,7 +106,7 @@ html,body,div,ul,h1,h2,h3,h4,h5,h6,input{
 	border-bottom: 1px solid #DDD;
 }
 .data-item .data-info{
-	padding-left: 70px;
+	padding-left: 100px;
 }
 .data-info h3{
 	margin: 5px;
@@ -121,6 +121,10 @@ html,body,div,ul,h1,h2,h3,h4,h5,h6,input{
 	width: 100px;
 	margin: 5px;
 }
+.filter-group{
+	border-bottom: 1px solid #DDD;
+	padding: 5px;
+}
 .filter-group li{
 	display: inline-block;
 	list-style: none;
@@ -132,13 +136,40 @@ html,body,div,ul,h1,h2,h3,h4,h5,h6,input{
 	padding: .5em .5em;
 	text-decoration: none;
 }
-.filter-group{
-	border-bottom: 1px solid #DDD;
-	padding: 5px;
+.filter-group li.active a{
+	color: #FFF;
+	background-color: #1D337C;
 }
 /*button*/
 .btn {
+	border-radius: 4px;
 	display: inline-block;
+	font-size: 18px;
+	height: 48px;
+	line-height: 48px;
+	padding-left: 1em;
+	padding-right: 1em;
+	cursor: pointer;
+}
+input.btn{
+	border: none;
+}
+a.btn{
+	text-decoration: none;
+}
+/*btn - size*/
+.btn-full{
+	width: 100%;
+}
+/*btn-colors*/
+.btn-blue{
+	background-color: #1D337C;
+	color: #FFF;
+}
+.btn-small{
+	height: 32px;
+	line-height: 32px;
+	font-size: 12px;
 }
 
 /*utils*/

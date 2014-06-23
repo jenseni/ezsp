@@ -1,0 +1,26 @@
+<extend name="Public/base"/>
+
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
+
+</block>
+
+<block name="content">
+<div class="tab-container">
+	<form action="{:U('HouseSale/lists')}" method="get">
+
+		{:W('Phone/showFilterClick', array('area', 'price', 'square', 'room'))} 
+
+		{:W('Phone/showAreaFilter', array($city, I('area')))} 
+
+		{:W('Phone/showLookupFilter', array('price', '价格', 'HOUSE_SALE_PRICE_RANGE', I('price')))} 
+
+		{:W('Phone/showLookupFilter', array('square', '面积', 'HOUSE_SALE_SQUARE_RANGE', I('square')))} 
+
+		{:W('Phone/showLookupFilter', array('room', '户型', 'HOUSE_RENT_BEDROOM', I('room')))} 
+
+		<input type="submit" class="btn btn-blue btn-full" value="确定"/>
+
+	</form>
+</div>
+</block>

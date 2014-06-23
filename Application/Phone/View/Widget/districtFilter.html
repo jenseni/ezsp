@@ -1,0 +1,77 @@
+<notempty name="areaList">
+	<style type="text/css">
+	.area-loading{
+		display: none;
+		height: 48px;
+		background: url(__PUBLIC__/images/loading01.gif) no-repeat center center;
+	}
+	</style>
+	<div class="panel area">
+		<div class="panel-title"><span class="icon">|</span> 区域</div>
+		<ul class="filter-group">
+			<volist name="areaList" id="area">
+				<li <notempty name="area.active"> class="active"</notempty>><a href="javascript:;" area-id="{$area.id}" target-name="area">{$area.name}</a></li>
+			</volist>
+		</ul>
+	</div>
+	<div class="area-loading"></div>
+	<notempty name="busiAreaList" id="area">
+	<div class="panel busi-area">
+		<div class="panel-title"><span class="icon">|</span> 区域</div>
+		<ul class="filter-group">
+			<volist name="busiAreaList" id="area">
+				<li <notempty name="area.active"> class="active"</notempty>><a href="javascript:;" target-name="busi_area">{$area.name}</a></li>
+			</volist>
+		</ul>
+	</div>
+	</notempty> 
+	<script type="text/javascript">
+	$(function(){
+		(function($){
+			function showBusiArea(pid){
+				$.ajax({
+					url: App.ROOT + '/' + App.MODULE + '/district/getchildren',
+					data: {
+						pid: pid
+					},
+					dataType: 'json',
+					timeout: 10 * 1000,
+					beforeSend: function(xhr, settings){
+						$('.busi-area').hide();
+						$('.area-loading').show();
+					},
+					success: function(result){
+						$('.area-loading').hide();
+						if(result.status != '0' || !result.data || result.data.length <= 0){
+							//TODO:失败处理
+							return;
+						}
+						var $busiArea = $('.busi-area');
+						if($busiArea.length <= 0){
+							$busiArea =$('<div class="panel busi-area"><div class="panel-title"><span class="icon">|</span> 商圈</div><ul class="filter-group"></ul></div>');
+							$('div.area').after($busiArea);
+						}
+						$busiArea.find('ul.filter-group').empty();
+
+						$('<li class="active"><a href="javascript:;" target-name="busi_area" area-id="0">全部</a></li>').appendTo($busiArea.find('ul.filter-group'));
+
+						for(var area in result.data){
+							$('<li><a href="javascript:;" target-name="busi_area" area-id="' + result.data[area].id + '">' + result.data[area].name + '</a></li>').appendTo($busiArea.find('ul.filter-group'));
+						}
+						$busiArea.show();
+					},
+					error: function(xhr, errorType, error){
+						$('.area-loading').hide();
+					}
+				});
+			}
+			$('.area ul li a').click(function(){
+				var areaId = $(this).attr('area-id');
+				if(areaId){
+					showBusiArea(areaId);
+				}
+			});
+		})(Zepto);
+	});
+	</script>
+</notempty> 
