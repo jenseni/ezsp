@@ -160,4 +160,8 @@ class PhoneWidget extends Controller{
 		$this->display('Widget/filterClick');
 	}
 
+	public function showPagination(){
+		
+	}
+
 }

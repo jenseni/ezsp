@@ -1,5 +1,9 @@
 <extend name="Public/base"/>
 
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
+</block>
+
 <block name="content">
 <div class="header">
 	<img class="logo" alt="LOGO" src="__IMG__/logo_02.gif">
@@ -7,7 +11,8 @@
 </div>
 <div class="nav">
 	<ul>
-		<li><a class="active" href="#">房屋买卖</a></li>
+		<li class="active"><a href="#">房屋买卖</a></li>
+		<li>|</li>
 		<li><a href="#">房屋租赁</a></li>
 		<li>|</li>
 		<li><a href="#">写字楼商铺</a></li>
@@ -22,10 +27,10 @@
 	<div class="panel">
 		<div class="panel-title"><span class="icon">|</span> {$city.name}<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a></div>
 		<volist name="dataList" id="data">
-		<div class="data-item">
-			<img src="{$data.thumbnail|get_img=172,126}"/>
+		<div class="data-item" data-href="{:U('HouseSale/detail', array('id'=>$data['id']))}">
+			<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>
 			<div class="data-info">
-				<h3>{$data.title}</h3>
+				<h4>{$data.title}</h4>
 				{$data.area_name} {$data.busi_area_name} {$data.bed_room}室{$data.live_room}厅
 				<span class="price">{$data.price}万</span>
 			</div>
@@ -33,5 +38,25 @@
 		</div>
 		</volist>
 	</div>
+
+	<div class="pagination">{$page}</div>
 </div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript">
+$(function(){
+	$('img.lazy-load').each(function(){
+		$this = $(this);
+		$this.attr('src', $this.attr('data-src'));
+	});
+
+	$('div.data-item').click(function(){
+		var href = $(this).attr('data-href');
+		if(href){
+			window.location.href = href;
+		}
+	});
+});
+</script>
 </block>
