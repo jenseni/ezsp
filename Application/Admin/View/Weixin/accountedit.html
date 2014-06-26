@@ -1,0 +1,26 @@
+<extend name="Public/base"/>
+
+<block name="content">
+<form action="{:U('Weixin/accountsave')}" method="post" class="form-horizontal">
+
+	<bs:textfield name="id" value="{$data.id}" label="微信号" layout="2:5"/> 
+
+	<bs:textfield name="desc_txt" value="{$data.desc_txt}" label="备注" layout="2:5"/> 
+
+	<bs:textfield name="app_id" value="{$data.app_id}" label="APP ID" layout="2:5"/> 
+
+	<bs:textfield name="app_secret" value="{$data.app_secret}" label="APP Secret" layout="2:5"/> 
+
+	<bs:textfield name="valid_token" value="{$data.valid_token}" label="接入TOKEN" layout="2:5"/> 
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-2">
+			<input type="submit" class="btn btn-primary form-control" value="保&nbsp&nbsp存" />
+		</div>
+		<div class="col-sm-2">
+			<a class="btn btn-primary form-control" href="{:get_return_url(U('Weixin/accountlist'))}">返回</a>
+		</div>
+	</div>
+
+</form>
+</block>
