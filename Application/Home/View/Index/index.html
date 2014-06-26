@@ -58,7 +58,7 @@
 						<volist name="agentMarket.picList" id="ap">
 						<li>
 							<a href="{$ap.path|get_img=685,500,true}">
-								<img title="{$agentMarket.title}" longdesc="{$agentMarket.pref_txt}" src="{$ap.path|get_img=172,126}">
+								<img title="{$agentMarket.title}" longdesc="{$agentMarket.pref_txt}" src="{$ap.path|get_img=172,126}" href="{:U('AgentMarket/detail', array('id'=>$agentMarket['id']))}">
 							</a>
 						</li>
 						</volist>
@@ -88,7 +88,7 @@
 </block>
 
 <block name="footscript">
-<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.my.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#gallery').adGallery({

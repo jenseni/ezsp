@@ -18,7 +18,7 @@ class IndexController extends HomeController {
 			$agentMarket['picList'] = M('Picture')->alias('p')
 				->field('p.path')
 				->join('__AGENTMARKET_PIC__ ap on ap.id=p.id', 'LEFT')
-				->where(array('p.pid'=>$agentMarket['id'], 'p.type'=>5, '_string'=>'ap.type is null'))
+				->where(array('p.pid'=>(int)$agentMarket['id'], 'p.type'=>5, '_string'=>'ap.type is null'))
 				->select();
 		}
 

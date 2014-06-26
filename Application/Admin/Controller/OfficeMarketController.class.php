@@ -76,10 +76,10 @@ class OfficeMarketController extends AdminController{
 
 			$data = $Case->saveOrUpdate();
 			if(!$data){
-				$this->errorInput($Case->getError(), 'OfficeMarket/index');
+				$this->errorInput($Case->getError(), 'OfficeMarket/add');
 			}
 
-			$this->successMessage('添加成功', 'OfficeMarket/index');
+			$this->successMessage('添加成功', 'OfficeMarket/add');
 		}
 		
 		$this->assign('city',$city);

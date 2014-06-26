@@ -23,6 +23,7 @@ class OfficeMarketController extends HomeController{
 		$map = array();
 
 		$map['h.city'] = (int)$this->city['id'];
+		$map['h.status'] = array('NEQ', 0);
 
 		if($area != '0'){
 			$map['_string'] = "h.area=$area OR h.busi_area=$area";

@@ -16,7 +16,9 @@
 <script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
 <script type="text/javascript">
 $(function(){
-    $('.ad-gallery').adGallery();
+    $('.ad-gallery').adGallery({
+        display_back_and_forward: false
+    });
 
     $("a.hxt").photoSwipe({
         captionAndToolbarAutoHideDelay: 0,
