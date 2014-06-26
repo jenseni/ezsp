@@ -1,0 +1,22 @@
+<extend name="Public/base"/>
+
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
+
+</block>
+
+<block name="content">
+<div class="tab-container">
+	<form action="{:U('OfficeMarket/lists')}" method="get">
+
+		{:W('Phone/showFilterClick', array('area', 'bdType'))} 
+
+		{:W('Phone/showAreaFilter', array($city, I('area')))} 
+
+		{:W('Phone/showLookupFilter', array('bdType', '类别', 'OFFICE_MARKET_BD_TYPE', I('bdType')))} 
+
+		<input type="submit" class="btn btn-blue btn-full" value="确定"/>
+
+	</form>
+</div>
+</block>
