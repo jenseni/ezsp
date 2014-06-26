@@ -15,7 +15,7 @@
 						<volist name="dataList" id="data">
 						<li>
 							<a href="{$data.thumbnail|get_img=685,500,true}">
-								<img title="{$data.title}" longdesc="{$data.pref_txt}" src="{$data.thumbnail|get_img=172,126}">
+								<img title="{$data.title}" longdesc="{$data.pref_txt}" src="{$data.thumbnail|get_img=172,126}" href="{:U('AgentMarket/detail', array('id'=>$data['id']))}">
 							</a>
 						</li>
 						</volist>
@@ -41,7 +41,7 @@
 </block>
 
 <block name="footscript">
-<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.js"></script>
+<script type="text/javascript" src="__STATIC__/adgallery/jquery.ad-gallery.my.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#gallery').adGallery({

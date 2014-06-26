@@ -19,10 +19,12 @@ class OfficeMarketController extends PhoneController{
 
 		if($area != '0'){
 			$map['_string'] = "h.area=$area OR h.busi_area=$area";
+			$param .= ' '.get_p_area($area);
 		}
 		
 		if($bdType != '0'){
 			$map['h.bd_type'] = (int)$bdType;
+			$param .= ' '.get_p_lookup('OFFICE_MARKET_BD_TYPE',$bdType);
 		}
 
 		$sortField = 'h.id';
@@ -59,11 +61,10 @@ class OfficeMarketController extends PhoneController{
 			->select();
 
 		$this->assign('dataList', $dataList);
-		$this->assign('area', $area);
-		$this->assign('bdType', $bdType);
+		$this->assign('param', $param);
 		$this->assign('page', $page->show());
 		$this->assign('nav',3);
-
+		$this->assign('site_title','恒润房产-写字楼商铺');
 		$this->display();
 	}
 
@@ -86,7 +87,7 @@ class OfficeMarketController extends PhoneController{
 		$data['picList'] = $housePicList;
 
 		$this->assign('data', $data);
-
+		$this->assign('site_title','恒润房产-写字楼商铺');
 		$this->display();
 	}
 }

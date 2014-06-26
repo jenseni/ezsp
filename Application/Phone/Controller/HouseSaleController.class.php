@@ -53,6 +53,7 @@ class HouseSaleController extends PhoneController{
 
 		if($area != '0'){
 			$map['_string'] = "h.area=$area OR h.busi_area=$area";
+			$param .= ' '.get_p_area($area);
 		}
 		if($price != '0'){
 			$priceRange = explode('-', $price);
@@ -63,6 +64,8 @@ class HouseSaleController extends PhoneController{
 			}elseif(is_numeric($priceRange[1])){
 				$map['h.price'] = array('LT', (int)$priceRange[1]);
 			}
+
+			$param .= ' '.get_p_lookup('HOUSE_SALE_PRICE_RANGE',$price);
 		}
 		if($square != '0'){
 			$squareRange = explode('-', $square);
@@ -73,9 +76,12 @@ class HouseSaleController extends PhoneController{
 			}elseif(is_numeric($squareRange[1])){
 				$map['h.square'] = array('LT', (int)$squareRange[1]);
 			}
+
+			$param .= ' '.get_p_lookup('HOUSE_SALE_SQUARE_RANGE',$square);
 		}
 		if($room != '0'){
 			$map['h.bed_room'] = (int)$room;
+			$param .= ' '.get_p_lookup('HOUSE_RENT_BEDROOM',$room);
 		}
 
 		$sortField = 'h.id';
@@ -111,13 +117,15 @@ class HouseSaleController extends PhoneController{
 			->select();
 
 		$this->assign('dataList', $dataList);
-		$this->assign('area', $area);
+		
+		$this->assign('param',$param);
 		$this->assign('price', $price);
 		$this->assign('square', $square);
 		$this->assign('room', $room);
 		$this->assign('page', $page->show());
 
 		$this->assign('nav',1);
+		$this->assign('site_title','恒润房产-房屋买卖');
 
 		$this->display();
 	}
@@ -142,6 +150,7 @@ class HouseSaleController extends PhoneController{
 
 		$this->assign('data', $data);
 
+		$this->assign('site_title','恒润房产-房屋买卖');
 		$this->display();
 	}
 }

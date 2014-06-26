@@ -1,0 +1,47 @@
+<extend name="Public/base_rich"/>
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
+</block>
+<block name="content">
+<div class="tab-container">
+	<div class="search">
+		<form action="{:U('AgentMarket/lists')}" method="get">
+			<input type="text" name="search" placeholder="请输入楼盘名称"/><input type="submit" class="searchbtn" value="搜索"/>
+		</form>
+	</div>
+	
+	<div class="panel">
+		<div class="panel-title"><span class="icon">|</span> {$city.name}</div>
+		<volist name="dataList" id="data">
+			<div class="agent-item" data-href="{:U('AgentMarket/detail', array('id'=>$data['id']))}">
+				<img class="lazy-load agent-img" data-src="{$data.thumbnail|get_img=800,500}"/>
+				<span class="img-desc" >
+					楼盘：{$data.title}&nbsp;位置：{$data.loc_txt}<br>
+					均价：{$data.price_avg}元,{$data.pref_txt}<br>
+					开盘时间：{$data.open_time}<br>
+				</span>
+				<div class="clearfix"></div>
+			</div>
+			
+		</volist>
+	</div>
+</div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript">
+$(function(){
+	$('img.lazy-load').each(function(){
+		$this = $(this);
+		$this.attr('src', $this.attr('data-src'));
+	});
+
+	$('div.agent-item').click(function(){
+		var href = $(this).attr('data-href');
+		if(href){
+			window.location.href = href;
+		}
+	});
+});
+</script>
+</block>

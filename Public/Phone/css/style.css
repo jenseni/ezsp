@@ -3,6 +3,10 @@ html,body,div,ul,h1,h2,h3,h4,h5,h6,input{
 	padding: 0;
 }
 
+th{
+	text-align: right;
+}
+
 .container{
 	width: 100%;
 	padding-bottom: 48px;
@@ -257,4 +261,42 @@ a.btn{
 /*colors*/
 .blue{
 	background-color: #1D337C;
+}
+
+.agent-img{
+	width: 100%;
+}
+
+.img-desc{ 
+	bottom: 0;	 
+	padding: 5px 0 5px 0;
+	left: 0;
+	position:absolute;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5);
+	color:white;
+	font-family: "微软雅黑";
+	font-size: 13px;
+}
+
+.agent-item{
+	position:relative;
+	display: block;
+	margin-top: 5px;
+}
+
+.roomtypeimg{
+	width: 100%;
+}
+
+.roomType-desc{
+	font-family: "微软雅黑";
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.filter-desc{
+	font-size: 12px;
+	font-weight: bold;
+	color:#1D337C;
 }

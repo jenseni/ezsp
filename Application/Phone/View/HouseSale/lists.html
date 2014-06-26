@@ -13,13 +13,20 @@
 		</form>
 	</div>
 	<div class="panel">
-		<div class="panel-title"><span class="icon">|</span> {$city.name}<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a></div>
+		<div class="panel-title">
+			<span class="icon">|</span> {$city.name}
+			<span class="filter-desc">{$param}</span>
+			<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a>
+
+		</div>
+		
+
 		<volist name="dataList" id="data">
 		<div class="data-item" data-href="{:U('HouseSale/detail', array('id'=>$data['id']))}">
 			<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>
 			<div class="data-info">
 				<h4>{$data.title}</h4>
-				{$data.area_name} {$data.busi_area_name} {$data.bed_room}室{$data.live_room}厅
+				{$data.area_name} {$data.busi_area_name} {$data.bed_room}室{$data.live_room}厅 {$data.square}m<sup>2</sup>
 				<span class="price">{$data.price}万</span>
 			</div>
 			<div class="clearfix"></div>

@@ -1,0 +1,86 @@
+<extend name="Public/base"/>
+
+<block name="style">
+</block>
+
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
+<script type="text/javascript" src="__STATIC__/zepto/zepto.touchCarousel.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('*[data-tel]').click(function(){
+		var tel = $(this).attr('data-tel');
+		window.location.href = 'tel:' + tel;
+	});
+
+	$('img.lazy-load').each(function(){
+		$this = $(this);
+		$this.attr('src', $this.attr('data-src'));
+	});
+
+	$('.carousel').touchCarousel({});
+});
+</script>
+</block>
+
+<block name="content">
+	<div class="carousel">
+		<volist name="data.house_pic" id="pic">
+			<div><img class="lazy-load" data-src="__ROOT__{$pic.path}"></div>
+		</volist>
+	</div>
+
+	<div class="detail-info">
+		<h3>{$data.title}</h3>
+	</div>
+
+	<div class="detail-info">
+		<table>
+			<tbody>
+				<tr>
+					<th>均价：</th><td class="price">{$data.price_avg}元/平米</td>
+					<th>公建均价：</th><td class="price">{$data.price_avg2}元/平米</td>
+				</tr>
+				<tr>
+					<th>恒润特惠：</th><td>{$data.pref_txt}</td>
+					<th>面积：</th><td>{$data.square}平米</td>
+				</tr>
+				<tr>
+			        <th>楼盘位置：</th><td>{$data.area_name}{$data.busi_area_name}{$data.loc_txt}</td>
+					<th>户型面积：</th><td>{$data.room_square_txt}</td>
+					
+				</tr>
+				<tr>
+			        <th>装修情况：</th><td>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</td>
+					<th>产权：</th><td>{$data.property_right|get_lookup_value='HOUSE_PROPERTY_RIGHT',###}</td>
+				</tr>
+				<tr>
+					<th>购房费用：</th>
+					<td>首付 {$data.down_payment}-{$data.down_payment_max}万  月供 {$data.monthly}-{$data.monthly_max}元 </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="tab-container">
+		<div class="title-plain">特色</div>
+		<div class="panel panel-content">
+			{$data.feature}
+		</div>
+		<div class="title-plain">户型图</div>
+		<div class="panel panel-content">
+			<volist name="data.roomTypePicList" id="roomTypePic">
+				<div class="roomType-desc">{$roomTypePic.desc_txt}<div>
+				<div><img class="lazy-load roomtypeimg" data-src="__ROOT__{$roomTypePic.path}"></div>
+				
+			</volist>
+		</div>
+
+	</div>
+
+	<div class="footer footer-fixed" data-tel="{$data.contact_tel}">
+		<img class="pull-left" src="__IMG__/contact_tel.png">
+		<img class="pull-right" src="__IMG__/arrow_right_01.gif">
+		<h2>{$data.contact_tel}</h2>
+	</div>
+</block>

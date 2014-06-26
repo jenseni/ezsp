@@ -5,21 +5,21 @@
 <block name="content">
 <div class="tab-container">
 	<div class="search">
-		<form action="{:U('OfficeMarket/lists')}" method="get">
+		<form action="{:U('HouseRent/lists')}" method="get">
 			<input type="text" name="search" placeholder="请输入楼盘或标题名"/><input type="submit" class="searchbtn" value="搜索"/>
 		</form>
 	</div>
 	
 	<div class="panel">
 		<div class="panel-title"><span class="icon">|</span> {$city.name}<span class="filter-desc">{$param}</span>
-			<a class="btn pull-right btn-small" href="{:U('OfficeMarket/filter')}">筛选</a></div>
+			<a class="btn pull-right btn-small" href="{:U('HouseRent/filter')}">筛选</a></div>
 		<volist name="dataList" id="data">
-			<div class="data-item" data-href="{:U('OfficeMarket/detail', array('id'=>$data['id']))}">
+			<div class="data-item" data-href="{:U('HouseRent/detail', array('id'=>$data['id']))}">
 				<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>
 				<div class="data-info">
 					<h4>{$data.title}</h4>
-					{$data.busi_area_name} {$data.bd_type|get_lookup_value='OFFICE_MARKET_BD_TYPE',###} {$data.square}平米
-					<span class="price">{$data.price}{$data.price_unit|get_lookup_value='OFFICE_MARKET_PRICE_UNIT',###}</span>
+					{$data.community} {$data.bed_room}室{$data.live_room}厅 {$data.square}平米
+					<span class="price">{$data.price}元/月</span>
 				</div>
 				<div class="clearfix"></div>
 			</div>
