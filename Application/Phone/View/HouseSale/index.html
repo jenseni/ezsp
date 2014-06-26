@@ -1,23 +1,15 @@
-<extend name="Public/base"/>
-
+<extend name="Public/base_rich"/>
+<block name="headscript">
+<script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
+</block>
 <block name="content">
-<div class="header">
-	<img class="logo" alt="LOGO" src="__IMG__/logo_02.gif">
-	<a class="user-login" href="#">登录</a>
-</div>
-<div class="nav">
-	<ul>
-		<li class="active"><a href="#">房屋买卖</a></li>
-		<li><a href="#">房屋租赁</a></li>
-		<li><a href="#">写字楼商铺</a></li>
-		<li><a href="#">代理楼盘</a></li>
-	</ul>
-</div>
 <div class="tab-container">
 	<div class="search">
-		<input type="text" name="search" placeholder="请输入楼盘或小区名"/><input type="submit" class="searchbtn" value="搜索"/>
+		<form action="{:U('HouseSale/index')}" method="get">
+			<input type="text" name="search" placeholder="请输入标题或小区名"/><input type="submit" class="searchbtn" value="搜索"/>
+		</form>
 	</div>
-	<div class="panel">
+	<!-- <div class="panel">
 		<div class="panel-title"><span class="icon">|</span> 从区域、价格开始</div>
 		<ul class="filter-group">
 			<li><a href="#">甘井子</a></li>
@@ -37,49 +29,39 @@
 			<li><a href="#">60-80万</a></li>
 			<li><a href="#">更多</a></li>
 		</ul>
-	</div>
+	</div> -->
 	<div class="panel">
-		<div class="panel-title"><span class="icon">|</span> 推荐二手房</div>
-		<div class="data-item">
-			<img src="__ROOT__/Uploads/Picture/2014-06-13/runtime/539afefc55b36_172_126.jpg"/>
-			<div class="data-info">
-				<h3>房屋标题标题房屋</h3>
-				北京街 北京街散盘<br/>
-				1室1厅 整租
-				<span class="price">1400元/月</span>
+		<div class="panel-title"><span class="icon">|</span> {$city.name}<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a></div>
+		<volist name="dataList" id="data">
+			<div class="data-item" data-href="{:U('HouseSale/detail', array('id'=>$data['id']))}">
+				<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>
+				<div class="data-info">
+					<h4>{$data.title}</h4>
+					{$data.area_name} {$data.busi_area_name} {$data.bed_room}室{$data.live_room}厅
+					<span class="price">{$data.price}万</span>
+				</div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="data-item">
-			<img src="__ROOT__/Uploads/Picture/2014-06-13/runtime/539afefc55b36_172_126.jpg"/>
-			<div class="data-info">
-				<h3>房屋标题标题房屋</h3>
-				北京街 北京街散盘<br/>
-				1室1厅 整租
-				<span class="price">1400元/月</span>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="data-item">
-			<img src="__ROOT__/Uploads/Picture/2014-06-13/runtime/539afefc55b36_172_126.jpg"/>
-			<div class="data-info">
-				<h3>房屋标题标题房屋</h3>
-				北京街 北京街散盘<br/>
-				1室1厅 整租
-				<span class="price">1400元/月</span>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="data-item">
-			<img src="__ROOT__/Uploads/Picture/2014-06-13/runtime/539afefc55b36_172_126.jpg"/>
-			<div class="data-info">
-				<h3>房屋标题标题房屋</h3>
-				北京街 北京街散盘<br/>
-				1室1厅 整租
-				<span class="price">1400元/月</span>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+		</volist>
+		<div class="pagination">{$page}</div>
 	</div>
 </div>
+</block>
+
+<block name="footscript">
+<script type="text/javascript">
+$(function(){
+	$('img.lazy-load').each(function(){
+		$this = $(this);
+		$this.attr('src', $this.attr('data-src'));
+	});
+
+	$('div.data-item').click(function(){
+		var href = $(this).attr('data-href');
+		if(href){
+			window.location.href = href;
+		}
+	});
+});
+</script>
 </block>

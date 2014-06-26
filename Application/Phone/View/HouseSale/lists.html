@@ -1,37 +1,32 @@
-<extend name="Public/base"/>
+<extend name="Public/base_rich"/>
 
 <block name="headscript">
 <script type="text/javascript" src="__STATIC__/zepto/zepto.min.js"></script>
 </block>
 
 <block name="content">
-<div class="header">
-	<img class="logo" alt="LOGO" src="__IMG__/logo_02.gif">
-	<a class="user-login" href="#">登录</a>
-</div>
-<div class="nav">
-	<ul>
-		<li class="active"><a href="#">房屋买卖</a></li>
-		<li>|</li>
-		<li><a href="#">房屋租赁</a></li>
-		<li>|</li>
-		<li><a href="#">写字楼商铺</a></li>
-		<li>|</li>
-		<li><a href="#">代理楼盘</a></li>
-	</ul>
-</div>
+
 <div class="tab-container">
 	<div class="search">
-		<input type="text" name="search" placeholder="请输入楼盘或小区名"/><input type="submit" class="searchbtn" value="搜索"/>
+		<form action="{:U('HouseSale/lists')}" method="get">
+			<input type="text" name="search" placeholder="请输入标题或小区名"/><input type="submit" class="searchbtn" value="搜索"/>
+		</form>
 	</div>
 	<div class="panel">
-		<div class="panel-title"><span class="icon">|</span> {$city.name}<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a></div>
+		<div class="panel-title">
+			<span class="icon">|</span> {$city.name}
+			<span class="filter-desc">{$param}</span>
+			<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a>
+
+		</div>
+		
+
 		<volist name="dataList" id="data">
 		<div class="data-item" data-href="{:U('HouseSale/detail', array('id'=>$data['id']))}">
 			<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>
 			<div class="data-info">
 				<h4>{$data.title}</h4>
-				{$data.area_name} {$data.busi_area_name} {$data.bed_room}室{$data.live_room}厅
+				{$data.area_name} {$data.busi_area_name} {$data.bed_room}室{$data.live_room}厅 {$data.square}m<sup>2</sup>
 				<span class="price">{$data.price}万</span>
 			</div>
 			<div class="clearfix"></div>

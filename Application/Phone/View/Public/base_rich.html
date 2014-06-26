@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>{$site_title}</title>
+		<meta name = "viewport" content = "width=device-width,initial-scale=1,user-scalable=0"/>
+		<link rel="stylesheet" type="text/css" href="__CSS__/style.css">
+		<block name="style"></block> 
+		<script type="text/javascript">
+		var App = {
+			ROOT: "__ROOT__",
+			MODULE: "<?php echo MODULE_NAME;?>"
+		};
+		</script>
+		<block name="headscript"></block> 
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<img class="logo" alt="LOGO" src="__IMG__/logo_02.gif">
+				<a class="user-login" href="#">登录</a>
+			</div>
+			<div class="nav">
+				<ul>
+					<li <eq name="nav" value="1">class="active"</eq>><a href="{:U('HouseSale/lists')}">房屋买卖</a></li>
+					<li <eq name="nav" value="2">class="active"</eq>><a href="{:U('HouseRent/lists')}">房屋租赁</a></li>
+					<li <eq name="nav" value="3">class="active"</eq>><a href="{:U('OfficeMarket/lists')}">写字楼商铺</a></li>
+					<li <eq name="nav" value="4">class="active"</eq>><a href="{:U('AgentMarket/lists')}">代理楼盘</a></li>
+				</ul>
+			</div>
+
+		<block name="content"></block> 
+		</div>
+		<block name="footscript"></block> 
+	</body>
+</html>
