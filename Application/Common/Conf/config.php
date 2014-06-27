@@ -1,6 +1,6 @@
 <?php
 return array(
-	'MODULE_ALLOW_LIST'	=>	array('Home', 'Phone', 'Admin'),
+	'MODULE_ALLOW_LIST'	=>	array('Home', 'Phone', 'Weixin', 'Admin'),
 	'MODULE_DENY_LIST'	=>	array('Common','Runtime'),
 	'DEFAULT_MODULE'	=>	'Home',
 	'URL_MODEL'	=>	2,

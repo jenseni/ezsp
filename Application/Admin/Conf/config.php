@@ -280,6 +280,24 @@ return array(
 					'icon'	=>	'glyphicon glyphicon-wrench'
 				)
 			)
+		),
+		array(
+			'id'	=>	123,
+			'name'	=>	'微信管理',
+			'action'	=>	'#',
+			'icon'	=> 'glyphicon glyphicon-comment',
+			'children'	=>	array(
+				array(
+					'id'	=>	124,
+					'name'	=>	'账户',
+					'action'	=>	'Weixin/accountlist'
+				),
+				array(
+					'id'	=>	125,
+					'name'	=>	'自定义菜单',
+					'action'	=>	'Weixin/menulist'
+				)
+			)
 		)
 	)
 );

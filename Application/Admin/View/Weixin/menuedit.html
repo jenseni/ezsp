@@ -1,0 +1,30 @@
+<extend name="Public/base"/>
+
+<block name="content">
+<form action="{:U('Weixin/menusave')}" method="post" class="form-horizontal">
+
+	<input type="hidden" name="account" value="{$account}"/>
+
+	<bs:formgroup field="pid" label="上级菜单" layout="1:4">
+		<select name="pid" class="form-control">
+		<volist name="topMenuList" id="topMenu">
+			<option value="{$topMenu.id}">{$topMenu.name}</option>
+		</volist> 
+		</select>
+	</bs:formgroup> 
+
+	<bs:textfield name="name" value="{$data.name}" label="名称" layout="1:4"/> 
+
+	
+
+	<div class="form-group">
+		<div class="col-sm-offset-1 col-sm-2">
+			<input type="submit" class="btn btn-primary form-control" value="保&nbsp&nbsp存" />
+		</div>
+		<div class="col-sm-2">
+			<a class="btn btn-primary form-control" href="{:get_return_url(U('Weixin/accountlist'))}">返回</a>
+		</div>
+	</div>
+
+</form>
+</block>
