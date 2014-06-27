@@ -5,6 +5,8 @@ html,body,div,ul,h1,h2,h3,h4,h5,h6,input{
 
 th{
 	text-align: right;
+	white-space:nowrap;
+	overflow:hidden;
 }
 
 .container{
@@ -213,6 +215,7 @@ th{
 	bottom: 0;
 	left: 0;
 	right: 0;
+	-webkit-appearance: none;
 }
 /*button*/
 .btn {

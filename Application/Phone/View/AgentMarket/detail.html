@@ -38,22 +38,23 @@ $(function(){
 		<table>
 			<tbody>
 				<tr>
-					<th>均价：</th><td class="price">{$data.price_avg}元/平米</td>
+					<th>均价：</th><td class="price">{$data.price_avg}元/平米</td>					
+				</tr>
+				<tr>
 					<th>公建均价：</th><td class="price">{$data.price_avg2}元/平米</td>
 				</tr>
 				<tr>
 					<th>恒润特惠：</th><td>{$data.pref_txt}</td>
-					<th>面积：</th><td>{$data.square}平米</td>
 				</tr>
+				<tr><th>面积：</th><td>{$data.room_square_txt}平米</td></tr>
 				<tr>
 			        <th>楼盘位置：</th><td>{$data.area_name}{$data.busi_area_name}{$data.loc_txt}</td>
-					<th>户型面积：</th><td>{$data.room_square_txt}</td>
-					
 				</tr>
+				<tr><th>户型面积：</th><td>{$data.room_square_txt}</td></tr>
 				<tr>
-			        <th>装修情况：</th><td>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</td>
-					<th>产权：</th><td>{$data.property_right|get_lookup_value='HOUSE_PROPERTY_RIGHT',###}</td>
+			        <th>装修情况：</th><td>{$data.decorate|get_lookup_value='HOUSE_DECORATE_TYPE',###}</td>					
 				</tr>
+				<tr><th>产权：</th><td>{$data.property_right|get_lookup_value='HOUSE_PROPERTY_RIGHT',###}</td></tr>
 				<tr>
 					<th>购房费用：</th>
 					<td>首付 {$data.down_payment}-{$data.down_payment_max}万  月供 {$data.monthly}-{$data.monthly_max}元 </td>
