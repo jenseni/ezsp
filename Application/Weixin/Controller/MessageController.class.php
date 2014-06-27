@@ -18,16 +18,23 @@ class MessageController extends Controller{
 		if(!IS_POST){
 			die($validResult);
 		}
-
+/*
 		if($validResult === false){
 			die('no access');
 		}
+*/
+		$type = $this->_wechat->getRev()->getRevType();
 
 		if($this->checkRepeat()){
 			die('repeat messages');
 		}
 
-		$type = $this->_wechat->getRev()->getRevType();
+		if($type == Wechat::MSGTYPE_EVENT){
+			$revEvent = $this->_wechat->getRevEvent();
+			if($revEvent['event'] == 'CLICK'){
+				$type = 'MENU-' . $revEvent['key'];
+			}
+		}
 
 		$EventMaterial = M('WxEventMaterial');
 		$executor = $EventMaterial->field('m.id,m.type,m.content,m.title,m.media_id,m.music_url,m.hq_music_url')
@@ -54,7 +61,7 @@ class MessageController extends Controller{
 	}
 
 	protected function checkRepeat($save = true){
-		$type = $this->_wechat->getRevType();
+		$type = $this->_wechat->getRev()->getRevType();
 		if($type == Wechat::MSGTYPE_EVENT){
 			$model = M('WxUserEvent');
 
@@ -129,10 +136,10 @@ class MessageController extends Controller{
 	}
 
 	protected function executeText($wxid, $executor){
-		return $this->_wechat->text($executor['content'])->reply(true);
+		return $this->_wechat->text($executor['content'])->reply(null, true);
 	}
 
-	protected function executeNews($wxid, $msgObj, $executor){
+	protected function executeNews($wxid, $executor){
 		$MaterialItem = M('wx_material_item');
 
 		$items = $MaterialItem->field('title,desc_txt,pic_url,url,seq_num')
@@ -145,18 +152,17 @@ class MessageController extends Controller{
 		}
 
 		$articles = array();
-		foreach ($items as $key => $value) {
-			if($key == 'title'){
-				$articles['Title'] = $value;
-			}elseif($key == 'desc_txt'){
-				$articles['Description'] = $value;
-			}elseif($key == 'pic_url'){
-				$articles['PicUrl'] = $value;
-			}elseif($key == 'url'){
-				$articles['Url'] = $value;
-			}
+		foreach ($items as $value) {
+			$article = array();
+			
+			$article['Title'] = $value['title'];
+			$article['Description'] = $value['desc_txt'];
+			$article['PicUrl'] = $value['pic_url'];
+			$article['Url'] = $value['url'];
+
+			$articles[] = $article;
 		}
 
-		return $this->_wechat->news($articles)->replay(true);
+		return $this->_wechat->news($articles)->reply(null, true);
 	}
 }

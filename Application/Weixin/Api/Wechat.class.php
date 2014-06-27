@@ -108,7 +108,7 @@ class Wechat
 		self::$_instance = new WeChat(array(
 				'token'=>$account['valid_token'],
 				'appid'=>$account['app_id'],
-				'appsecret'=>$account['appsecret']
+				'appsecret'=>$account['app_secret']
 			));
 
 		return self::$_instance;

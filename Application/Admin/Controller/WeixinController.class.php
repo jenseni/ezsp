@@ -108,4 +108,97 @@ class WeixinController extends AdminController{
 		$this->assign('topMenuList', $topMenuList);
 		$this->display('menuedit');
 	}
+
+	public function menusync($account){
+		$this->authView(125);
+
+		$Account = M('WxAccount');
+		$account = $Account->find($account);
+
+		if(empty($account)){
+			$this->error('账户不存在');
+		}
+
+		$menu = array(
+			'button'	=>	array(
+				array(
+					'name'	=>	'介绍',
+					'sub_button'	=>	array(
+						array(
+							'type'	=>	'view',
+							'name'	=>	'首页',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+						),
+						array(
+							'type'	=>	'view',
+							'name'	=>	'公司介绍',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/company/index.html'
+						),
+						array(
+							'type'	=>	'click',
+							'name'	=>	'房产动态',
+							'key'	=>	'house_news'
+						)
+					)
+				),
+				array(
+					'name'	=>	'服务',
+					'sub_button'	=>	array(
+						array(
+							'type'	=>	'view',
+							'name'	=>	'租赁房源',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/house_rent/lists.html'
+						),
+						array(
+							'type'	=>	'view',
+							'name'	=>	'买卖房源',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/house_sale/lists.html'
+						),
+						array(
+							'type'	=>	'view',
+							'name'	=>	'写字楼商铺',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/office_market/lists.html'
+						),
+						array(
+							'type'	=>	'view',
+							'name'	=>	'代理楼盘',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/agent_market/lists.html'
+						),
+					)
+				),
+				array(
+					'name'	=>	'互动',
+					'sub_button'	=>	array(
+						array(
+							'type'	=>	'view',
+							'name'	=>	'会员加入',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+						),
+						array(
+							'type'	=>	'click',
+							'name'	=>	'优惠活动',
+							'key'	=>	'activity'
+						),
+						array(
+							'type'	=>	'view',
+							'name'	=>	'我的积分',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+						),
+						array(
+							'type'	=>	'view',
+							'name'	=>	'客服咨询',
+							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+						),
+					)
+				)
+			)
+		);
+
+		$Wechat = \Weixin\Api\Wechat::create($account['id']);
+		$result = $Wechat->createMenu($menu);
+
+		echo $result;
+
+		return;
+	}
 }
