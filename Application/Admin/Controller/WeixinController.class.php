@@ -127,12 +127,12 @@ class WeixinController extends AdminController{
 						array(
 							'type'	=>	'view',
 							'name'	=>	'首页',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/index'
 						),
 						array(
 							'type'	=>	'view',
 							'name'	=>	'公司介绍',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/company/index.html'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/company/index.html'
 						),
 						array(
 							'type'	=>	'click',
@@ -147,22 +147,22 @@ class WeixinController extends AdminController{
 						array(
 							'type'	=>	'view',
 							'name'	=>	'租赁房源',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/house_rent/lists.html'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/house_rent/lists.html'
 						),
 						array(
 							'type'	=>	'view',
 							'name'	=>	'买卖房源',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/house_sale/lists.html'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/house_sale/lists.html'
 						),
 						array(
 							'type'	=>	'view',
 							'name'	=>	'写字楼商铺',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/office_market/lists.html'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/office_market/lists.html'
 						),
 						array(
 							'type'	=>	'view',
 							'name'	=>	'代理楼盘',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/agent_market/lists.html'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/agent_market/lists.html'
 						),
 					)
 				),
@@ -172,7 +172,7 @@ class WeixinController extends AdminController{
 						array(
 							'type'	=>	'view',
 							'name'	=>	'会员加入',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/index'
 						),
 						array(
 							'type'	=>	'click',
@@ -182,12 +182,12 @@ class WeixinController extends AdminController{
 						array(
 							'type'	=>	'view',
 							'name'	=>	'我的积分',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/index'
 						),
 						array(
 							'type'	=>	'view',
 							'name'	=>	'客服咨询',
-							'url'	=>	'http://60.20.132.97/ezsp/phone/index'
+							'url'	=>	'http://113.226.118.241/ezsp/phone/user/infosubmit'
 						),
 					)
 				)
