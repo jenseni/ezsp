@@ -1,0 +1,71 @@
+<extend name="Public/base"/>
+
+<block name="style">
+<style type="text/css">
+html,body{
+	height: 100%;
+}
+div.sub-container{
+	text-align: left;
+}
+.sub-content{
+	margin: 0 auto;
+	width: 70%;
+}
+.footer{
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+}
+.footer{
+	color: #FFF;
+	font-weight: bold;
+	width: 100%;
+	font-size: 18px;
+	height: 48px;
+	line-height: 48px;
+	background-color: #0E193E;
+}
+
+
+.input_text_info {
+	border: 1px solid #3A5187;
+	line-height: 25px;
+	text-align: left;
+	height: 25px;
+	padding-left: 3px;
+
+}
+
+</style>
+</block>
+
+<block name="content">
+<div class="sub-container blue">
+	<img class="sub-content" style="margin-top:10px;margin-bottom:10px;" src="__IMG__/logo_01.png"/>
+</div>
+<form action="{:U('User/infosubmit')}" method="post">
+<div class="sub-container" style="margin-top:20px;margin-bottom:10px;">
+	<div class="sub-content">
+		<div><p style="color:red;">{$message}</p></div>
+		<table>
+			<tr>
+				<th>联系人：</th>
+				<td><input type="text" name="contact" class="input_text_info" /></td>
+			</tr>
+			<tr>
+				<th>联系方式：</th>
+				<td><input type="text" class="input_text_info" name="contact_tel"  /></td>
+			</tr>
+			<tr>
+				<th>描述：</th>
+				<td><textarea rows="6" name="content" ></textarea></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<input type="submit" class="btn footer" value="提交信息"/>
+
+</form>
+</block>
