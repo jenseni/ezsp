@@ -296,6 +296,11 @@ return array(
 					'id'	=>	125,
 					'name'	=>	'自定义菜单',
 					'action'	=>	'Weixin/menulist'
+				),
+				array(
+					'id'	=>	126,
+					'name'	=>	'素材管理',
+					'action'	=>	'WxMaterial/lists'
 				)
 			)
 		)
