@@ -17,6 +17,12 @@ return array(
 	),
 
 	'STATIC_PAGE_PATH'	=>	'./Uploads/static',
-	'CRYPT_KEY'	=> 'c58e9b858d85030ed2b5215255019f1f'
+	'CRYPT_KEY'	=> 'c58e9b858d85030ed2b5215255019f1f',
+
+	'SERVER_IP'	=>	'60.20.140.182',
+	'WEIXIN_ACCOUNT'	=>	'gh_3d57520728f8',
+	'WEIXIN_APPID'	=>	'wxcc74c0f42a8449d4',
+	'WEIXIN_APPSECRET'	=>	'21276e9b54bd9083a5f2f25b54f0f9cf',
+	'WEIXIN_VALID_TOKEN'	=>	'wanghetest'
 );
 

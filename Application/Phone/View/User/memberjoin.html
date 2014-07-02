@@ -1,0 +1,15 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	<form action="{:U('User/memberjoin')}" method="post">
+		<input type="hidden" name="openid" value="{$openid}"/>
+
+		<input type="text" name="username" value=""/>
+		<br/>
+		<input type="password" name="password" value=""/>
+		<input type="password" name="repassword" value=""/>
+		<br/>
+
+		<input type="submit" value="加入"/>
+	</form>
+</block>

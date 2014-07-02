@@ -214,6 +214,8 @@ CREATE TABLE `t_member` (
    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
    `username` VARCHAR(32) NOT NULL COMMENT '用户名',
    `password` CHAR(32) NOT NULL COMMENT '密码',
+   `openid` CHAR(28) COMMENT '微信OPENID',
+   `point` INT(10) NOT NULL DEFAULT 0 COMMENT '积分',
    `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
    `last_login` INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后登录时间',
    PRIMARY KEY (`id`)

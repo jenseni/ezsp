@@ -100,19 +100,31 @@ class Wechat
 
 	private static $_instance;
 
-	public static function create($wxid){
-		$account = M('WxAccount')->field('app_id,app_secret,valid_token')->find($wxid);
-		if(empty($account)){
-			return false;
-		}
-		self::$_instance = new WeChat(array(
-				'token'=>$account['valid_token'],
-				'appid'=>$account['app_id'],
-				'appsecret'=>$account['app_secret']
+	public static function create($wxid = ''){
+		if(!self::$_instance){
+			self::$_instance = new WeChat(array(
+				'token'=>C('WEIXIN_VALID_TOKEN'),
+				'appid'=>C('WEIXIN_APPID'),
+				'appsecret'=>C('WEIXIN_APPSECRET')
 			));
+		}
 
 		return self::$_instance;
 	}
+
+	// public static function create($wxid){
+	// 	$account = M('WxAccount')->field('app_id,app_secret,valid_token')->find($wxid);
+	// 	if(empty($account)){
+	// 		return false;
+	// 	}
+	// 	self::$_instance = new WeChat(array(
+	// 			'token'=>$account['valid_token'],
+	// 			'appid'=>$account['app_id'],
+	// 			'appsecret'=>$account['app_secret']
+	// 		));
+
+	// 	return self::$_instance;
+	// }
 	
 	public function __construct($options)
 	{
