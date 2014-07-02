@@ -8,20 +8,6 @@ class HouseNewsController extends HomeController{
 		$this->assign('site_title','恒润房产-房产动态');
 	}
 
-	public function newspics(){
-		$ret = '<?xml version="1.0" encoding="utf-8"?>
-<data>
-<newsid>
-<project mytitle="大型景观歌剧《图兰朵》" mypic="/Uploads/ueditor/image/20140614/1402723541659978.jpg" links="http://js.alixixi.com/" />
-<project mytitle="鸟巢嘉年华" mypic="/Uploads/ueditor/image/20140614/1402723457290421.jpg" links="http://js.alixixi.com/" />
-<project mytitle="积分换购经典演出海报" mypic="/Uploads/ueditor/image/20140614/1402723572484408.jpg" links="http://js.alixixi.com/" />
-<project mytitle="2009足球比赛汇总" mypic="http://pic1.ajkimg.com/display/xinfang/ed0221b2407d5ad6702941df0cf60822/500x37500.jpg" links="http://js.alixixi.com/" />
-</newsid>
-</data>';
-		
-		echo $ret;
-	}
-
 	public function index(){
 		$Document = D('Article');
 		$CATEGORY_RECOMMEND = '1';
