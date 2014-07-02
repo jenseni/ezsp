@@ -21,3 +21,11 @@ function get_p_lookup($lookup_code,$lookup_name){
 	$data = $case->where($map)->find();
 	return $data['val'];
 }
+
+function get_wx_headimg($imgurl, $size = 64){
+	if(empty($imgurl)){
+		return __ROOT__.'/Public/images/noimg.png';
+	}
+
+	return preg_replace('/(\/0)$/', "/$size", $imgurl);
+}

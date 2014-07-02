@@ -1,15 +1,139 @@
 <extend name="Public/base"/>
 
+<block name="style">
+<style type="text/css">
+html,body{
+	height: 100%;
+}
+div.sub-container{
+	text-align: center;
+	padding:10px;
+	line-height: 48px;
+	color: #FFF;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+div.reg{
+	padding-top: 30px;
+	background:url("__IMG__/beijing.jpg") no-repeat;
+	background-size:cover;
+	padding-bottom: 30px;
+	-webkit-background-size: cover;
+	margin: 0 auto;
+	width: 100%;
+}
+
+input{
+	line-height: 30px;
+	margin-left: 10px;
+	width: 60%;
+}
+
+
+.sub-content{
+	margin: 0 auto;
+	width: 100%;
+}
+.footer-index{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 48px;
+	line-height: 48px;
+}
+.footer-index a{
+	color: #FFF;
+	font-weight: bold;
+	font-size: 18px;
+	text-decoration: none;
+	height: 48px;
+	line-height: 48px;
+}
+.menu{
+	width: 20%;
+	margin-bottom: 10px;
+}
+
+.btn{
+	margin-top:30px;
+
+}
+
+.slabel{
+	width:80%;
+	font-weight: bold;
+	text-align: right;
+	padding-top: 15px;
+}
+.btnlabel{
+	width:80%;
+	text-align: right;
+}
+</style>
+</block>
+
+<block name="headscript">
+<script type="text/javascript">
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+</block>
+
 <block name="content">
+<div class="sub-container blue">
+	登录
+</div>
+
+<div class="reg">
 	<form action="{:U('User/memberjoin')}" method="post">
 		<input type="hidden" name="openid" value="{$openid}"/>
-
-		<input type="text" name="username" value=""/>
-		<br/>
-		<input type="password" name="password" value=""/>
-		<input type="password" name="repassword" value=""/>
-		<br/>
-
-		<input type="submit" value="加入"/>
+		<div class="slabel">
+			<span>用户名</span>
+			<input type="text" name="username" />
+		</div>
+		<div class="slabel">
+			<span >密码</span>
+			<input type="password" name="password" />
+		</div>
+		<div class="slabel">
+			<span >确认密码</span>
+			<input type="password" name="repassword" />
+		</div>		
+		<div class="btnlabel">
+			<input type="submit" value="成为会员" class="btn blue" style="color:white; width:80%">
+		</div>
 	</form>
+</div>
+<div class="sub-container" style="margin-top:20px;margin-bottom:10px;">
+	<div class="sub-content">
+		<a href="{:U('HouseSale/lists')}">
+			<img class="menu pull-left" style="margin-left:3%;" alt="房屋买卖" src="__IMG__/btn_hs.gif" />
+		</a>
+		<a href="{:U('HouseRent/lists')}">
+			<img class="menu pull-left" style="margin-left:5%;" alt="房屋租赁" src="__IMG__/btn_hr.gif" />
+		</a>
+		<a href="{:U('OfficeMarket/lists')}">
+			<img class="menu pull-left" style="margin-left:5%;" alt="写字楼商铺" src="__IMG__/btn_om.gif" />
+		</a>
+		<a href="{:U('AgentMarket/lists')}">
+			<img class="menu pull-left" style="margin-left:5%;" alt="代理楼盘" src="__IMG__/btn_am.gif" />
+		</a>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
 </block>

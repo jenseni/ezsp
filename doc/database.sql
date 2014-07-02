@@ -303,3 +303,140 @@ CREATE TABLE `t_iplog` (
 
 DROP TABLE IF EXISTS `t_iplog_01`;
 CREATE TABLE `t_iplog_01` AS select * from `t_iplog` where 1=2;
+
+
+DROP TABLE IF EXISTS `t_wx_account`;
+
+CREATE TABLE `t_wx_account` (
+  `id` varchar(32) NOT NULL,
+  `app_id` varchar(255) DEFAULT NULL,
+  `app_secret` varchar(255) DEFAULT NULL,
+  `valid_token` varchar(32) NOT NULL,
+  `access_token` varchar(255) DEFAULT NULL,
+  `last_fetch` datetime DEFAULT NULL,
+  `exp_in` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `desc_txt` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_event_material`;
+
+CREATE TABLE `t_wx_event_material` (
+  `account_id` varchar(32) NOT NULL DEFAULT '',
+  `event_type` varchar(32) NOT NULL,
+  `material_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`account_id`,`event_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_material`;
+
+CREATE TABLE `t_wx_material` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(32) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `title` varchar(128) DEFAULT NULL,
+  `media_id` varchar(32) DEFAULT NULL,
+  `music_url` varchar(255) DEFAULT NULL,
+  `hq_music_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_material_item`;
+
+CREATE TABLE `t_wx_material_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mater_id` int(11) NOT NULL,
+  `title` varchar(32) NOT NULL,
+  `desc_txt` varchar(255) DEFAULT NULL,
+  `pic_url` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `seq_num` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_mater_id` (`mater_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_menu`;
+
+CREATE TABLE `t_wx_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL,
+  `name` varchar(32) NOT NULL,
+  `type` varchar(12) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `btn_key` varchar(32) DEFAULT NULL,
+  `level` tinyint(4) NOT NULL DEFAULT '0',
+  `account_id` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_share_path`;
+
+CREATE TABLE `t_wx_share_path` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `busi_id` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `fro` varchar(32) NOT NULL,
+  `who` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_busi_id_who` (`busi_id`,`who`),
+  KEY `idx_created` (`created`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_user`;
+
+CREATE TABLE `t_wx_user` (
+  `id` char(28) NOT NULL,
+  `nickname` varchar(64) DEFAULT NULL,
+  `sex` tinyint(4) NOT NULL DEFAULT '0',
+  `province` varchar(64) DEFAULT NULL,
+  `city` varchar(64) DEFAULT NULL,
+  `country` varchar(64) DEFAULT NULL,
+  `head_img_url` varchar(255) DEFAULT NULL,
+  `privilege` varchar(255) DEFAULT NULL,
+  `acc_token` varchar(255) DEFAULT NULL,
+  `exp_in` int(11) DEFAULT NULL,
+  `ref_token` varchar(255) DEFAULT NULL,
+  `scope` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_wx_nickname` (`nickname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_user_event`;
+
+CREATE TABLE `t_wx_user_event` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `from_user` char(28) NOT NULL,
+  `to_user` varchar(32) NOT NULL,
+  `created` int(11) NOT NULL,
+  `event` varchar(32) NOT NULL,
+  `event_key` varchar(32) NOT NULL,
+  `ticket` varchar(128) DEFAULT NULL,
+  `loc_x` double DEFAULT NULL,
+  `loc_y` double DEFAULT NULL,
+  `prec` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_wx_user_event_fu` (`from_user`,`created`)
+) ENGINE=MyISAM AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_wx_user_msg`;
+
+CREATE TABLE `t_wx_user_msg` (
+  `id` bigint(20) NOT NULL,
+  `to_user` varchar(32) NOT NULL,
+  `from_user` char(28) NOT NULL,
+  `created` int(11) NOT NULL,
+  `msg_type` varchar(32) NOT NULL,
+  `content` text,
+  `pic_url` varchar(255) DEFAULT NULL,
+  `media_id` varchar(32) DEFAULT NULL,
+  `format` varchar(32) DEFAULT NULL,
+  `thumb_mediaId` varchar(32) DEFAULT NULL,
+  `loc_x` double DEFAULT NULL,
+  `loc_y` double DEFAULT NULL,
+  `scale` int(11) DEFAULT NULL,
+  `title` varchar(128) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_wx_msg_fu` (`from_user`,`created`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -1,6 +1,90 @@
 <extend name="Public/base"/>
 
+<block name="style">
+<style type="text/css">
+
+.menu{
+	width: 20%;
+	margin-bottom: 10px;
+}
+
+.user-header{
+	height: 250px;
+	background: url('__IMG__/jifen.jpg') no-repeat;
+	-webkit-background-size: cover;
+}
+
+.pic-header{
+	float: left;
+	width: 96px;
+	height: 96px;
+	border: 3px solid white;
+	border-radius:50%;
+	margin-top: 60px;
+	margin-left: 10%;
+}
+span{
+	float:left;
+}
+
+.name{
+	margin-top: 75px;
+	margin-left: 8%;
+	font-size: 22px;
+	color: white;
+	font-family: 微软雅黑;
+}
+
+
+</style>
+</block>
+
+<block name="headscript">
+<script type="text/javascript">
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+</block>
+
 <block name="content">
-	{$user.nickname}<br/>
-	{$user.city}
+<div class="user-header">
+	<img src="{$user.head_img_url|get_wx_headimg=132}" class="pic-header" />
+	<span class="name">
+		{$user.username}
+		<br><br>
+		积分 {$user.point}
+	</span>
+</div>
+
+
+<div class="sub-container" style="margin-top:40px;margin-bottom:10px;">
+	<div class="sub-content">
+		<a href="{:U('HouseSale/lists')}">
+			<img class="menu pull-left" style="margin-left:3%;" alt="房屋买卖" src="__IMG__/btn_hs.gif" />
+		</a>
+		<a href="{:U('HouseRent/lists')}">
+			<img class="menu pull-left" style="margin-left:5%;" alt="房屋租赁" src="__IMG__/btn_hr.gif" />
+		</a>
+		<a href="{:U('OfficeMarket/lists')}">
+			<img class="menu pull-left" style="margin-left:5%;" alt="写字楼商铺" src="__IMG__/btn_om.gif" />
+		</a>
+		<a href="{:U('AgentMarket/lists')}">
+			<img class="menu pull-left" style="margin-left:5%;" alt="代理楼盘" src="__IMG__/btn_am.gif" />
+		</a>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
 </block>

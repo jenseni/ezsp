@@ -210,7 +210,7 @@ class UserController extends PhoneController{
 		$WxUser = M('WxUser');
 		$wxUserInfo = $WxUser->find($openid);
 		$User = M('Member');
-		$bindUser = $UserInfo = $User->where(array('openid'=>$openid))->find();
+		$bindUser = $User->where(array('openid'=>$openid))->find();
 
 		$this->assign('user', array_merge($bindUser, $wxUserInfo));
 
