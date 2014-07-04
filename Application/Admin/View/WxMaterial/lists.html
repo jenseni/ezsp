@@ -1,5 +1,34 @@
-<extend name="Public/base" />
+<extend name="Public/base-wx" />
 
 <block name="content">
+		<div class="btn-group btn-group-sm pull-left" style="margin-bottom: 15px;">
+			<a href="{:U('WxMaterial/add')}" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> 添加单图文</a>
+			<a href="{:U('WxMaterial/additem')}" class="btn btn-default app-btn"><i class="glyphicon glyphicon-plus"></i> 添加多图文</a>
+		</div>
+
+		<div class="row">
+			<volist name="dataList" id="data">
+				<div class="col-md-3">
+					<div class="thumbnail">
+					  <div class="caption">
+					  	<h4>{$data.title}</h4>
+					  	{$data.creat_time}
+					  </div>	
+				      <img src="{$data.cover_url|get_img=360,200}">
+				      <div class="caption">				        
+				        <p>{$data.content|htmlspecialchars_decode}</p>
+				      </div>
+				      <div class="btn-group btn-group-justified">
+  						 <div class="btn-group">
+						    <a class="btn btn-default" href="{:U('WxMaterial/edit', array('id'=>$data['id']))}">编辑</a>
+						 </div>
+						 <div class="btn-group">
+						    <a class="btn btn-default" confirm="确认删除？" href="{:U('WxMaterial/delete', array('id'=>$data['id']))}" >删除</a>
+						 </div>
+					   </div>
+			        </div>			    
+				</div>
+			</volist>
+		</div>
 	
 </block>

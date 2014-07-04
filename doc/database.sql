@@ -332,15 +332,18 @@ CREATE TABLE `t_wx_event_material` (
 DROP TABLE IF EXISTS `t_wx_material`;
 
 CREATE TABLE `t_wx_material` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(32) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `title` varchar(128) DEFAULT NULL,
-  `media_id` varchar(32) DEFAULT NULL,
-  `music_url` varchar(255) DEFAULT NULL,
-  `hq_music_url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `description` varchar(255) DEFAULT NULL COMMENT '摘要',
+   `type` varchar(32) NOT NULL,
+   `content` text,
+   `title` varchar(128) DEFAULT NULL,
+   `media_id` varchar(32) DEFAULT NULL,
+   `music_url` varchar(255) DEFAULT NULL,
+   `hq_music_url` varchar(255) DEFAULT NULL,
+   `cover_url` varchar(100) DEFAULT NULL COMMENT '封面图片',
+   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
+   PRIMARY KEY (`id`)
+ ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `t_wx_material_item`;
 
@@ -348,7 +351,7 @@ CREATE TABLE `t_wx_material_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mater_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `desc_txt` varchar(255) DEFAULT NULL,
+  `desc_txt` text DEFAULT NULL,
   `pic_url` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `seq_num` tinyint(4) NOT NULL DEFAULT '0',

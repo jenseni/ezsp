@@ -1,0 +1,110 @@
+<extend name="Public/base-wx"/>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.mymin.js"></script>
+<script type="text/javascript" src="__STATIC__/scripts/imageexplorer.js"></script>
+<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+$(function(){	
+
+
+	$("#file_upload").uploadify({
+		'height': 34,
+		'swf': '__STATIC__/uploadify/uploadify.swf',
+		'uploader': '<?php echo U("File/uploadhousepic");?>',
+		'fileObjName': 'fileUpload',
+		'buttonClass': 'btn btn-primary',
+		'multi': true,
+		'queueID': 'queue_container',
+		'formData': {'busi_type': 9},
+		//'uploadLimit': 5,
+		//'queueSizeLimit': 5,
+		'fileSizeLimit': '2MB',
+		'buttonText': '上传封面图片',
+		'fileTypeExts': '*.jpg; *.png; *.gif; *.bmp',
+		'fileTypeDesc': 'JPG,PNG,GIF,BMP',
+		'removeTimeout': 1,
+		'onUploadSuccess': function(file, data, response){
+			var info = $.parseJSON(data);
+			if(info.status == 0){
+				
+			}else{
+				alert(info.info);
+			}
+		},
+		'onUploadError': function(file, errorCode, errorMsg, errorString){
+			//alert(file.name + " 上传失败 " + errorCode + " " + errorMsg + " " + errorString);
+		},
+		'onFallback': function(){
+			alert('请先安装Flash插件');
+		}
+	});
+});
+
+KindEditor.ready(function(K) {
+	window.editor = K.create('#content', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'link']
+	});
+});
+</script>
+</block>
+
+<block name="content">
+
+<div class="row">
+	
+		<div class="col-md-4">
+			<div class="thumbnail">
+			  <div class="caption">
+			  	<h4>{$data.title}</h4>
+			  	{$data.creat_time}
+			  </div>	
+		      <img src="{$data.cover_url|get_img=360,200}">
+		      <div class="caption">				        
+		        <p>{$data.content|htmlspecialchars_decode}</p>
+		      </div>
+		    </div>  
+		</div>
+		
+		<div class="col-md-8">
+			<form role="form" action="{:U('WxMaterial/add')}" method="post" class="form-horizontal">
+			<div class="panel panel-default">
+			<div class="panel-body">	
+				<input type="hidden" value="{$data.id}" name="id"/>
+				<bs:textfield name="title" value="{$data.title}" label="标题" layout="1:4"/>
+				<bs:textfield name="description" value="{$data.description}" label="摘要" layout="1:8"/>
+				<div class="form-group" style="position:relative">
+					<div class="col-sm-offset-1 col-sm-4">
+						<input type="file" name="fileUpload" id="file_upload"/>
+						<input type="hidden" id="cover_url" name="cover_url" value='{$data.cover_url|default=""}' />
+						<span class="help-block">（大图片建议尺寸：360像素 * 200像素）</span>
+					</div>
+					<div id="queue_container" style="position:absolute;right:0;top:0;z-index:999;"></div>
+				</div>
+				
+				<bs:textarea name="content" value="{$data.content}" label="正文" layout="1:8"/>
+				<div class="form-group">
+					<div class="col-md-offset-1 col-md-3">
+						<input type="submit" class="btn btn-primary form-control" value="保&nbsp&nbsp存" />
+					</div>
+					
+					<div class="col-md-3">
+						<a class="btn btn-default form-control" href="{:get_return_url(U('WxMaterial/lists'))}">返回</a>
+					</div>
+				</div>
+				</form>
+			</div>
+			</div>
+
+
+		</div>
+
+		
+</div>
+
+</block>

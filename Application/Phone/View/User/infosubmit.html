@@ -5,13 +5,52 @@
 html,body{
 	height: 100%;
 }
-div.sub-container{
-	text-align: left;
-}
 .sub-content{
 	margin: 0 auto;
 	width: 70%;
 }
+
+div.reg{
+	padding-top: 30px;
+	background-size:cover;
+	padding-bottom: 30px;
+	-webkit-background-size: cover;
+	margin: 0 auto;
+}
+
+ul{
+	float:left;
+}
+
+li{
+	list-style: none;
+}
+
+.mlabel{
+	width:35%;
+	font-weight: bold;
+	text-align: right;
+}
+
+.mlabel li{	
+	margin-top: 25px;
+}
+
+.minput li{
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+input{
+	width: 100%;
+	min-width: 150px;
+	line-height: 23px;
+}
+
+textarea{
+	width: 100%;
+}
+
 .footer-index{
 	color: #FFF;
 	font-weight: bold;
@@ -22,19 +61,8 @@ div.sub-container{
 	background-color: #0E193E;
 	text-align: center;
 	position: fixed;
-	left: 0;
 	bottom: 0;
 	right: 0;
-}
-
-
-.input_text_info {
-	border: 1px solid #3A5187;
-	line-height: 25px;
-	text-align: left;
-	height: 25px;
-	padding-left: 3px;
-
 }
 
 </style>
@@ -45,24 +73,19 @@ div.sub-container{
 	<img class="sub-content" style="margin-top:10px;margin-bottom:10px;" src="__IMG__/logo_01.png"/>
 </div>
 <form action="{:U('User/infosubmit')}" method="post">
-<div class="sub-container" style="margin-top:20px;margin-bottom:10px;">
-	<div class="sub-content">
-		<div><p style="color:red;">{$message}</p></div>
-		<table>
-			<tr>
-				<th>联系人：</th>
-				<td><input type="text" name="contact" class="input_text_info" /></td>
-			</tr>
-			<tr>
-				<th>联系方式：</th>
-				<td><input type="text" class="input_text_info" name="contact_tel"  /></td>
-			</tr>
-			<tr>
-				<th>描述：</th>
-				<td><textarea rows="6" name="content" ></textarea></td>
-			</tr>
-		</table>
-	</div>
+<div class="reg">
+	<ul class="mlabel">
+		<li>联系人</li>
+		<li>联系电话</li>
+		<li>描述</li>
+	</ul>
+	<ul class="minput">
+		<li><input type="text" name="contact"></li>
+		<li><input type="text" name="contact_tel"></li>
+		<li>
+			<textarea rows="6"></textarea>
+		</li>
+	</ul>		
 </div>
 
 <input type="submit" class="btn footer-index" value="提交信息"/>
