@@ -112,6 +112,7 @@ CREATE TABLE `t_housesale` (
    `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
    `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户ID',
    `level` INT(10) NOT NULL DEFAULT '0' COMMENT '优先级',
+   `share_path` CHAR(1) NOT NULL DEFAULT 'N' COMMENT '记录分享路径',
    `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
    `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
    `community` varchar(128) NOT NULL COMMENT '小区',

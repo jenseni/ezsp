@@ -22,7 +22,7 @@ class HouseSaleController extends AdminController{
 
 		$Page = new \Org\Util\Page($totalCount);
 
-		$HouseSale->field('hs.id,hs.title,hs.community,hs.status,hs.create_time,area.name area_name,busi_area.name busi_area_name')
+		$HouseSale->field('hs.id,hs.title,hs.community,hs.status,hs.create_time,hs.share_path,area.name area_name,busi_area.name busi_area_name')
 			->alias('hs')
 			->join('__DISTRICT__ area on area.id=hs.area', 'LEFT')
 			->join('__DISTRICT__ busi_area on busi_area.id=hs.busi_area', 'LEFT')
@@ -101,6 +101,16 @@ class HouseSaleController extends AdminController{
 		$HouseSale->where(array('id'=>(int)$id))->setField('status', $status);
 
 		$this->successMessage('操作成功', get_return_url(U('HosueSale/lists')));
+	}
+
+	public function changesharepath($id, $sp){
+		$this->authView(103);
+
+		$HouseSale = D('HouseSale');
+
+		$HouseSale->where(array('id'=>(int)$id))->setField('share_path', $sp);
+
+		$this->successMessage('操作成功', get_return_url(U('HouseSale/lists')));
 	}
 
 	public function delete(){
