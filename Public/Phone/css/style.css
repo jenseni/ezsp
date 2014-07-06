@@ -304,16 +304,37 @@ a.btn{
 	color:#1D337C;
 }
 
-.sortlabel{
-	border:1px solid;
-	font-size:16px;
-	font-weight: bold;
-	margin-left: 5%;
+.sortnav{
 	text-align: center;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 20px 0 15px 0;
 }
-.sortlabel a{
+
+.sortnav ul{
+	margin: 0 auto;
+	left:16%;
+	position:relative;
+	padding: 0;
+	float:left;
+
+}
+.sortnav ul li{
+	list-style: none;
+	float:left;
+	min-width: 90px;
+	border: 1px solid #1D337C;
+	padding: 5px;
+}
+.sortnav ul li a{
+	padding: 8px 5px;
+	color: #1D337C;
+	font-size: 14px;
+	font-weight: bold;
 	text-decoration: none;
+}
+
+.sortnav ul li.active{
+	background-color: #1D337C;
+}
+.sortnav ul li.active a{
+	color: #FFF;
 }

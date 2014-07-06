@@ -21,30 +21,28 @@
 
 		</div>
 
-		<br>
-		<div class="row">
-			<if condition="$sort eq 'square-asc'">
-				<span class="sortlabel"><a href="{:U('HouseSale/lists',array('sort'=>'square-desc'))}">面积↓</a></span>
-			<else />
-				<span class="sortlabel"><a href="{:U('HouseSale/lists',array('sort'=>'square-asc'))}">面积↑</a></span>
-			</if>
-			
-			<if condition="$sort eq 'price-asc'">
-				<span class="sortlabel"><a href="{:U('HouseSale/lists',array('sort'=>'price-desc'))}">价格↓</a></span>
-			<else />
-				<span class="sortlabel"><a href="{:U('HouseSale/lists',array('sort'=>'price-asc'))}">价格↑</a></span>
-			</if>
-
-			<if condition="$sort eq 'create_time-asc'">
-				<span class="sortlabel"><a href="{:U('HouseSale/lists',array('sort'=>'create_time-desc'))}">时间↓</a></span>
-			<else />
-				<span class="sortlabel"><a href="{:U('HouseSale/lists',array('sort'=>'create_time-asc'))}">时间↑</a></span>
-			</if>
+		<div class="sortnav">
+			<ul>
+				<if condition="$sort eq 'square-asc'">
+					<li <eq name="sort" value="square-asc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'square-desc'))}">面积↑</a></li>
+				<else />
+					<li <eq name="sort" value="square-desc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'square-asc'))}">面积↓</a></li>
+				</if>
+				<if condition="$sort eq 'price-asc'">
+					<li <eq name="sort" value="price-asc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'price-desc'))}">价格↑</a></li>
+				<else />
+					<li <eq name="sort" value="price-desc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'price-asc'))}">价格↓</a></li>
+				</if>
+				<if condition="$sort eq 'create_time-asc'">
+					<li <eq name="sort" value="create_time-asc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'create_time-desc'))}">时间↑</a></li>
+				<else />
+					<li <eq name="sort" value="create_time-desc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'create_time-asc'))}">时间↓</a></li>
+				</if>
+			</ul>
 		</div>
-		<p></p>
-		<hr>
-		
-		
+		<div style="clear:both;"></div>
+		<br>
+		<hr>	
 
 		<volist name="dataList" id="data">
 		<div class="data-item" data-href="{:U('HouseSale/detail', array('id'=>$data['id']))}">
