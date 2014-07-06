@@ -232,7 +232,7 @@ class UserController extends PhoneController{
 		}
 
 		$WxUser = M('WxUser');
-		$wxUserInfo = $WxUser->find($openid);
+		$wxUserInfo = $WxUser->find($result['openid']);
 
 		$this->assign('user', array_merge($bindUser, $wxUserInfo));
 

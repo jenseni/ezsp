@@ -19,10 +19,9 @@
 			<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a>
 
 		</div>
-		
 
 		<volist name="dataList" id="data">
-		<div class="data-item" data-href="{:U('HouseSale/detail', array('id'=>$data['id']))}">
+		<div class="data-item" data-href="{:U('HouseSale/sharepathdetail', array('id'=>$data['id']))}">
 			<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>
 			<div class="data-info">
 				<h4>{$data.title}</h4>

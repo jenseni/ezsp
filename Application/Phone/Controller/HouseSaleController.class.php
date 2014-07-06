@@ -153,4 +153,63 @@ class HouseSaleController extends PhoneController{
 		$this->assign('site_title','恒润房产-房屋买卖');
 		$this->display();
 	}
+
+	public function sharepathdetail($id, $who = 'root'){
+		$House = M('Housesale');
+
+		$data = $House->field('h.*,area.name area_name,busi_area.name busi_area_name')
+			->alias('h')
+			->join('__DISTRICT__ area on area.id=h.area', 'LEFT')
+			->join('__DISTRICT__ busi_area on busi_area.id=h.busi_area', 'LEFT')
+			->where(array('h.id'=>(int)$id))
+			->find();
+
+		if(empty($data)){
+			$this->error('404:信息已删除或不存在');
+		}
+
+		if($data['share_path'] == 'Y'){
+			$openid = cookie('openid');
+			if(empty($openid)){
+				$wxapi = \Weixin\Api\Wechat::create();
+				$redirecturl = $wxapi->getOauthRedirect('http://'.C('SERVER_IP').__ROOT__.'/phone/house_sale/getopenid/id/'.$id.'/who/'.$who, '123', 'snsapi_base');
+				redirect($redirecturl);
+			}
+			if($openid != $who){
+				$SharePath = M('WxSharePath');
+				$sharePath = $SharePath->where(array('busi_type'=>1, 'busi_id'=>(int)$id, 'who'=>$openid))->find();
+				if(empty($sharePath)){
+					$sharePath['busi_id'] = $id;
+					$sharePath['busi_type'] = 1;
+					$sharePath['created'] = date('Y-m-d H:i:s', NOW_TIME);
+					$sharePath['fro'] = $who;
+					$sharePath['who'] = $openid;
+
+					$SharePath->data($sharePath)->add();
+				}
+				$this->redirect('HouseSale/sharepathdetail', array('id'=>$id, 'who'=>$openid));
+			}
+		}
+
+		$Picture = M('Picture');
+		$housePicList = $Picture->field('path')->where(array('pid'=>$id,'type'=>1))->select();
+		$data['picList'] = $housePicList;
+
+		$this->assign('data', $data);
+
+		$this->assign('site_title','恒润房产-房屋买卖');
+		$this->display('detail');
+
+	}
+
+	public function getopenid($id, $who){
+		$wxapi = \Weixin\Api\Wechat::create();
+		$result = $wxapi->getOauthAccessToken();
+		if(!isset($result['openid'])){
+			$this->redirect('HouseSale/detail', array('id'=>$id));
+		}
+		cookie('openid', $result['openid']);
+
+		$this->sharepathdetail($id, $who);
+	}
 }
