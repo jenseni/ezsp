@@ -13,51 +13,66 @@ class WxMaterialController extends AdminController{
 
 		$this->assign('dataList', $dataList);	
 
+		$this->assign('wxnav',1);
 		$this->display();
 	}
 
 	public function add(){
 		$this->authView(126);
+		$this->assign('wxnav',1);
 		if(IS_POST){
-			$cover = get_first_img($_POST['content']);
-			if($cover){
-				$_POST['cover_url'] = $cover;
-			}
-
-			$Case = D('WxMaterial');
-			$data = $Case->create();
-
+			$WxMaterial = D('WxMaterial');
+			$data = $WxMaterial->saveOrUpdate();
 			if(!$data){
-				$this->errorInput($Case->getError(), 'WxMaterial/add');
+				$this->errorInput($WxMaterial->getError(), 'WxMaterial/add');
 			}
 
-			$wx = $Case->find($data['id']);
-			if(empty($wx)){
-				$id = $Case->add();
-
-				if(!$id){
-					$this->errorMessage('添加失败', 'WxMaterial/lists');
-				}
-
-				$this->successMessage('添加成功', 'WxMaterial/lists');
-			}else{
-				$Case->data($data)->save();
-				$this->successMessage('保存成功', 'WxMaterial/lists');
-			}
-
+			$this->successMessage('发布成功', 'WxMaterial/lists');
+		}else{
+			
+			$this->display('add');
 		}
+	}
+
+	public function additem(){
+		$this->assign('wxnav',1);
 		$this->display();
 	}
 
-	public function edit($id){
+	public function edit(){
 		$this->authView(126);
 
-		$Account = M('WxMaterial');
-		$data = $Account->find($id);
+		if(IS_POST){
+			$WxMaterial = D('WxMaterial');
+			$data = $WxMaterial->saveOrUpdate();
+			if(!$data){
+				$this->errorInput($WxMaterial->getError(), 'WxMaterial/edit');
+			}
 
-		$this->assign('data', $data);
+			$this->successMessage('修改成功', get_return_url('WxMaterial/lists'));
+		}else{
+			$WxMaterial = D('WxMaterial');
+			$id = I('id');
+			if(empty($id)){
+				$this->error('参数不正确');
+			}
+			$data = $WxMaterial->find($id);
+			if(empty($data)){
+				$this->error('数据不存在');
+			}
 
-		$this->display('add');
+			/*$Picture = M('Picture');
+			$picList = $Picture->field('id,path')->where(array('pid'=>$data['id'], 'type'=>1))->select();
+			if(empty($picList)){
+				$data['house_pic'] = '[]';
+			}else{
+				$data['house_pic'] = json_encode($picList);
+			}*/
+
+			$this->assign('data', $data);
+
+			$this->display('add');
+		}
 	}
 
 	public function delete(){
@@ -75,5 +90,21 @@ class WxMaterialController extends AdminController{
 		}
 
 		$this->successMessage('删除成功', get_return_url('WxMaterial/lists'));
+	}
+
+	public function pictures(){
+		$this->authView(126);
+		$this->assign('wxnav',2);
+		$pics = M('Picture');
+		$condition['type'] = array('eq',9);
+		$totalCount = $pics->where($condition)->count();
+
+		$Page = new \Org\Util\Page($totalCount);
+		$dataList = $pics->where('type = 9')
+		->limit($Page->firstRow, $Page->listRows)
+		->select();
+		$this->assign('dataList',$dataList);
+		$this->assign('page',$Page->show());
+		$this->display();
 	}
 }

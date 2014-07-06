@@ -9,10 +9,36 @@
 			<input type="text" name="search" placeholder="请输入楼盘或标题名"/><input type="submit" class="searchbtn" value="搜索"/>
 		</form>
 	</div>
+
+
 	
 	<div class="panel">
 		<div class="panel-title"><span class="icon">|</span> {$city.name}<span class="filter-desc">{$param}</span>
 			<a class="btn pull-right btn-small" href="{:U('HouseRent/filter')}">筛选</a></div>
+
+		<br>
+		<div class="row">
+			<if condition="$sort eq 'square-asc'">
+				<span class="sortlabel"><a href="{:U('HouseRent/lists',array('sort'=>'square-desc'))}">面积↓</a></span>
+			<else />
+				<span class="sortlabel"><a href="{:U('HouseRent/lists',array('sort'=>'square-asc'))}">面积↑</a></span>
+			</if>
+			
+			<if condition="$sort eq 'price-asc'">
+				<span class="sortlabel"><a href="{:U('HouseRent/lists',array('sort'=>'price-desc'))}">价格↓</a></span>
+			<else />
+				<span class="sortlabel"><a href="{:U('HouseRent/lists',array('sort'=>'price-asc'))}">价格↑</a></span>
+			</if>
+
+			<if condition="$sort eq 'create_time-asc'">
+				<span class="sortlabel"><a href="{:U('HouseRent/lists',array('sort'=>'create_time-desc'))}">时间↓</a></span>
+			<else />
+				<span class="sortlabel"><a href="{:U('HouseRent/lists',array('sort'=>'create_time-asc'))}">时间↑</a></span>
+			</if>
+		</div>
+		<p></p>
+		<hr>
+
 		<volist name="dataList" id="data">
 			<div class="data-item" data-href="{:U('HouseRent/detail', array('id'=>$data['id']))}">
 				<img class="lazy-load" data-src="{$data.thumbnail|get_img=172,126}"/>

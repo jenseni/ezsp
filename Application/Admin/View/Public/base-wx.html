@@ -69,10 +69,10 @@ window.App = {
 				<bs:actionError />
 				<bs:actionMessage />
 				<ul class="nav nav-pills">
-				  <li class="active"><a href="#">图文消息</a></li>
-				  <li><a href="#">图片</a></li>
-				  <li><a href="#">语音</a></li>
-				  <li><a href="#">视频</a></li>
+				  <li <eq name="wxnav" value="1">class="active"</eq>><a href="{:U('WxMaterial/lists')}">图文消息</a></li>
+				  <li <eq name="wxnav" value="2">class="active"</eq>><a href="{:U('WxMaterial/pictures')}">图片</a></li>
+				  <!-- <li <eq name="wxnav" value="3">class="active"</eq>><a href="#">语音</a></li>
+				  <li <eq name="wxnav" value="4">class="active"</eq>><a href="#">视频</a></li> -->
 				</ul>
 				<hr>
 				<block name="content"></block> 

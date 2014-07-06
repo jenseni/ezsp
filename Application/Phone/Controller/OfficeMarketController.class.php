@@ -65,6 +65,7 @@ class OfficeMarketController extends PhoneController{
 		$this->assign('page', $page->show());
 		$this->assign('nav',3);
 		$this->assign('site_title','恒润房产-写字楼商铺');
+		$this->assign('sort',$sort);
 		$this->display();
 	}
 
