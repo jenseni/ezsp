@@ -303,3 +303,17 @@ a.btn{
 	font-weight: bold;
 	color:#1D337C;
 }
+
+.sortlabel{
+	border:1px solid;
+	font-size:16px;
+	font-weight: bold;
+	margin-left: 5%;
+	text-align: center;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.sortlabel a{
+	text-decoration: none;
+}

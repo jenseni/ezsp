@@ -60,16 +60,16 @@ KindEditor.ready(function(K) {
 <div class="row">
 	
 		<div class="col-md-4">
-			<div class="thumbnail">
-			  <div class="caption">
-			  	<h4>{$data.title}</h4>
-			  	{$data.creat_time}
-			  </div>	
-		      <img src="{$data.cover_url|get_img=360,200}" id="preview-img">
-		      <div class="caption">				        
-		        <p>{$data.content|htmlspecialchars_decode}</p>
-		      </div>
-		    </div>  
+
+			<div class="list-group">
+			  <a href="#" class="list-group-item active">
+			    主消息
+			  </a>
+			  <a href="#" id="item2" class="list-group-item">第一条目</a>
+			  <a href="#" id="item3" class="list-group-item">第二条目</a>
+			  <a href="#" id="item4" class="list-group-item">第三条目</a>
+			</div>
+			
 		</div>
 		
 		<div class="col-md-8">

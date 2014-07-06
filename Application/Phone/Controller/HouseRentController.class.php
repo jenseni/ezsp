@@ -77,6 +77,7 @@ class HouseRentController extends PhoneController{
 		$this->assign('page', $page->show());
 		$this->assign('nav',2);
 		$this->assign('site_title','恒润房产-房屋租赁');
+		$this->assign('sort',$sort);
 		$this->display();
 	}
 

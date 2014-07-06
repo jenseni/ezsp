@@ -126,6 +126,7 @@ class HouseSaleController extends PhoneController{
 
 		$this->assign('nav',1);
 		$this->assign('site_title','恒润房产-房屋买卖');
+		$this->assign('sort',$sort);
 
 		$this->display();
 	}
