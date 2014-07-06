@@ -276,7 +276,7 @@ return array(
 				array(
 					'id'	=>	120,
 					'name'	=>	'积分派发',
-					'action'	=>	'Index/test?auth=120',
+					'action'	=>	'PointAssign/test',
 					'icon'	=>	'glyphicon glyphicon-wrench'
 				)
 			)
