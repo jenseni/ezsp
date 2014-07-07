@@ -15,7 +15,7 @@ class MemberController extends AdminController{
 
 		cookie('return_url', $_SERVER['REQUEST_URI']);
 
-		$this->assign('dataList', $dataList);	
+		$this->assign('dataList', $dataList);
 
 		$this->display();
 	}
