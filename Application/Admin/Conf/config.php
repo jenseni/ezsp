@@ -234,7 +234,7 @@ return array(
 				array(
 					'id'	=>	117,
 					'name'	=>	'用户管理',
-					'action'	=>	'Index/test?auth=117',
+					'action'	=>	'Member/lists',
 					'icon'	=>	'glyphicon glyphicon-edit'
 				)
 			)
