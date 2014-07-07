@@ -1,0 +1,24 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	<img src="{:U('PointAssign/getqrcode', array('token'=>$token))}"/>
+</block>
+
+<block name="footscript">
+<script type="text/javascript">
+function checkQrcodeScan(){
+	$.getJSON('<?php echo U("PointAssign/checkQrcodeScan", array("token"=>$token));?>', function(resp){
+		if(resp && resp.status == 0
+			&& resp.data && resp.data.finish == 1){
+			window.location = "<?php echo U('PointAssign/generatesharepath', array('token'=>$token));?>";
+			return;
+		}
+
+		setTimeout('checkQrcodeScan()', 1000);
+	});
+}
+$(function(){
+	checkQrcodeScan();
+});
+</script>
+</block>

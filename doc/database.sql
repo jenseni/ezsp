@@ -444,3 +444,13 @@ CREATE TABLE `t_wx_user_msg` (
   PRIMARY KEY (`id`),
   KEY `idx_wx_msg_fu` (`from_user`,`created`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE `t_qrcode_scan` IF EXISTS;
+CREATE TABLE `t_qrcode_scan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
+  `busi_type` tinyint(4) DEFAULT NULL COMMENT '业务类型',
+  `busi_id` int(11) DEFAULT NULL COMMENT '实体ID',
+  `openid` char(28) DEFAULT NULL COMMENT '微信openid',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8

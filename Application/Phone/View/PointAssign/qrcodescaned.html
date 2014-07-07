@@ -1,0 +1,17 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	{$data.title}<br/>
+	{$data.price}
+	<if condition="$tk.busi_type eq 1">
+		万元
+	<else/>
+		元/月
+	</if>
+	<br/>
+	<form action="{:U('PointAssign/qrcodeconfirm')}" method="post">
+		<input type="hidden" name="token" value="{$tk.id}"/>
+
+		<input type="submit" class="btn" value="成交"/>
+	</form>
+</block>
