@@ -274,9 +274,15 @@ return array(
 			'icon'	=> 'glyphicon glyphicon-heart',
 			'children'	=>	array(
 				array(
+					'id'	=>	127,
+					'name'	=>	'派发记录',
+					'action'	=>	'PointAssign/history',
+					'icon'	=>	'glyphicon glyphicon-wrench'
+				),
+				array(
 					'id'	=>	120,
 					'name'	=>	'积分派发',
-					'action'	=>	'PointAssign/test',
+					'action'	=>	'PointAssign/qrcodescan',
 					'icon'	=>	'glyphicon glyphicon-wrench'
 				)
 			)

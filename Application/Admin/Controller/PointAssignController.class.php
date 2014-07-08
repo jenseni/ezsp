@@ -108,6 +108,37 @@ class PointAssignController extends AdminController{
 			}
 		}
 
-		echo '操作成功';
+		$this->successMessage('操作成功', 'PointAssign/history');
+	}
+
+	public function history(){
+		$this->authView(127);
+
+		$username = I('username');
+		$condition = array();
+		if(!empty($username)){
+			$condition['m.username'] = $username;
+		}
+
+		$PointLog = M('PointLog');
+
+		$totalCount = $PointLog->alias('pl')
+			->join('__MEMBER__ m on m.id=pl.uid', 'LEFT')
+			->where($condition)
+			->count(1);
+		$Page = new \Org\Util\Page($totalCount);
+
+		$dataList = $PointLog->alias('pl')
+			->field('m.username, pl.point, pl.type, pl.channel, pl.created')
+			->join('__MEMBER__ m on m.id=pl.uid', 'LEFT')
+			->where($condition)
+			->limit($Page->firstRow, $Page->listRows)
+			->order('pl.created desc')
+			->select();
+
+		$this->assign('dataList', $dataList);
+		$this->assign('page', $Page->show());
+
+		$this->display();
 	}
 }
