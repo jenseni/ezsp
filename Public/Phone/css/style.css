@@ -304,22 +304,29 @@ a.btn{
 	color:#1D337C;
 }
 
-.sortnav{
+/*.sortnav{
 	text-align: center;
 	padding: 20px 0 15px 0;
+}*/
+.sortnav{
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	margin-top: 8px;
 }
 
 .sortnav ul{
-	margin: 0 auto;
-	left: 15%;
+	float: left;
 	position:relative;
-	padding: 0;
-	float:left;
+	left:50%;
 
 }
 .sortnav ul li{
 	list-style: none;
 	float:left;
+	position: relative;
+	right: 50%;
+	width: auto;
 	border: 1px solid #1D337C;
 	padding: 5px;
 }
