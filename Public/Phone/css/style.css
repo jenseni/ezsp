@@ -311,7 +311,7 @@ a.btn{
 
 .sortnav ul{
 	margin: 0 auto;
-	left:16%;
+	left: 15%;
 	position:relative;
 	padding: 0;
 	float:left;
@@ -320,7 +320,6 @@ a.btn{
 .sortnav ul li{
 	list-style: none;
 	float:left;
-	min-width: 90px;
 	border: 1px solid #1D337C;
 	padding: 5px;
 }
