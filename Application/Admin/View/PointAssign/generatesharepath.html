@@ -1,20 +1,37 @@
 <extend name="Public/base"/>
 
 <block name="content">
+	<form action="{:U('PointAssign/assignpoint')}" method="post" class="form-inline">
+	<div class="page-header">
+		<h3>{$info.title}<small>{$info.price}</small></h3>
+		<label>积分</label>
+		<input type="text" name="total_point" class="form-control"/>
+		<input type="submit" value="派发" class="btn btn-primary"/>
+	</div>
 	<table class="table table-striped table-condensed table-hover table-bordered">
 		<thead>
 			<tr>
+				<th>#</th>
 				<th>用户名</th>
 				<th>分享时间</th>
+				<th>当前积分</th>
 			</tr>
 		</thead>
 		<tbody>
 			<volist name="dataList" id="data">
 			<tr>
+				<td>
+					{$key + 1}
+					<if condition="$data.username">
+					<input type="hidden" name="id[]" value="{$data.id}"/>
+					</if>
+				</td>
 				<td>{$data.username}</td>
 				<td>{$data.share_time}</td>
+				<td>{$data.point|default='-'}</td>
 			</tr>
 			</volist>
 		</tbody>
 	</table>
+	</form>
 </block>
