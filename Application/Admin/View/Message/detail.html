@@ -1,7 +1,7 @@
 <extend name="Public/base"/>
 <block name="content">
 	<div class="page-header">
-		<h3>{$data.contact} <small></span>{$data.create_time|format_timestamp}</small></h3>
+		<h3>{$data.contact} <small>{$data.create_time|format_timestamp}</small></h3>
 		<h4>{$data.contact_tel}</h4>
 		<p>详细内容：</p>
 		<pre>{$data.content}</pre>
