@@ -4,6 +4,16 @@ namespace Phone\Controller;
 use \Think\Controller;
 
 class PointAssignController extends Controller{
+	public function qrcodescanedtest(){
+		$data = array();
+		$data['title'] = '111111';
+		$data['price'] = 11;
+		$data['price_unit'] = '万元';
+
+		$this->assign('data', $data);
+
+		$this->display('qrcodescaned');
+	}
 	public function qrcodescaned($token){
 		$QrcodeScan = M('QrcodeScan');
 		$tk = $QrcodeScan->find($token);
@@ -27,6 +37,9 @@ class PointAssignController extends Controller{
 			//HouseSale
 			$HouseSale = M('Housesale');
 			$data = $HouseSale->find($tk['busi_id']);
+			if(!empty($data)){
+				$data['price_unit'] = '万元';
+			}
 		}
 
 		$this->assign('tk', $tk);

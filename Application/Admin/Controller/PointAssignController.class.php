@@ -10,6 +10,11 @@ class PointAssignController extends AdminController{
 		\QRcode::png('PHP QR Code :)');
 	}
 
+	public function helpdoc(){
+		$this->authView(120);
+		$this->display();
+	}
+
 	public function qrcodescan($busiType, $busiId){
 		$this->authView(120);
 
@@ -17,6 +22,15 @@ class PointAssignController extends AdminController{
 		$data = array('busi_type'=>$busiType, 'busi_id'=>$busiId, 'status'=>0);
 		$id = $QrcodeScan->data($data)->add();
 
+		$data = array();
+		if($busiType == 1){
+			$data = M('Housesale')->field('title,price')->find($busiId);
+			if(!empty($data)){
+				$data['price_unit'] = '万元';
+			}
+		}
+
+		$this->assign('data', $data);
 		$this->assign('token', $id);
 
 		$this->display();

@@ -136,11 +136,7 @@ class UserController extends PhoneController{
 
 				$User->where(array('id'=>$user['id']))->setField('openid', $openid);
 
-				$uid = \Think\Crypt::encrypt($user['id'], C('CRYPT_KEY'));
-				cookie('uid', $uid);
-				cookie('openid', $openid);
-
-				$this->success('加入成功', U('User/mypoint'));
+				
 			}else{
 				$data = array();
 				$data['username'] = $username;
@@ -149,25 +145,25 @@ class UserController extends PhoneController{
 				$data['openid'] = $openid;
 
 				$id = $User->data($data)->add();
-
-				$uid = \Think\Crypt::encrypt($id, C('CRYPT_KEY'));
-				cookie('uid', $uid);
-				cookie('openid', $openid);
-
-				$this->success('加入成功', U('User/mypoint'));
 			}
+
+			cookie('openid', $openid);
+
+			$this->success('加入成功', U('User/mypoint'));
+
 		}else{
-			$uid = cookie('uid');
 			$openid = cookie('openid');
-
-			if(!empty($uid)){
-				return $this->display('alreadymember');
-			}
 
 			if(empty($openid)){
 				$wxapi = \Weixin\Api\Wechat::create();
 				$redirecturl = $wxapi->getOauthRedirect('http://'.C('SERVER_IP').__ROOT__.'/phone/user/getopenid', '123', 'snsapi_base');
 				redirect($redirecturl);
+			}
+
+			$User = M('Member');
+			$user = $User->where(array('openid'=>$openid))->find();
+			if(!empty($user)){
+				$this->redirect('User/mypoint');
 			}
 
 			$this->assign('openid', $openid);
@@ -183,34 +179,45 @@ class UserController extends PhoneController{
 			$this->error('获取微信openid失败');
 		}
 
-		$User = M('Member');
-		$bindUser = $User->where(array('openid'=>$result['openid']))->find();
-		if(!empty($bindUser)){
-			return $this->display('alreadymember');
-		}
+		cookie('openid', $result['openid']);
 
-		$this->assign('openid', $result['openid']);
-
-		$this->display('memberjoin');
+		$this->memberjoin();
 	}
 
 	public function mypoint(){
-		$uid = cookie('uid');
-		if(!empty($uid)){
-			$uid = \Think\Crypt::decrypt($uid, C('CRYPT_KEY'));
-		}
 		$openid = cookie('openid');
+		$wxapi = \Weixin\Api\Wechat::create();
 
 		if(empty($openid)){
-			$wxapi = \Weixin\Api\Wechat::create();
 			$redirecturl = $wxapi->getOauthRedirect('http://'.C('SERVER_IP').__ROOT__.'/phone/user/getopenidformypoint', '123', 'snsapi_base');
 			redirect($redirecturl);
 		}
 
 		$WxUser = M('WxUser');
 		$wxUserInfo = $WxUser->find($openid);
+
+		if(empty($wxUserInfo)){
+			$wxUserInfo = $wxapi->getUserInfo($openid);
+			if($wxUserInfo){
+				$data = array();
+				$data['id'] = $openid;
+				$data['nickname'] = $wxUserInfo['nickname'];
+				$data['sex'] = $wxUserInfo['sex'];
+				$data['city'] = $wxUserInfo['city'];
+				$data['province'] = $wxUserInfo['province'];
+				$data['country'] = $wxUserInfo['country'];
+				$data['head_img_url'] = $wxUserInfo['headimgurl'];
+
+				$WxUser->data($data)->add();
+			}
+		}
+
 		$User = M('Member');
 		$bindUser = $User->where(array('openid'=>$openid))->find();
+
+		if(empty($bindUser)){
+			return $this->memberjoin();
+		}
 
 		$this->assign('user', array_merge($bindUser, $wxUserInfo));
 
@@ -224,18 +231,8 @@ class UserController extends PhoneController{
 			$this->error('获取微信openid失败');
 		}
 
-		$User = M('Member');
-		$bindUser = $User->where(array('openid'=>$result['openid']))->find();
+		cookie('openid', $result['openid']);
 
-		if(empty($bindUser)){
-			die('请先加入会员');
-		}
-
-		$WxUser = M('WxUser');
-		$wxUserInfo = $WxUser->find($result['openid']);
-
-		$this->assign('user', array_merge($bindUser, $wxUserInfo));
-
-		$this->display('mypoint');
+		$this->mypoint();
 	}
 }

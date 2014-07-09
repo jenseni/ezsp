@@ -1,7 +1,14 @@
 <extend name="Public/base"/>
 
 <block name="content">
+	<div class="page-header">
+		<h3>{$data.title}<small>{$data.price}{$data.price_unit}</small></h3>
+	</div>
 	<img src="{:U('PointAssign/getqrcode', array('token'=>$token))}"/>
+
+	<div>
+		请成交用户使用微信扫一扫
+	</div>
 </block>
 
 <block name="footscript">

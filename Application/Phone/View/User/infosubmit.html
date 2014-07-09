@@ -5,13 +5,16 @@
 html,body{
 	height: 100%;
 }
+div.sub-container{
+	text-align: center;
+}
 .sub-content{
 	margin: 0 auto;
 	width: 70%;
 }
 
 div.reg{
-	padding-top: 30px;
+	padding-top: 20px;
 	background-size:cover;
 	padding-bottom: 30px;
 	-webkit-background-size: cover;
@@ -72,6 +75,7 @@ textarea{
 <div class="sub-container blue">
 	<img class="sub-content" style="margin-top:10px;margin-bottom:10px;" src="__IMG__/logo_01.png"/>
 </div>
+<div>{$message}</div>
 <form action="{:U('User/infosubmit')}" method="post">
 <div class="reg">
 	<ul class="mlabel">
@@ -80,15 +84,17 @@ textarea{
 		<li>描述</li>
 	</ul>
 	<ul class="minput">
-		<li><input type="text" name="contact"></li>
-		<li><input type="text" name="contact_tel"></li>
+		<li><input type="text" name="contact" value="{$data.contact}" /></li>
+		<li><input type="text" name="contact_tel" value="{$data.contact_tel}"/></li>
 		<li>
-			<textarea rows="6"></textarea>
+			<textarea name="content" rows="6"></textarea>
 		</li>
 	</ul>		
 </div>
 
-<input type="submit" class="btn footer-index" value="提交信息"/>
+<div class="clearfix" style="padding: 10px 5px 0 5px;">
+	<input type="submit" class="btn btn-blue btn-full" value="提交信息"/>
+</div>
 
 </form>
 </block>

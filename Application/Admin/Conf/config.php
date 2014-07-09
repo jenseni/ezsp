@@ -282,12 +282,12 @@ return array(
 				array(
 					'id'	=>	120,
 					'name'	=>	'积分派发',
-					'action'	=>	'PointAssign/qrcodescan',
+					'action'	=>	'PointAssign/helpdoc',
 					'icon'	=>	'glyphicon glyphicon-wrench'
 				)
 			)
 		),
-		array(
+		/*array(
 			'id'	=>	123,
 			'name'	=>	'微信管理',
 			'action'	=>	'#',
@@ -309,6 +309,6 @@ return array(
 					'action'	=>	'WxMaterial/lists'
 				)
 			)
-		)
+		)*/
 	)
 );
