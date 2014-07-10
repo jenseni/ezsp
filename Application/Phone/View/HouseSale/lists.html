@@ -17,12 +17,28 @@
 		<div class="panel-title">
 			<span class="icon">|</span> {$city.name}
 			<span class="filter-desc">{$param}</span>
-			<a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a>
+			<!-- <a class="btn pull-right btn-small" href="{:U('HouseSale/filter')}">筛选</a> -->
+			<button type="button" class="button blue pull-right" onclick="location='{:U('HouseSale/filter')}'">筛选</button>
 
 		</div>
 
 		<div class="sortnav">
-			<ul>
+			<if condition="$sort eq 'square-asc'">
+				<button type="button" class="button gray" onclick="location='{:U('HouseSale/lists',array('sort'=>'square-desc'))}'">面积↑</button>
+			<else />
+				<button type="button" class="button gray" onclick="location='{:U('HouseSale/lists',array('sort'=>'square-asc'))}'">面积↓</button>
+			</if>	
+			<if condition="$sort eq 'price-asc'">
+				<button type="button" class="button gray" onclick="location='{:U('HouseSale/lists',array('sort'=>'price-desc'))}'">价格↑</button>
+			<else />
+				<button type="button" class="button gray" onclick="location='{:U('HouseSale/lists',array('sort'=>'price-asc'))}'">价格↓</button>
+			</if>
+			<if condition="$sort eq 'create_time-asc'">
+				<button type="button" class="button gray" onclick="location='{:U('HouseSale/lists',array('sort'=>'create_time-desc'))}'">时间↑</button>
+			<else />
+				<button type="button" class="button gray" onclick="location='{:U('HouseSale/lists',array('sort'=>'create_time-asc'))}'">时间↓</button>
+			</if>
+			<!-- <ul>
 				<if condition="$sort eq 'square-asc'">
 					<li <eq name="sort" value="square-asc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'square-desc'))}">面积↑</a></li>
 				<else />
@@ -38,7 +54,7 @@
 				<else />
 					<li <eq name="sort" value="create_time-desc">class="active"</eq>><a href="{:U('HouseSale/lists',array('sort'=>'create_time-asc'))}">时间↓</a></li>
 				</if>
-			</ul>
+			</ul> -->
 		</div>
 		
 		<hr>	

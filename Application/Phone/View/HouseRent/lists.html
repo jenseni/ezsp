@@ -14,26 +14,25 @@
 	
 	<div class="panel">
 		<div class="panel-title"><span class="icon">|</span> {$city.name}<span class="filter-desc">{$param}</span>
-			<a class="btn pull-right btn-small" href="{:U('HouseRent/filter')}">筛选</a></div>
+			<button type="button" class="button blue pull-right" onclick="location='{:U('HouseRent/filter')}'">筛选</button>
+		</div>
 
 		<div class="sortnav">
-			<ul>
-				<if condition="$sort eq 'square-asc'">
-					<li <eq name="sort" value="square-asc">class="active"</eq>><a href="{:U('HouseRent/lists',array('sort'=>'square-desc'))}">面积↑</a></li>
-				<else />
-					<li <eq name="sort" value="square-desc">class="active"</eq>><a href="{:U('HouseRent/lists',array('sort'=>'square-asc'))}">面积↓</a></li>
-				</if>
-				<if condition="$sort eq 'price-asc'">
-					<li <eq name="sort" value="price-asc">class="active"</eq>><a href="{:U('HouseRent/lists',array('sort'=>'price-desc'))}">价格↑</a></li>
-				<else />
-					<li <eq name="sort" value="price-desc">class="active"</eq>><a href="{:U('HouseRent/lists',array('sort'=>'price-asc'))}">价格↓</a></li>
-				</if>
-				<if condition="$sort eq 'create_time-asc'">
-					<li <eq name="sort" value="create_time-asc">class="active"</eq>><a href="{:U('HouseRent/lists',array('sort'=>'create_time-desc'))}">时间↑</a></li>
-				<else />
-					<li <eq name="sort" value="create_time-desc">class="active"</eq>><a href="{:U('HouseRent/lists',array('sort'=>'create_time-asc'))}">时间↓</a></li>
-				</if>
-			</ul>
+			<if condition="$sort eq 'square-asc'">
+				<button type="button" class="button gray" onclick="location='{:U('HouseRent/lists',array('sort'=>'square-desc'))}'">面积↑</button>
+			<else />
+				<button type="button" class="button gray" onclick="location='{:U('HouseRent/lists',array('sort'=>'square-asc'))}'">面积↓</button>
+			</if>	
+			<if condition="$sort eq 'price-asc'">
+				<button type="button" class="button gray" onclick="location='{:U('HouseRent/lists',array('sort'=>'price-desc'))}'">价格↑</button>
+			<else />
+				<button type="button" class="button gray" onclick="location='{:U('HouseRent/lists',array('sort'=>'price-asc'))}'">价格↓</button>
+			</if>
+			<if condition="$sort eq 'create_time-asc'">
+				<button type="button" class="button gray" onclick="location='{:U('HouseRent/lists',array('sort'=>'create_time-desc'))}'">时间↑</button>
+			<else />
+				<button type="button" class="button gray" onclick="location='{:U('HouseRent/lists',array('sort'=>'create_time-asc'))}'">时间↓</button>
+			</if>
 		</div>
 		<hr>	
 
